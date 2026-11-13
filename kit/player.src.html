@@ -1,0 +1,126 @@
+<title>Surplus preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- FONTS: tools/build.mjs fills this from the style's `fonts` list -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
+<!--@fonts-->
+<style>
+  /* A screening room for a 9:16 video: the frame fills the window height above a thin control bar. */
+  :root { --bg: #15111a; --bar: #1f1925; --fg: #f7ecd6; --muted: #a99fae; --track: #3a3142; --accent: #ee5a36; --bar-h: 64px;
+    --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: dark; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font: 14px/1.4 var(--f-mono); display: grid; grid-template-rows: minmax(0, 1fr) auto; overflow: hidden; }
+  .screen { display: grid; place-items: center; min-height: 0; padding: 12px 16px; }
+  .frame { position: relative; height: min(100%, calc((100vw - 32px) * 16 / 9)); aspect-ratio: 9 / 16; max-height: calc(100dvh - var(--bar-h) - 24px); }
+  canvas { display: block; width: 100%; height: 100%; background: #222; }
+  /* the exact clock the user quotes for changes: always top-right, never part of the rendered video */
+  #clock { position: absolute; top: 8px; right: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(10, 8, 14, 0.78); color: #fff;
+    font: 600 clamp(13px, 2.2vh, 22px)/1.1 var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; pointer-events: none; }
+  #clock small { display: block; font-weight: 500; font-size: 0.62em; color: #cfc6d4; }
+  /* Instagram Reels UI covers these areas: keep words and the subject out of the shaded parts */
+  .safe { position: absolute; inset: 0; pointer-events: none; display: none; }
+  .safe.on { display: block; }
+  .safe i { position: absolute; background: rgba(238, 90, 54, 0.22); outline: 1px dashed rgba(238, 90, 54, 0.9); }
+  .bar { height: var(--bar-h); background: var(--bar); display: flex; align-items: center; gap: 10px; padding: 0 16px; }
+  button { all: unset; cursor: pointer; min-width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; color: var(--fg); flex: none; padding: 0 6px; }
+  button:hover { background: var(--track); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button[aria-pressed="false"] { color: var(--muted); }
+  button svg { width: 22px; height: 22px; fill: currentColor; }
+  #play .i-pause, #play[data-state="playing"] .i-play { display: none; }
+  #play[data-state="playing"] .i-pause { display: block; }
+  input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); height: 28px; }
+  .note { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  @media (max-width: 640px) { .note { display: none; } .bar { gap: 4px; padding: 0 8px; } }
+</style>
+
+<main class="screen"><div class="frame">
+  <canvas id="stage" width="1080" height="1920" aria-label="Video preview"></canvas>
+  <div class="safe" id="safe"><i style="left:0;right:0;top:0;height:11.5%"></i><i style="left:0;right:0;bottom:0;height:24%"></i><i style="right:0;top:11.5%;bottom:24%;width:13%"></i></div>
+  <div id="clock" aria-live="off">00:00.00<small>frame 0</small></div>
+</div></main>
+<div class="bar">
+  <button id="play" aria-label="Play" data-state="paused">
+    <svg class="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>
+    <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
+  </button>
+  <input id="scrub" type="range" min="0" max="1" step="0.0333" value="0" aria-label="Scrub">
+  <button id="sound" aria-label="Sound" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
+  <button id="loop" aria-label="Loop" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2z"/></svg></button>
+  <button id="safeBtn" aria-label="Show Instagram safe zones" aria-pressed="false">Safe</button>
+  <span class="note" id="note">loading…</span>
+</div>
+
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js" } }</script>
+<script type="module">import * as THREE from 'three'; window.THREE = THREE;</script>
+<script type="module">/*@include kit/stage.js*/</script>
+<script type="module">/*@include kit/sound.js*/</script>
+<script type="module">/*@include vo.js*/</script>
+<script type="module">/*@include kit/voice.js*/</script>
+<script type="module">/*@include src/style.js*/</script>
+<script type="module">
+  const $ = (id) => document.getElementById(id);
+  const style = window.STYLES[window.STYLES.length - 1];
+  const canvas = $('stage'), playBtn = $('play'), scrub = $('scrub'), clock = $('clock'), soundBtn = $('sound'), loopBtn = $('loop'), note = $('note');
+  const FPS = 30, LIVE = 3; // sub-renders per frame while playing; paused frames use the style's full count
+  const S = await K.run(canvas, style, { samples: style.render.samples, width: 1080, height: 1920 });
+  const D = style.duration;
+  Object.assign(window, { S, style, DURATION: D, seek: (t, n) => S.seek(t, n) });
+  scrub.max = D.toFixed(4);
+
+  let voBuf = null;
+  if (window.VO_AUDIO) {
+    const bin = atob(window.VO_AUDIO), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    voBuf = await new OfflineAudioContext(2, 48000, 48000).decodeAudioData(bytes.buffer);
+  }
+  const startVO = (from) => {
+    if (!voBuf || from >= voBuf.duration) return null;
+    const ctx = new AudioContext(), src = ctx.createBufferSource(), g = ctx.createGain();
+    src.buffer = voBuf; g.gain.value = window.VO_GAIN || 1; src.connect(g).connect(ctx.destination); src.start(ctx.currentTime + 0.03, from);
+    return () => { try { ctx.close(); } catch (e) {} };
+  };
+
+  let t = Math.min(D, Math.max(0, +(new URLSearchParams(location.search).get('t') || 0))), playing = false, wall0 = 0, t0 = 0;
+  let soundOn = true, loop = true, scrubbing = false, stopSound = null, stopVO = null;
+  const fmt = (x) => { const m = Math.floor(x / 60), s = x - m * 60; return `${String(m).padStart(2, '0')}:${s.toFixed(2).padStart(5, '0')}`; };
+  const ui = () => { scrub.value = t; clock.innerHTML = `${fmt(t)}<small>frame ${Math.round(t * FPS)} · ${fmt(D)}</small>`; };
+  const stopAll = () => { if (stopSound) stopSound(); if (stopVO) stopVO(); stopSound = stopVO = null; };
+  const startAll = () => { stopAll(); if (!soundOn) return; stopSound = SOUND.live((k) => style.sound(k), t, { voiceover: !!voBuf }); stopVO = startVO(t); };
+  const still = () => { S.seek(t); ui(); };
+
+  function tick() {
+    if (!playing) return;
+    if (!scrubbing) {
+      t = t0 + (performance.now() - wall0) / 1000;
+      if (t >= D) { if (loop) { t = 0; t0 = 0; wall0 = performance.now(); startAll(); } else { t = D; pause(); return; } }
+      S.seek(t, LIVE); ui();
+    }
+    requestAnimationFrame(tick);
+  }
+  function play() {
+    if (t >= D - 1e-3) t = 0;
+    playing = true; t0 = t; wall0 = performance.now();
+    playBtn.dataset.state = 'playing'; playBtn.setAttribute('aria-label', 'Pause');
+    startAll(); requestAnimationFrame(tick);
+  }
+  function pause() { playing = false; stopAll(); playBtn.dataset.state = 'paused'; playBtn.setAttribute('aria-label', 'Play'); still(); }
+  const step = (dt) => { if (playing) pause(); t = Math.min(D, Math.max(0, Math.round((t + dt) * FPS) / FPS)); still(); };
+
+  playBtn.onclick = () => (playing ? pause() : play());
+  scrub.addEventListener('pointerdown', () => { scrubbing = true; stopAll(); });
+  scrub.addEventListener('input', () => { scrubbing = true; stopAll(); t = +scrub.value; S.seek(t, LIVE); ui(); });
+  scrub.addEventListener('change', () => { scrubbing = false; t = +scrub.value; if (playing) { t0 = t; wall0 = performance.now(); startAll(); } else still(); });
+  soundBtn.onclick = () => { soundOn = !soundOn; soundBtn.setAttribute('aria-pressed', soundOn); if (!soundOn) stopAll(); else if (playing) startAll(); };
+  loopBtn.onclick = () => { loop = !loop; loopBtn.setAttribute('aria-pressed', loop); };
+  $('safeBtn').onclick = (e) => { const on = $('safe').classList.toggle('on'); e.currentTarget.setAttribute('aria-pressed', on); };
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' && e.code !== 'ArrowLeft' && e.code !== 'ArrowRight') return;
+    if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); }
+    else if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') { e.preventDefault(); step((e.code === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? 1 : 1 / FPS)); }
+  });
+
+  note.textContent = (voBuf ? 'narrated' : 'no narration') + ' · ←/→ one frame, shift = 1 s';
+  still();
+  window.playerReady = true;
+</script>

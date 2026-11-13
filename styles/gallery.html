@@ -1,0 +1,367 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick a style</title>
+<style>
+  :root { --bg: #15111a; --card: #1f1925; --fg: #f7ecd6; --muted: #a99fae; --line: #3a3142; --accent: #ee5a36; --ok: #6fcf97; color-scheme: dark; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 system-ui, -apple-system, sans-serif; }
+  header { padding: 24px 16px 8px; max-width: 1280px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 26px; } header p { margin: 0; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 0 4px; }
+  .chips button { all: unset; cursor: pointer; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .chips button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .chips button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding: 12px 16px 40px; max-width: 1280px; margin: 0 auto; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .media { aspect-ratio: 16 / 9; background: #000; } video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; } .num { font: 600 13px ui-monospace, Menlo, monospace; color: var(--fg); }
+  h2 { margin: 0; font-size: 18px; } .use { font-size: 11px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; vertical-align: middle; }
+  p { margin: 0; color: var(--muted); font-size: 13.5px; }
+  .tags { margin-top: auto; display: flex; gap: 6px; font-size: 12px; } .tags span { padding: 2px 8px; border-radius: 6px; background: #2a2231; color: var(--muted); }
+  .tags .ok { color: var(--ok); } .tags .no { color: #e0a96d; }
+  .card[hidden] { display: none; }
+</style>
+<header><h1>Pick a style for this video</h1><p>Hover or tap a card to play its sample. Then tell Claude the number or name (e.g. "#04 Tiny Diorama").</p>
+<div class="chips" role="group" aria-label="Filter by family"><button aria-pressed="true" data-f="">All 37</button><button aria-pressed="false" data-f="Filters over 3D">Filters over 3D 7</button><button aria-pressed="false" data-f="Material worlds">Material worlds 5</button><button aria-pressed="false" data-f="Spaces and journeys">Spaces and journeys 5</button><button aria-pressed="false" data-f="Diagrams with depth">Diagrams with depth 6</button><button aria-pressed="false" data-f="Flat content made physical">Flat content made physical 7</button><button aria-pressed="false" data-f="Machines that explain">Machines that explain 3</button><button aria-pressed="false" data-f="Products and screens">Products and screens 4</button></div></header>
+<main>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-05-55.710Z-6wFLSoOte14V-InUNWG0cmWXhcP6fJAEp.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-36.672Z--ubaeH0YlVxlhxMj8gyVhH_qF3E1XFqDd.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#01</span><span>Filters over 3D</span></div>
+      <h2>Low-Poly <span class="use">Explainer</span></h2>
+      <p>Faceted miniature world, one flat tone per triangle; sand, coral and cream against teal and sage.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Material worlds">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-01.891Z-zl0fMJx_DX2LrqPJNAY-i0VqOU325V3yp.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-40.310Z-82fWWpTlEA6nq3rtps6CaT0POLLIch4ZE.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#02</span><span>Material worlds</span></div>
+      <h2>Paper Pop-Up <span class="use">Story</span></h2>
+      <p>Die-cut card scenes rising from a pop-up book on a lamplit table.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Material worlds">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-07.551Z-JE7xPhpcVh7j08R__lLWljUIfVJnT2QZQ.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-43.351Z-t-eQr--56G4jldTa-gEipVR20yZdJbk-K.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#03</span><span>Material worlds</span></div>
+      <h2>Soft Clay <span class="use">Explainer</span></h2>
+      <p>Plasticine stop-motion on a tabletop: chunky handmade forms with fingerprints, seamless paper backdrop.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Spaces and journeys">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-13.428Z-fcMKFZ3Rn1v0xja6nPjHbS1Eg0oUek9tp.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-46.133Z-27h5N6dHz88UL6Dh8uA2-WINQKOxQAGqg.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#04</span><span>Spaces and journeys</span></div>
+      <h2>Tiny Diorama <span class="use">Explainer</span></h2>
+      <p>A little world on one floating tile: toy buildings, peg people, cut ground showing its layers.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-18.618Z-iF6Eiljit5xTEGh4GRhuYmylhlOosNErY.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-49.256Z-Nl8DBy54VN1KnvN6dkiKTZtXi9oY5cmQm.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#05</span><span>Diagrams with depth</span></div>
+      <h2>Blueprint Build <span class="use">Explainer</span></h2>
+      <p>A drafting sheet whose white linework lifts into a 3D wireframe, then a solid object.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Spaces and journeys">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-24.029Z-jno9OLXzaMCUsYxzC1Nsh83aHU2g_L39F.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-52.104Z-pXqHpeVtDfOEsYgqpWUIGo__8x0OATBaW.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#06</span><span>Spaces and journeys</span></div>
+      <h2>Spotlight Stage <span class="use">Story</span></h2>
+      <p>Toy theatre at night: card cut-outs in layers, picked out by beams through haze.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-29.030Z-Jr2HjYPAYDD4HJL_CsYPpfkj0Yf1cQp8Z.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-54.318Z-vo4L1EbjuK4gkI_SQstxUF9YB1h2XeEEG.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#07</span><span>Flat content made physical</span></div>
+      <h2>Neon Sign <span class="use">Explainer</span></h2>
+      <p>Line drawings bent from glowing glass tube on a night-time brick wall, wet ground reflecting.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-33.185Z-QSRGnLkMTS-pEXj4SRG3NQSlWqK7XrK2r.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-56.340Z-MR3ZdSPMJ5CkCbzeGS51daK7C5U7Ne20y.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#08</span><span>Diagrams with depth</span></div>
+      <h2>Exploded View <span class="use">Explainer</span></h2>
+      <p>Product teardown: one object comes apart along its axis, each part with a numbered callout.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Machines that explain">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-37.173Z-Vmhg7jQnCScWRvdMlfyL4Xy0xJGyx7Qfz.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-09-58.650Z-WF1UAHnEJOzFUPlwhLj30QlpQUx0tActF.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#09</span><span>Machines that explain</span></div>
+      <h2>Marble Run <span class="use">Explainer</span></h2>
+      <p>Wooden marble run with brass gates and glass jars, shot like a product film.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-41.063Z-de9bnFO_NymLOmIFSq2k_uJouu2japo9S.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-00.830Z-BX7IF7I-xA546ptgJe0CSXmjiGK2KueRe.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#10</span><span>Filters over 3D</span></div>
+      <h2>X-Ray <span class="use">Explainer</span></h2>
+      <p>Objects as glowing radiograph film on a dark scanner, one warm accent on what matters.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-45.589Z-wm-V1ZHD7YWMBQ5Nhc2ay6NeucWAWD45Z.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-03.484Z-8vgNCO3wICSHVjzqnTnkToAKSrg6iuBuh.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#11</span><span>Flat content made physical</span></div>
+      <h2>LED Wall <span class="use">Story</span></h2>
+      <p>A giant outdoor screen of real lamps: a picture from afar, single glowing LEDs up close.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Material worlds">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-50.172Z-pLxmUBnACp4tXh3x-YkC8OcEqj-QQDoCH.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-05.432Z-N1fbR_QpjFFFHLUDEcbtWP-UmtxRPaFP6.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#12</span><span>Material worlds</span></div>
+      <h2>Inflated <span class="use">Explainer</span></h2>
+      <p>Glossy inflatables in a one-colour studio, limp when empty, mirror-round when full.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-55.010Z-JOUGJ6ueGQo9hCaNZcAi5p6J4mrPcTffs.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-08.049Z-Q_b1NXEZ3Qk9aOuqbh-q1XyMP0pQ7OIJ0.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#13</span><span>Filters over 3D</span></div>
+      <h2>Painted <span class="use">Story</span></h2>
+      <p>Any lit scene turned into a thick-brushed oil painting on linen canvas.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Spaces and journeys">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-06-59.036Z-NwYb9VOjcvgf_U22tHNY2A2GTRH1R9udy.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-09.888Z-ERFl1CO5jKgz_d9aHyem_wU-uY9INSf-g.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#14</span><span>Spaces and journeys</span></div>
+      <h2>Circuit City <span class="use">Explainer</span></h2>
+      <p>A circuit board filmed as a night city: chips as buildings, gold tracks as streets.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Material worlds">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-03.194Z-fxOXFXDULEA_DM5UugyX636oKsGUCtyrV.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-11.910Z-ahZDmbBXogPQ2NIeByzEEAow6O0QuZeNX.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#15</span><span>Material worlds</span></div>
+      <h2>Glass and Light <span class="use">Explainer</span></h2>
+      <p>Clear lab glassware with coloured liquid layers throwing caustic light on dark stone.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Machines that explain">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-07.284Z-pHJLhQoXKRsdetDVs7iFwshjY-Z8uK21j.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-13.870Z-TUeCpgzz6ezJ40zhzpIrZqDc-ftxVrU9Z.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#16</span><span>Machines that explain</span></div>
+      <h2>Factory Line <span class="use">Explainer</span></h2>
+      <p>Toy-grade production line: cobalt machines, orange moving parts, one item riding the belt.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-11.201Z-sehl-2-uzuwzZXeTbUmImKFgL9FTEdn2r.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-15.991Z-7VTm4R4e8xqzPUWsSHguLZmnY0W-OYWfZ.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#17</span><span>Diagrams with depth</span></div>
+      <h2>White Model <span class="use">Explainer</span></h2>
+      <p>All-white architect's model with a single saturated accent for the subject.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-15.110Z-fOm_fIcBJqvRq8o-h9NDnI050D9O53GjO.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-18.292Z-wabu8C-BDh8N5iH6-b0y736FUcZyXmyJl.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#18</span><span>Filters over 3D</span></div>
+      <h2>Voxel <span class="use">Explainer</span></h2>
+      <p>Everything built from small bevelled cubes on a display base.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-18.981Z-qbmp8nbJTViBWXNr4vXbU2mnOTdq1fEv6.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-20.136Z-x5O96jmo0X-5kz3Z9AAHSDuhA1G4wXm5N.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#19</span><span>Diagrams with depth</span></div>
+      <h2>Data Skyline <span class="use">Explainer</span></h2>
+      <p>A bar chart as an architectural model: stone-block towers, one in vermilion, tiny people for scale.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-22.969Z-Q5pvdn8tJUZpVBCzCd621yDrf4H6ekmFH.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-22.262Z-Da7O_1VrXtc9jQnkfsHPYAiRs6uT6ECKX.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#20</span><span>Filters over 3D</span></div>
+      <h2>Ink and Toon <span class="use">Explainer</span></h2>
+      <p>3D that reads as an inked cartoon cel: two-tone colour, brush outlines, halftone, warm paper.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-27.811Z-7szxv-c6PDzmF0rLDequ5kj4bXIa7yH3A.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-24.751Z-gNczFpuiWEgmz9KJVduksVLadZpqGNLym.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#21</span><span>Flat content made physical</span></div>
+      <h2>Pin Wall <span class="use">Explainer</span></h2>
+      <p>A wall-sized pin-art relief whose pin heights and tints form the picture.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Material worlds">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-32.735Z-U1hRXnVIaZtROnzsZdu8jeFx3QIL6arTK.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-26.965Z-6z_lx5bwGL5qOMzvhgWrKHepEZuPoHC7s.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#22</span><span>Material worlds</span></div>
+      <h2>Toy Blocks <span class="use">Explainer</span></h2>
+      <p>Painted wooden blocks on a sunny playroom floor; the stacks are the chart.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-41.208Z-TaT77pDBQbdTdWJI2Zgs7AXNFbH20-HhZ.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-29.094Z-2sX-DKI3wlxfirN7CX103rpTbDBRzpk2-.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#23</span><span>Flat content made physical</span></div>
+      <h2>Particle Swarm <span class="use">Explainer</span></h2>
+      <p>Thousands of glass beads swarm into rounded models of things, hold, then fly on.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Spaces and journeys">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-46.847Z-StL4hey4QqHkyWp6Gk-MHpSjdSiPgnBUG.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-31.129Z-_IC5eRZyO4Ego6Mg-91fG2B7w2khOedIw.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#24</span><span>Spaces and journeys</span></div>
+      <h2>Museum Gallery <span class="use">Explainer</span></h2>
+      <p>A dark gallery of gilt-framed exhibits, each in its own pool of spotlight.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-07-52.133Z-E4VHgxtLWyL4KOM6dtvrZcvsrHIjtoe2M.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-33.426Z-iz2ychKBZ-wrJKeh3bY78qBNcDnCHtvcl.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#25</span><span>Filters over 3D</span></div>
+      <h2>Pencil Sketch <span class="use">Explainer</span></h2>
+      <p>3D drawn as a graphite sketchbook page: hatching, construction lines, one red accent.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Machines that explain">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-17.430Z-T5qMMzPf5JkAGtNj1zR73bHoZ_a3adrAd.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-55.190Z-zL0S5iFe5Zy5gOwA2ZkRen0WzZ968rD9y.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#26</span><span>Machines that explain</span></div>
+      <h2>Domino Chain <span class="use">Explainer</span></h2>
+      <p>Engraved dominoes on walnut; each one that falls lays down the next step.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-23.309Z-O3Y0WG3s4BQBJXM65ODr2Ce1Dq3f08oEQ.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-10-58.721Z-kl1wNzcG6uGRbt3DAq-65HbmiS6PRtt1H.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#27</span><span>Diagrams with depth</span></div>
+      <h2>Node Network <span class="use">Explainer</span></h2>
+      <p>A wall-mounted network of porcelain tokens on brass rods that flip as news spreads.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-28.018Z-L_F3RKrMoXlxpytVNxvXvbxUlj85Rkt7I.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-02.017Z-RJ-mKgmuUq4niGL1U0TBfon1nFga6g876.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#28</span><span>Flat content made physical</span></div>
+      <h2>Shadow Box <span class="use">Explainer</span></h2>
+      <p>Layered paper-cut silhouettes in a glowing walnut light box.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Diagrams with depth">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-33.035Z-W8fu-Ah-b_mg3xoBnzuXXXw6cTbIzplqj.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-05.619Z-8RDulRkagYl_X9rzGoaU6Mxqdzo4GiLtk.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#29</span><span>Diagrams with depth</span></div>
+      <h2>Layer Stack <span class="use">Explainer</span></h2>
+      <p>A system as floating glass sheets with white diagrams and glowing aqua edges.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Filters over 3D">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-37.994Z-KFBndAZdjCnLvhZm8Ic-pnmpwNBei1nfE.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-09.173Z-YquOvD1ZfiodRNqeRclq7cpQAT41xObHj.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#30</span><span>Filters over 3D</span></div>
+      <h2>Dithered <span class="use">Explainer</span></h2>
+      <p>One-bit retro computer look: two colours, dot-pattern shading, bitmap windows.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Products and screens">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-43.413Z-59PCF8i88UcXLzxDoXiuElI-XNMZhIpMP.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-12.033Z-GX361JwOFIt5ybhYLyPyC21l6QQqcAHD5.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#31</span><span>Products and screens</span></div>
+      <h2>Floating Screens <span class="use">Explainer</span></h2>
+      <p>App screens as glass-backed cards hanging in a bright room, newest in front.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Products and screens">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-48.400Z-rBsqq2FXYAVVBQ0QWc2yiVMREfMgYx5VY.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-15.093Z-DnsnYZ0BDGZaJrHeZ-VbEu2XPtkvgd8Jt.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#32</span><span>Products and screens</span></div>
+      <h2>Device Hero <span class="use">Product shot</span></h2>
+      <p>A phone filmed like a launch video, then its interface floats out as cards.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Products and screens">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-53.147Z-hPbhwlnVTpIHcRCUEU4EhwNQGQziMoAVa.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-18.091Z-0erYNNPQnbY-doyMNjdm5HLqMYVhq1UoK.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#33</span><span>Products and screens</span></div>
+      <h2>Studio Product <span class="use">Product shot</span></h2>
+      <p>One product carved from darkness by softboxes on a black mirror floor.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-08-58.310Z-b5e0M5kGW_WcjynHQA3HiGaiNt_LxXlM8.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-20.515Z-TNzyUBTwad1R3rd4AUThdd3amI5eBCfUZ.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#34</span><span>Flat content made physical</span></div>
+      <h2>Split-Flap Board <span class="use">Title</span></h2>
+      <p>A clacking station departure board, one amber row for the key point.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Products and screens">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-09-02.425Z-Ty44IPf_PQ63ybk2C0mNwkxVJyf3utFq5.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-22.690Z-1-goYqma5MmUR3TWdkyF3pJXYNg1h3b3U.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#35</span><span>Products and screens</span></div>
+      <h2>Hero Icon <span class="use">Title</span></h2>
+      <p>One chunky toy-like app icon floating in a bright single-colour studio.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Flat content made physical">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-09-06.333Z-ATc-UXN7B_3luUdCI3exOve0ZfaJb7RRB.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-24.870Z-Ckz7xsxH1kYAgasreHojXAtrSXxCNcuol.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#36</span><span>Flat content made physical</span></div>
+      <h2>Embossed <span class="use">Title</span></h2>
+      <p>Letterpress and foil pressed into thick cotton paper, filmed in macro.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article>
+  <article class="card" data-family="Spaces and journeys">
+    <div class="media"><video src="https://cdn.futurepedia.io/2026-11-11T22-09-10.442Z-4xZlV0c9glWg45kdqOxkrgNhql9_cqUQh.mp4" poster="https://cdn.futurepedia.io/2026-11-11T22-11-27.290Z-wO2YvV1l4UBujGHceyuHt3SfVtL2Wf1pD.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="body">
+      <div class="meta"><span class="num">#37</span><span>Spaces and journeys</span></div>
+      <h2>Monument Type <span class="use">Title</span></h2>
+      <p>Words as colossal letters on a concrete monument in a flooded salt flat at sunset.</p>
+      <div class="tags"><span class="ok">ready</span></div>
+    </div>
+  </article></main>
+<script>
+  const vids = document.querySelectorAll('video');
+  for (const v of vids) { const c = v.closest('.card'); c.addEventListener('pointerenter', () => v.play().catch(() => {})); c.addEventListener('pointerleave', () => v.pause()); c.addEventListener('click', () => (v.paused ? v.play() : v.pause())); }
+  document.querySelector('.chips').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    for (const x of document.querySelectorAll('.chips button')) x.setAttribute('aria-pressed', x === b);
+    for (const c of document.querySelectorAll('.card')) c.hidden = !!b.dataset.f && c.dataset.family !== b.dataset.f;
+  });
+</script>

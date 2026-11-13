@@ -1,0 +1,14 @@
+{
+  "voiceId": "cgSgspJ2msm6clMCkdW9",
+  "voiceName": "Jessica",
+  "model": "eleven_multilingual_v2",
+  "speed": 1.2,
+  "rate": 3.75,
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.2,
+  "lead": 0.25,
+  "tail": 0.35,
+  "projects": "~/surplus-videos",
+  "port": 8765
+}
