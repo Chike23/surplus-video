@@ -25,7 +25,10 @@ one follows a character's change). Each story is 4–6 bullets:
 - **Reveal:** <the number or mechanism that flips it>
 - **Payoff (last 10–15 %):** <how the character brings Surplus in, and the result they get>. CTA: <the picked one>
 Kind A or B · about N words · Sources: <the facts it rests on>
+Closest done story: <title from stories-done.md> · different because <its core fact, hook, lesson and character>
 ```
+Both stories must pass the "too similar" rules in `references/stories-done.md`, against every done story and against
+each other.
 
 ## The two kinds
 **A. Value video, Surplus at the end (most videos).** The viewer learns something useful even if they never download.

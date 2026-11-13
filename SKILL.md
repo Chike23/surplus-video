@@ -11,7 +11,7 @@ notes by timestamp, and says when to render. You do everything else, the script 
 **Names:** SKILL = this skill's folder (its base directory). P = the project folder, `~/surplus-videos/<yyyy-mm-dd>-<slug>`.
 **Read first:** `references/specs.md` (the owner's specs: every video meets them), `references/surplus.md` (what we
 sell, the CTAs, health guard rails) and `references/lessons.md` (every time).
-Read the others at their step: `references/script.md`, `references/build.md`, `agents/reviewer.md`.
+Read the others at their step: `references/stories-done.md`, `references/script.md`, `references/build.md`, `agents/reviewer.md`.
 
 ## Rules, always
 - **Keys:** the ElevenLabs key lives in `~/.surplus-video-keys` or `~/.make-short-keys`. Never print, open or ask for it.
@@ -44,8 +44,10 @@ Then `touch SKILL/.checked`.
 
 ## 1. Topic, story, call to action
 1. **Topic and CTA** (one AskUserQuestion call; skip what the user already said). First read `references/surplus.md`
-   and `SKILL/styles/spotlight-stage/videos.txt`, and the titles of past `~/surplus-videos/*/script.md`, so you don't
-   repeat a topic.
+   and `references/stories-done.md` (every story already made, and what counts as too similar), plus the `brief.json`
+   and `script.md` of any `~/surplus-videos/*` not on that list yet (videos still in progress). Never suggest a topic
+   that is on the list or too similar to one. If the user types a topic that is, say which done story it's close to
+   and ask whether to go ahead.
    - *Topic:* your 3 best topics for people who struggle to gain weight. Each option: a short name, and in its
      description the surprising fact it hooks on and its kind (A: teaches something, plugs Surplus at the end; B:
      problem → Surplus fixes it). The user can type their own.
@@ -56,7 +58,8 @@ Then `touch SKILL/.checked`.
    `P/brief.json`: `{ "topic", "mode": "A|B", "cta": "bio|appstore|keyword", "keyword", "story": null, "style": "spotlight-stage" }`.
 2. **Story A and Story B, in a doc.** Look up the topic's facts first (web search), so both stories rest on real,
    sourced numbers. Then write two different stories, each as 4–6 bullets in the shape of `references/script.md`
-   ("The two stories"). Put them in a doc: load the docs skill (`anthropic-skills:docs`, or whatever docs tool this
+   ("The two stories"). Check both against `references/stories-done.md` and against each other with its rules, and
+   replace any that's too similar. Put them in a doc: load the docs skill (`anthropic-skills:docs`, or whatever docs tool this
    session has) and make a doc titled "<topic>: pick a story" with two headings, **Story A** and **Story B**, and the
    sources under them. With no docs tool, write `P/stories.md` the same way and open it. Give the user the link, then
    ask (AskUserQuestion): *Story A* / *Story B* (they can type changes). Make the changes and ask again until they
@@ -159,3 +162,6 @@ are black, or all the same small file, the GPU dropped out. Then send the MP4 to
 - Turn the user's notes into general lessons in `references/lessons.md` (what kind of mistake, the rule that prevents it).
 - Style-specific lessons go in `SKILL/styles/spotlight-stage/notes.md`.
 - `echo "<P folder name>" >> SKILL/styles/spotlight-stage/videos.txt` (a record of the videos made).
+- Add the story to the top of the list in `references/stories-done.md`, in its entry format (core fact, hook, lesson,
+  character, payoff), so later topics and stories steer clear of it. (The skill folder is a git repo: commit and push
+  only when the user asks.)
