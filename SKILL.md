@@ -1,6 +1,6 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a viral true story with a twist, or a relatable story with a surprising fact), then offers 10 checked story ideas of that kind to pick from, then writes a show-don't-tell script with a scroll-stopping hook (or uses one the user pastes); Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -6 dB to the voice), shows the preview, and renders the MP4 only after approval. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script with a scroll-stopping hook (or uses one the user pastes); Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -6 dB to the voice), shows the preview, and renders the MP4 only after approval. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
@@ -44,10 +44,14 @@ Read the others at their step: `references/stories-done.md`, `references/build.m
   (the easel card, a marquee).
 - **One style only:** #6 Spotlight Stage (`spotlight-stage`). Never ask which style. If the user asks for another
   one, say the skill is set to Spotlight Stage.
-- **Facts:** every key fact is checked with a web search before an idea is offered, and every number or health claim
-  in the script is listed under Sources in `P/script.md`. A viral legend is never presented as fact: say "legend
-  says". Surplus claims only from `references/surplus.md`. Never write a claim you can't source: leave it out. (In a
-  script the user pasted, a wrong or unsupported claim goes back to them, step 4.)
+- **Stories can be true, reworked or made up; facts can't.** A story may be true, a true one made better (a sharper
+  twist, higher stakes, bent towards eating and gaining) or fiction (`references/script.md`, "Where the story comes
+  from"). A changed or made-up story is never called true, and a reworked one uses invented characters instead of the
+  real people. The food, body and weight facts a story teaches are real: checked with a web search and listed under
+  Sources in `P/script.md`. Surplus claims only from `references/surplus.md`. Never write a fact you can't source:
+  leave it out. (In a script the user pasted, a wrong or unsupported claim goes back to them, step 4.)
+- **Fits Surplus, never an ad.** The story's problem is one Surplus solves, but Surplus only appears in the payoff,
+  as one thing it does for the character (`references/script.md`, "Fit the app, don't sell it").
 - **Ask before downloading** anything (models, packages), with name, source and size.
 - Keep messages between steps short: what happened, in a line or two. No code or stack traces for the user.
 
@@ -60,25 +64,27 @@ Then `touch SKILL/.checked`.
 
 ## 1. Kind, idea, call to action
 1. **Kind and CTA** (one AskUserQuestion call with two questions; skip what the user already said).
-   - *Kind:* **Twist story** (a viral true story with a twist, from any era; Surplus comes in at the end) /
+   - *Kind:* **Twist story** (a story with a twist from any era: true, reworked from a true one, or made up; Surplus
+     comes in at the end) /
      **Relatable story** (an everyday moment the viewer lives and the surprising truth behind it; Surplus is the fix).
    - *Call to action:* *Link in bio* / *Search Surplus on the App Store* / *Comment a keyword* (then ask the keyword:
      one word in caps).
 2. **Ten ideas of that kind.** First read `references/script.md` (all of it), `references/surplus.md` and
    `references/stories-done.md` (every story already made, and what counts as too similar), plus the `brief.json` and
    `script.md` of any `~/surplus-videos/*` not on that list yet (videos still in progress). Then find 10 ideas that fit
-   "What makes an idea right" in script.md, mixed the way it says. Verify each idea's key facts with a web search
-   before offering it; drop any you can't verify, or frame a legend as "legend says". Give each its real hook line,
+   "What makes an idea right" in script.md, mixed the way it says (true, inspired by a true story, fiction), each
+   labelled. Check a true idea's story with a web search before offering it (one you can't verify can come back as
+   inspired or fiction, labelled so), and check every idea's food or body fact. Give each its actual hook line,
    written and tested as script.md says. Check all 10 against stories-done.md and against each other, and replace any
    that's too similar. If the user named a topic, all 10 are takes on it; if they bring another creator's video, the
    ideas are original takes on its idea, never a copy.
    Put them in a doc: load the docs skill (`anthropic-skills:docs`, or whatever docs tool this session has) and make a
-   doc titled "Surplus: pick a story (<kind>)" with the 10 in the format from script.md, sources under each. With no
+   doc titled "Surplus: pick a story (<kind>)" with the 10 in the format from script.md, label and sources under each. With no
    docs tool, write the same to a file and open it. Give the user the link, and in chat show the 10 as a numbered list
-   (title, era or moment, the hook line, the twist or turn: one or two lines each). Ask them to reply with a number,
+   (title, era or moment, True / Inspired / Fiction, the hook line, the twist or turn: one or two lines each). Ask them to reply with a number,
    or with changes; make the changes and ask again until they pick one.
 3. **Make P** (slug from the picked title): `mkdir -p P/{src,qa,out,voice,kit} && cp SKILL/kit/* P/kit/`, and write
-   `P/brief.json`: `{ "kind": "twist|relatable", "story": "<picked title>", "hook": "<its hook line>", "cta": "bio|appstore|keyword", "keyword", "style": "spotlight-stage" }`.
+   `P/brief.json`: `{ "kind": "twist|relatable", "source": "true|inspired|fiction", "story": "<picked title>", "hook": "<its hook line>", "cta": "bio|appstore|keyword", "keyword", "style": "spotlight-stage" }`.
 4. **A script the user pastes** (at any point here) replaces 1–2: use it word for word, take the CTA from its ending
    (ask only if it isn't clear), make P with `"story": null`, and go on.
 
@@ -103,8 +109,9 @@ best kept), the story engine (want and stakes by second eight, "but" and "so" be
 twist planted), show don't tell (a *We see* line under every line), no pauses, the specs' word count (aim for
 150–170 words, about 50–57 s), written to flow ("Writing for the ear": bridges instead of full stops, one question,
 one exclamation, a dash before the reveal), "You see," after the hook or about two-thirds in, a new place every ~20 words, and the
-payoff (the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every number and
-health claim checked (web search) and listed under Sources; Surplus claims only from `references/surplus.md`. Run the
+payoff (the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every real fact, number and
+health claim checked (web search) and listed under Sources, the story's source under Story source, a changed or
+made-up story never called true, and Surplus only in the payoff; Surplus claims only from `references/surplus.md`. Run the
 checklist at the end of script.md, then add the numbered script to the ideas doc under a heading **Script**, so the
 user can read it while you build. No question: go on.
 A script the user pasted: lay their words out in the same file format (only line breaks, `[S#]` and *We see* lines

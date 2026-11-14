@@ -31,10 +31,13 @@ when it's the same rule; don't add duplicates.
   frame. (eat-less-than-you-think: the penny scale stood in front of the balance's post)
 
 ## Story, script and voice (owner's notes)
-- The hook must stop a stranger in the first second: open on the strangest true moment, already happening, as a fact.
+- The hook must stop a stranger in the first second: open on the strangest moment, already happening, said straight.
   No set-up, no name intro, no question. A hook that only states the topic didn't grab the owner. (2026-11-14)
 - A story is one surprising story, fact or experience with a want, rising stakes and a planted twist, not a generic
   weight-gain explainer that exists to reach the app. Every beat is a "but" or a "so". (2026-11-14)
+- Stories don't have to be true (owner, 2026-11-14): rework a true one for a sharper twist and bend it towards eating
+  and gaining, or make one up, as long as it's never called true and the food and body facts stay real. Build the
+  story's problem around what Surplus solves, but keep Surplus to the payoff so it never feels like an ad.
 - Show, don't tell: the picture acts out every line; the narration never names a feeling or describes the screen.
   (2026-11-14)
 - No pauses and no re-timing: cutting silence into the take broke the flow and forced the rest of the voice to be

@@ -65,7 +65,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
      on a readable face, a 1–2° sway on every hold, impacts frozen 3 frames then a recoil with a sound, props acting,
      no lip-sync), using bursts;
    - the easel card naming the scene, outlined in black;
-   - the script-side items (word count, hook stated as fact, "You see,", payoff in the last 10–15 %): blockers when
+   - the script-side items (word count, hook stated as fact, "You see,", payoff in the last 10–15 %, a changed or
+     made-up story never called true, Surplus not named before the payoff): blockers when
      the skill wrote the script (`P/brief.json` has a `"story"`); notes for the owner when the user pasted it.
 
 **Report** (write it to `P/qa/review.md`, and return the same text):

@@ -31,6 +31,10 @@ These come from the owner. They are rules, not suggestions. Every video meets al
   on screen.
 - No real, named living people as characters, no brand mascots or logos, nothing graphic or political; stories,
   characters and shots are original.
+- The story is true, inspired by a true story, or fiction (brief.json `source`). A changed or made-up story is never
+  called true; the food, body and weight facts it teaches are real and sourced.
+- Not an ad: Surplus isn't named before the payoff, the payoff is one thing Surplus does and the character's result,
+  and the story stands on its own with the payoff cut.
 
 **The first 4 seconds (the hook)**
 - A surprising action, stated as fact, inside the first 4 seconds. *script + look*

@@ -1,25 +1,43 @@
 # The story and the script
 
 Read all of this before step 1 (the ideas) and again before step 4 (the script). You write the script from the idea
-the user picked. It meets the script-side specs in `references/specs.md`, and every fact in it is sourced. A script
+the user picked. It meets the script-side specs in `references/specs.md`, and every real fact in it is checked and sourced. A script
 the user pastes instead is used word for word: only lay it out (the file format below) and check it.
 
 The job: a stranger mid-scroll stops in the first second, can't leave before the end, and walks away with something
 they'll repeat to a friend. Surplus is the last 10–15 % and has to feel earned, not stapled on.
 
 ## The two kinds (the user picks one first)
-**Twist: a viral story with a twist.** A true story most people have never heard, from any era, with a physical cause
-and effect you can show on a stage, and a last beat that flips what we thought was going on. It is a story first: it
-would be worth watching with no app at the end. Its turn is about eating, food, appetite, strength or the body, so the
-bridge to gaining weight is one short line.
+**Twist: a story with a twist.** A gripping story from any era, with a physical cause and effect you can show on a
+stage, and a last beat that flips what we thought was going on. It can be true, a true story made better, or made up
+(next section). It is a story first: it would be worth watching with no app at the end. Its want and its turn are
+about eating, food, appetite, strength or the body, so the bridge to gaining weight is one short line.
 
 **Relatable: an informative story the viewer lives.** A moment the viewer has had ("you order the big meal and tap out
-at half"), the surprising fact or mechanism behind it, and one character living it until the turn. The viewer
+at half"), the surprising fact or mechanism behind it (always real), and one character living it until the turn
+(usually made up). The viewer
 recognises themselves in the first three seconds and leaves knowing something they didn't. Surplus is how the
 character fixes it.
 
 Both kinds turn on **one surprising story, fact or experience.** Never a tip list, never a generic "how to gain weight"
 explainer, never a story that's only there to get to the app.
+
+## Where the story comes from: true, reworked or made up
+Stories don't have to be true. Pick whatever makes the best video:
+- **True:** it happened as told. Check its key facts with a web search. Real historical names are fine (still no
+  living people).
+- **Inspired by a true story:** take a real event or fact and make it better: a sharper, better-planted twist, higher
+  stakes, a new everyman character or setting, and the want bent towards eating, appetite, strength or gaining so it
+  fits Surplus. Swap the real people for invented characters, so nothing made up is pinned on a real person.
+- **Fiction:** made up from scratch: a fable, a what-if, a character in an invented town or kingdom. Anything goes,
+  as long as the cause and effect feel real and can be shown on stage.
+
+What stays true in every kind: the food, body and weight facts the story teaches (the stomach adapts, a handful of
+nuts is about 160 calories), because viewers act on them, so they're checked and sourced; and what Surplus does
+(`references/surplus.md` only). Never call a changed or made-up story true ("true story", "this really happened"),
+and never pin a made-up event on a real date or a real person. Telling it straight ("The cook ate double rations and
+stayed the thinnest man aboard") is fine: that's storytelling, not a claim. A legend is told as a story or as "legend
+says", never as fact.
 
 ## What makes an idea right for this format
 - One surprising story with a physical cause and effect you can show: something happens to an object or a body, on
@@ -32,8 +50,9 @@ explainer, never a story that's only there to get to the app.
   disasters, weird laws, lucky accidents.
 - **Relatable:** mix the 10 across everyday moments: school or work lunch, family dinner, eating out, the gym, sport,
   mornings, a date, holidays, travel, being sick, a growth spurt.
-- **True, checked:** verify the key facts with a web search before offering the idea. Don't present a viral legend as
-  fact. If the user wants a legend anyway, frame it as "legend says" in the script.
+- **Mix the sources and label each:** Twist ideas roughly a third true, a third inspired by a true story, a third
+  fiction, unless the user asks for one kind; Relatable ideas usually have a made-up character living a real fact.
+  A true idea's story is checked with a web search before it's offered; every idea's food or body fact is checked.
 - **Rules:** stories, characters and shots are always original. Never recreate another creator's video shot for shot;
   if the user brings one, offer an original take on the same idea. No real, named living people as characters, and
   no real living person as the butt of a joke. No brand mascots or logos. Nothing graphic, nothing political.
@@ -42,17 +61,19 @@ explainer, never a story that's only there to get to the app.
 ## The 10 ideas (step 1)
 Numbered, ranked by how hard the hook stops a scroll. Each one:
 ```
-3. **<Title>** · <era or everyday moment> · Twist | Relatable
-   Hook: "<the real first line, word for word>"
+3. **<Title>** · <era or everyday moment> · Twist | Relatable · True | Inspired | Fiction
+   Hook: "<the first line, word for word>"
    Story: <the character, what they want, what goes wrong, how it gets worse (2 lines)>
    Twist / turn: <the flip in the last story beat>
    Bridge: <how it turns to gaining weight and Surplus, one line>
-   Sources: <links for the key facts>
+   Based on: <True: as it happened | Inspired: the real story in one line, then what you changed | Fiction: made up>
+   Sources: <links for the real facts: the story's if it's true, and the food or body fact it teaches>
 ```
-In chat, show only the number, title, era, hook line and twist (one or two lines each). The doc has everything.
+In chat, show only the number, title, era, label (True, Inspired or Fiction), hook line and twist (one or two lines
+each). The doc has everything.
 
 ## The hook: the first three seconds decide everything
-The first line is the strangest true thing in the story, said as a fact, in about 10 words or fewer, and the first
+The first line is the strangest thing in the story, said straight, in about 10 words or fewer, and the first
 frame already shows it happening. It opens one question the viewer needs answered, and only the end answers it.
 - **Start in the middle**, at the moment it's already strange. No set-up, no name first ("Meet Sam", "This is Sam"),
   no "Did you know", "Have you ever", "Here's why", "In 1854,", no question, no title card.
@@ -64,9 +85,10 @@ frame already shows it happening. It opens one question the viewer needs answere
 - **Relatable hooks name the viewer's own moment and flip it:** "You eat until you're stuffed. That's exactly why the
   scale won't move."
 - **Write ten hooks for the picked idea, keep the best,** and test it: would a stranger mid-scroll stop? Can the first
-  frame show it? Does it promise something only the end delivers? Is it true? Any "no" means rewrite.
+  frame show it? Does it promise something only the end delivers? Is any real fact in it checked? Any "no" means
+rewrite.
 
-Hook shapes (adapt; never copy anyone's line; the facts in these are placeholders, check your own):
+Hook shapes (adapt; never copy anyone's line; the facts in these are placeholders, and a real fact you use is checked):
 - **Impossible fact:** "<Ordinary thing> once <extraordinary consequence>."
 - **Contradiction:** "The strongest men in <place> were fed to be fat."
 - **Stakes in progress:** "Tom has thirty days to gain six kilos, or he's off the team."
@@ -108,7 +130,7 @@ The picture tells the story. The narration says only what the picture can't.
 **Twist**
 | Part | When | Job |
 |---|---|---|
-| Hook | 0–3 s | The strangest true moment, already happening. Opens the big question. |
+| Hook | 0–3 s | The strangest moment, already happening. Opens the big question. |
 | "You see," | 3–12 s | Who they are, what they want, what's at stake. A small loop opens. |
 | Escalation | 12–38 s | 2–3 beats, each in a new place, each a "but" or a "so", the stakes rising, one concrete number or image each. Plant the twist. |
 | Twist | about 38–47 s | The flip, planted earlier. The hook now means something new. |
@@ -141,6 +163,15 @@ stopped guessing. Surplus counted every bite and set him five hundred calories o
 moved. Search Surplus on the App Store." Features only from `references/surplus.md`. In a Twist story the bridge is one
 line that ties the twist to the viewer ("They had a whole empire feeding them. You've got Surplus.").
 
+**Fit the app, don't sell it.** Choose and shape the story so its problem is the one Surplus solves (not eating
+enough, a stomach that fills too fast, guessing instead of counting, gaining too slowly or too fast), so the plug grows
+out of the story. But the story is the point, so it never feels like an ad:
+- Surplus isn't named, hinted at or set up before the payoff. With the payoff cut, it's still a story worth sharing.
+- The payoff is the last 10–15 % (about 20 words before the CTA): one thing Surplus does, the one the story's problem
+  needs, and the result we see. No feature list, no hype words, no price, no "download now".
+- The character is the hero and Surplus is the tool they pick up. The win is theirs: "Sam finally ate enough", not
+  "Surplus changed Sam's life".
+
 ## Writing for the ear
 - Short clauses (≤ 14 words between bridges), one idea each, everyday words. The character by name, the viewer as
   "you".
@@ -170,15 +201,17 @@ Kind: Twist | Relatable   CTA: link-in-bio | app-store | comment KEYWORD
 2. [S1] You see, ...
    - We see: ...
 ...
+## Story source
+True | Inspired by <the real story, one line>; changed: <what> | Fiction
 ## Sources
-- <every fact or number above, with where it comes from>
+- <every real fact or number above (food, body, weight, and the story itself if it's true), with where it comes from>
 ```
 - One numbered line = one sentence or phrase. `[S1]`–`[S4]` at the start of a line opens that story part (3–4 parts).
   Lines without a tag stay in the current part. The indented *We see* lines are not spoken (voice.mjs reads only the
   numbered lines).
 
 ## Check before voicing
-- **The hook:** the strangest true thing, as fact, within the first ~10 words; no set-up, no question; the first frame
+- **The hook:** the strangest thing in the story, said straight, within the first ~10 words; no set-up, no question; the first frame
   can show it; it opens a question only the end answers.
 - **The engine:** want, obstacle and stakes by second eight; every beat a "but" or a "so"; stakes rise; a loop open at
   all times; the twist or turn planted earlier and changing what the hook means.
@@ -188,7 +221,10 @@ Kind: Twist | Relatable   CTA: link-in-bio | app-store | comment KEYWORD
   3–4 story parts; no `[pause]` marks.
 - The payoff starts after about 85 % of the words, ends the script, and its last line is the picked CTA.
 - Surplus told through the character; no line that needs a phone or the app on screen; claims only from surplus.md.
-- Every number and health claim has a source (web search) and stays inside the health guard rails in surplus.md.
-  A legend is said as "legend says".
+- **Not an ad:** Surplus isn't named before the payoff; the payoff is one feature and the character's result; the
+  story still works with the payoff cut, and the payoff grows out of the story's problem.
+- Every real fact, number and health claim has a source (web search) and stays inside the health guard rails in
+  surplus.md. A changed or made-up story is never called true and pins nothing on a real person or date; a legend is
+  told as a story or as "legend says".
 - For a script the user pasted: their words exactly (only line breaks, `[S#]` and *We see* lines added); a claim that
   fails goes back to them; script-side specs it misses are listed at step 9. Never fix their words yourself.

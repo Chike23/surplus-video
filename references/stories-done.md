@@ -17,7 +17,7 @@ calories and sets a daily surplus target) is in every video and doesn't count. W
 another.
 
 ## The list
-Newest first. Entry: date · title · folder · style and kind (twist or relatable; older ones say mode A or B), then the four things above and the payoff.
+Newest first. Entry: date · title · folder · style and kind (twist or relatable; older ones say mode A or B) · source (true, inspired or fiction; older ones are true), then the four things above and the payoff.
 
 ### 2026-11-13 · You eat less than you think
 `~/surplus-videos/2026-11-13-eat-less-than-you-think` · Spotlight Stage · mode A
