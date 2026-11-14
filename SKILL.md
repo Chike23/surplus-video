@@ -1,12 +1,13 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), shows the preview, and renders the MP4 only after approval. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
 
-From an idea to a finished, reviewed MP4. The user picks the kind of story and one of ten ideas, watches the preview,
-gives notes by timestamp if they want changes, and says when to render. You do everything else, the script included.
+From an idea to a finished, reviewed MP4. The user picks the kind of story and one of ten ideas and gets back the
+finished MP4 once the one review's fixes are in (no approval step). They give notes by timestamp only if they want
+changes, and each round is rendered again. You do everything else, the script included.
 
 **Names:** SKILL = this skill's folder (its base directory). P = the project folder, `~/surplus-videos/<yyyy-mm-dd>-<slug>`.
 **Read first:** `references/specs.md` (the owner's specs: every video meets them), `references/surplus.md` (what we
@@ -100,8 +101,8 @@ all in config.json, picked by the owner from test takes. Never ask which voice o
 set either per video. If the user asks for another narrator, say the skill is set to Mark on v4. If ElevenLabs answers
 that the voice isn't found, ask the user to add "Mark - Natural Conversations" to My Voices on elevenlabs.io.
 
-**From here to the preview: no questions.** Once the idea is picked, work through steps 4–9 and only come back
-with the reviewed preview. Say in one line what you're starting at each step.
+**From here to the finished MP4: no questions.** Once the idea is picked, work through steps 4–10 and only come
+back with the rendered video. Say in one line what you're starting at each step.
 
 ## 4. The script → `P/script.md`
 Write it from the picked idea, following `references/script.md` (the format of the owner's eight model videos; its
@@ -123,7 +124,7 @@ user can read it while you build. No question: go on.
 A script the user pasted: lay their words out in the same file format (only line breaks, `[S#]` and *We see* lines
 added, never a word changed; any pause marks in it are dropped). If a claim in it is wrong or unsupported, quote the
 line, say what's off with the source, and wait for their corrected line (the one question allowed before the
-preview). Script-side specs it misses: list them in one line each at step 9; never change their words to meet them.
+video). Script-side specs it misses: list them in one line each at step 10; never change their words to meet them.
 
 ## 5. Voice and word timing
 `node SKILL/tools/voice.mjs P` → `P/voice/voice.mp3`, `P/timing.json` (every word's start and end, scenes), `P/vo.js`.
@@ -136,7 +137,7 @@ preview). Script-side specs it misses: list them in one line each at step 9; nev
   a new take (`node SKILL/tools/voice.mjs P` again). At most 2 re-takes, then rephrase that line in script.md, same
   meaning (in a script the user pasted: tell them which word the voice keeps getting wrong instead).
 - The voice must run 45–60 s. If it doesn't, add or cut a beat in script.md and take it again (a script the user
-  pasted: say so in one line at step 9, never cut or add their words).
+  pasted: say so in one line at step 10, never cut or add their words).
 - `node SKILL/tools/voice.mjs P --retime`: timing only from the existing take (no new take, no cost), e.g. after a
   new Whisper model.
 
@@ -171,36 +172,39 @@ Start it with `preview_start` (stop an older one on the same port first), then o
    `SKILL/agents/reviewer.md` with `{P}` and `{SKILL}` filled in, plus the style slug. Wait for its report.
 3. Fix every blocker and should-fix. Fix the cause (in the general way) in `src/style.js`, rebuild, and look at the
    fixed moments yourself: `node SKILL/tools/qa.mjs P --times <t1>,<t2>` (skip `--full`: it loses the GPU, see lessons.md).
-   Then run `node SKILL/tools/qa.mjs P` once more and fix any FAIL. No second reviewer: the video goes back to the
-   user. Anything you couldn't fix goes in the hand-off.
+   Then run `node SKILL/tools/qa.mjs P` once more and fix any FAIL. No second reviewer: the video goes straight to the
+   render (step 9). Anything you couldn't fix goes in the hand-off.
 4. Add the reviewer's "New general lessons" (and your own) to `references/lessons.md`: the general rule, merged, no duplicates.
 
-## 9. Show the user
+## 9. Mix and render (no question)
+The one review and its fixes are the check: the video renders straight away, with no approval step (owner's rule,
+2026-11-14).
 1. **The mix:** `node SKILL/tools/render.mjs P --audio` renders the effects and the music bed, mixes them with the voice
    through `tools/mix.py` (prints each level against the rule) and rebuilds the preview, so it plays the final mix.
-   Run it again after any change to the voice or to `sound(k)`.
-2. Open `http://localhost:8765/preview.html` in the browser pane (if the pane is hidden, ask them to press Cmd+Shift+B).
-   Tell them, briefly:
-   - what it is (the story, kind, length) and the script (the numbered lines);
-   - what the reviewer caught and you fixed, and anything still open; the specs: all met, or which one isn't and why;
-   - for a script the user pasted: any script-side spec it misses (step 4), one line each;
-   - how to give notes: **"Play it and tell me what to change with the time from the clock, top-right, e.g. '0:12.4 the
-     label covers the jar'. ←/→ steps one frame (shift: 1 s). *Safe* shades the parts Instagram covers."**
-   Then ask: *Any changes, or render it?* (buttons: *Render it* / *I have changes*).
+2. **The render:** `node SKILL/tools/render.mjs P --samples 8` in the background; say the expected finish time in one
+   line. Use `--samples 8` (about an hour for 55 s on this Mac; more lost the GPU, see the style's notes.md). It
+   renders every frame, mixes the audio with `tools/mix.py`, and writes `P/out/<name>.mp4` plus
+   `P/out/check-1..5.jpg`. Look at the check frames: if they are black, or all the same small file, the GPU dropped
+   out; render again with the samples render.mjs suggests.
 
-## 10. Changes (only when the user asks)
+## 10. Hand it over
+Send the MP4 (SendUserFile) and `open` it, and open `http://localhost:8765/preview.html` in the browser pane for notes
+(if the pane is hidden, ask them to press Cmd+Shift+B). Tell them, briefly:
+- what it is (the story, kind, length) and the script (the numbered lines);
+- what the reviewer caught and you fixed, and anything still open; the specs: all met, or which one isn't and why;
+- for a script the user pasted: any script-side spec it misses (step 4), one line each;
+- how to give notes, if they want changes: **"Play the preview and tell me what to change with the time from the
+  clock, top-right, e.g. '0:12.4 the label covers the jar'. ←/→ steps one frame (shift: 1 s). *Safe* shades the parts
+  Instagram covers."**
+No question: the video is done. Changes happen only if they ask (step 11).
+
+## 11. Changes (only when the user asks)
 Log each note in `P/notes.md` (time · note · what you changed). Picture changes: fix, rebuild, close-up QA at those
 times, and look yourself. Script changes: rewrite the lines the note asks for (the user's own words exactly when they
 give them), still to the specs, update the doc → `voice.mjs P` (new take; every cue follows) → rebuild → full QA.
 After a voice or sound change, `render.mjs P --audio` again. No reviewer round unless the user asks for one. A note
-that conflicts with a spec or a rule: do what the user says, and tell them which one it breaks. Show it again
-(step 9). Repeat until the user says render.
-
-## 11. Render (only on the user's explicit go)
-`node SKILL/tools/render.mjs P --samples <n>` in the background; say the expected finish time. Use `--samples 8` (about 40 min
-for 55 s; more lost the GPU on this Mac, see the style's notes.md). It renders every frame, mixes the audio with
-`tools/mix.py`, and writes `P/out/<name>.mp4` plus `P/out/check-1..5.jpg`. Look at the check frames: if they
-are black, or all the same small file, the GPU dropped out. Then send the MP4 to the user (SendUserFile) and `open` it.
+that conflicts with a spec or a rule: do what the user says, and tell them which one it breaks. Then render again and
+hand it over (steps 9–10), unless they say to hold the render while they send more notes.
 
 ## 12. Close the loop
 - Turn the user's notes into general lessons in `references/lessons.md` (what kind of mistake, the rule that prevents it).

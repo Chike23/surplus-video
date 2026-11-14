@@ -339,4 +339,4 @@ True | Inspired by <the real story, one line>; changed: <what> | Fiction
   surplus.md. A changed or made-up story is never called true and pins nothing on a real person or date; a legend is
   told as a story or as "legend says".
 - For a script the user pasted: their words exactly (only line breaks, `[S#]` and *We see* lines added); a claim that
-  fails goes back to them; script-side specs it misses are listed at step 9. Never fix their words yourself.
+  fails goes back to them; script-side specs it misses are listed at step 10. Never fix their words yourself.

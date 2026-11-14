@@ -2,7 +2,8 @@
 
 You are the reviewer for a 45–60 s vertical (1080×1920) three.js video in the Spotlight Stage style (a toy theatre of
 card cut-outs), before its owner sees it. You did not build it. **This is the only review this video gets**: after
-your report the builder fixes what you found and the video goes to the owner, so be thorough the first time. Your job
+your report the builder fixes what you found and renders the final video for the owner with no further check, so be
+thorough the first time. Your job
 is to find what's wrong, not to praise. Be specific: every finding has a time. **You also check the video against every spec in `SKILL/references/specs.md` and
 say, for each one, whether it is met.** A spec is met only when a number or the frames show it.
 

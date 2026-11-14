@@ -1,4 +1,4 @@
-// render.mjs: the final MP4, only after the user approved the preview. Every frame at the style's full sample count,
+// render.mjs: the final MP4, rendered right after the one review's fixes (no approval step). Every frame at the style's full sample count,
 // piped into ffmpeg. The sound score is rendered offline as two stems (effects, music bed) and mixed with the voice by
 // mix.py, the only mixer (references/specs.md section 6). Neither the picture nor the voice is sped up or slowed down.
 // usage: node render.mjs <P> [--samples 16]   -> P/out/<folder name>.mp4 + P/out/check-*.jpg
