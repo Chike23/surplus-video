@@ -1,16 +1,20 @@
-// voice.mjs: narration for a project. ElevenLabs reads the script, Whisper (whisper.cpp) times every word, the words are
-// lined up with the script, the [pause x] marks are cut into the audio as real silence, and the result is written as
-//   P/voice/raw.mp3 (the take), P/voice/voice.wav + voice.mp3 (final narration), P/timing.json, P/vo.js (for the player).
-// usage: node voice.mjs <P>             new take + timing
-//        node voice.mjs <P> --retime    timing only, from the existing take (after editing pauses, or a new Whisper model)
-//        --rate 3.75                    words a second to pace the finished voice to (default: config.json rate, 3.75)
+// voice.mjs: narration for a project. ElevenLabs reads the script at a pace that already meets the spec, Whisper
+// (whisper.cpp) times every word, and the words are lined up with the script. The take is never sped up, slowed down,
+// cut or re-timed (owner's rule): only the silence before the first word and after the last is trimmed. Always Mark on
+// Eleven v4 (config.json). v4 sets its own pace and ignores the speed setting (tested 2026-11-14: 1.0-1.2 all read
+// about 3.0 words a second), so its pace comes from the script; on older models a miss means a new take at a nudged speed.
+// Writes P/voice/raw.mp3 (the take), P/voice/voice.wav + voice.mp3 (final narration), P/timing.json, P/vo.js (for the player).
+// usage: node voice.mjs <P>             new take(s) + timing
+//        node voice.mjs <P> --retime    timing only, from the existing take (no cost)
+//        --rate 3                       words a second to aim for (default: config.json rate; in range = rateMin-rateMax)
+//        --tries 3                      most takes to reach the pace
 //        node voice.mjs --list          list the voices on the ElevenLabs account
-// Script: P/script.md, numbered lines under a "## Narration" heading, e.g.  3. [S2] Then pack it with dense calories. [pause 0.4]
+// Script: P/script.md, numbered lines under a "## Narration" heading, e.g.  3. [S2] Then pack it with dense calories.
 // Key: env ELEVENLABS_API_KEY, else ~/.make-short-keys or ~/.surplus-video-keys (ELEVENLABS_API_KEY=... or Creator_key=...). Never printed.
 import fs from 'node:fs'; import path from 'node:path'; import os from 'node:os'; import { execFileSync } from 'node:child_process';
 
 const SKILL = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const cfg = Object.assign({ model: 'eleven_multilingual_v2', speed: 1.2, rate: 3.75, stability: 0.45, similarity: 0.8, style: 0.2, lead: 0.25, tail: 0.35,
+const cfg = Object.assign({ model: 'eleven_v4', speed: 1.0, rate: 3.0, rateMin: 2.8, rateMax: 3.2, stability: 0.5, similarity: 0.8, style: 0.2, lead: 0.25, tail: 0.35,
   whisperModel: path.join(os.homedir(), '.cache/whisper-cpp/ggml-small.en.bin') }, JSON.parse(fs.readFileSync(path.join(SKILL, 'config.json'), 'utf8')));
 const key = () => {
   if (process.env.ELEVENLABS_API_KEY) return process.env.ELEVENLABS_API_KEY;
@@ -35,53 +39,63 @@ if (process.argv[2] === '--list') {
 const P = path.resolve(process.argv[2]); const retime = process.argv.includes('--retime');
 const argv = (k) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : undefined; };
 const brief = fs.existsSync(path.join(P, 'brief.json')) ? JSON.parse(fs.readFileSync(path.join(P, 'brief.json'), 'utf8')) : {};
-const voiceId = brief.voiceId || cfg.voiceId; if (!voiceId) throw new Error('no voiceId in brief.json or config.json (run --list and pick one)');
+const voiceId = cfg.voiceId; if (!voiceId) throw new Error('no voiceId in config.json'); // always the owner's narrator, never per video
 fs.mkdirSync(path.join(P, 'voice'), { recursive: true });
 const V = (f) => path.join(P, 'voice', f);
 
-// ---- the script: lines, scenes, words, pauses
+// ---- the script: lines, scenes, words. [pause] marks are not used any more (the voice is never cut): they're dropped.
 const md = fs.readFileSync(path.join(P, 'script.md'), 'utf8');
 const body = (md.split(/^#+\s*narration.*$/im)[1] || '').split(/^#+\s/m)[0];
 const lines = [...body.matchAll(/^\s*(\d+)\.\s+(.+)$/gm)].map(([, n, raw]) => ({ n: +n, raw: raw.trim() }));
 if (!lines.length) throw new Error('no numbered lines under "## Narration" in script.md');
-const words = [], pauses = []; let scene = 1;
+if (/\[pause/i.test(body)) console.log('note: [pause] marks are ignored (the voice is never cut or re-timed); remove them from script.md');
+const words = []; let scene = 1;
 for (const l of lines) {
   const s = l.raw.match(/^\[S(\d+)\]\s*/i); if (s) scene = +s[1];
   l.scene = scene;
-  for (const tok of l.raw.replace(/^\[S\d+\]\s*/i, '').match(/\[pause[^\]]*\]|\S+/gi) || []) {
-    const p = tok.match(/^\[pause\s*([\d.]+)\s*s?\]$/i);
-    if (p) { if (words.length) pauses.push({ after: words.length - 1, dur: +p[1] }); continue; }
-    words.push({ i: words.length, w: tok, line: l.n, scene });
-  }
   l.text = l.raw.replace(/\[(S\d+|pause[^\]]*)\]/gi, '').replace(/\s+/g, ' ').trim();
+  // spoken words only: a lone dash or a tone tag for Eleven v3 ([excited]) is sent to ElevenLabs but isn't a word
+  for (const tok of l.text.split(' ')) if (/[a-z0-9]/i.test(tok) && !/^\[[a-z ]+\]$/i.test(tok)) words.push({ i: words.length, w: tok, line: l.n, scene });
 }
 const text = lines.map((l) => l.text).join(' ');
 
-// ---- 1. the take
-if (!retime) {
-  const r = await el(`/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`, { method: 'POST', body: JSON.stringify({
-    text, model_id: brief.model || cfg.model,
-    voice_settings: { stability: cfg.stability, similarity_boost: cfg.similarity, style: cfg.style, speed: brief.speed || cfg.speed, use_speaker_boost: true } }) });
-  fs.writeFileSync(V('raw.mp3'), Buffer.from(await r.arrayBuffer()));
-}
-
-// ---- 2. Whisper word times on the take
+// ---- 1. the take, at a pace that's already right (references/specs.md: 3 words a second, 2.8-3.2). Pace is
+// words / (last word end - first word start) as Whisper hears it. Out of range: a new take at speed x target/measured,
+// within ElevenLabs' 0.7-1.2. The audio itself is never sped up, slowed down or cut.
 const ff = (args, opts) => execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...args], { maxBuffer: 1 << 30, ...opts });
-ff(['-i', V('raw.mp3'), '-ar', '16000', '-ac', '1', V('raw16k.wav')]);
-execFileSync('whisper-cli', ['-m', cfg.whisperModel, '-f', V('raw16k.wav'), '-ml', '1', '-sow', '-oj', '-of', V('whisper'), '-np', '-l', 'en'], { stdio: ['ignore', 'ignore', 'pipe'] });
-const heard = JSON.parse(fs.readFileSync(V('whisper.json'), 'utf8')).transcription
-  .map((s) => ({ w: s.text.trim(), start: s.offsets.from / 1000, end: s.offsets.to / 1000 }))
-  .filter((s) => /[a-z0-9]/i.test(s.w));
-
-// ---- 2b. pace (references/specs.md: 3.75 words a second, 3.35-3.91). ElevenLabs tops out at speed 1.2, so the take is
-// sped up (pitch kept) until words / (spoken time + the pauses cut in later) hits the target; Whisper's times scale with it.
-const rate = +(argv('rate') ?? brief.rate ?? cfg.rate), cutIn = pauses.filter((p) => p.after < words.length - 1).reduce((a, p) => a + p.dur, 0);
-const tempo = Math.min(1.5, Math.max(0.85, (heard.at(-1).end - heard[0].start) / (words.length / rate - cutIn)));
-let SRC = V('raw.mp3');
-if (Math.abs(tempo - 1) > 0.005) {
-  ff(['-i', V('raw.mp3'), '-filter:a', `atempo=${tempo.toFixed(4)}`, V('paced.wav')]); SRC = V('paced.wav');
-  for (const h of heard) { h.start /= tempo; h.end /= tempo; }
+const listen = () => {
+  ff(['-i', V('raw.mp3'), '-ar', '16000', '-ac', '1', V('raw16k.wav')]);
+  execFileSync('whisper-cli', ['-m', cfg.whisperModel, '-f', V('raw16k.wav'), '-ml', '1', '-sow', '-oj', '-of', V('whisper'), '-np', '-l', 'en'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  fs.rmSync(V('raw16k.wav'));
+  return JSON.parse(fs.readFileSync(V('whisper.json'), 'utf8')).transcription
+    .map((s) => ({ w: s.text.trim(), start: s.offsets.from / 1000, end: s.offsets.to / 1000 }))
+    .filter((s) => /[a-z0-9]/i.test(s.w));
+};
+const model = cfg.model, speedWorks = !/^eleven_v4/.test(model); // always the owner's model, never per video
+const rate = +(argv('rate') ?? brief.rate ?? cfg.rate), tries = speedWorks ? +(argv('tries') ?? 3) : 1;
+const paceOf = (h) => words.length / (h.at(-1).end - h[0].start), inRange = (r) => r >= cfg.rateMin && r <= cfg.rateMax;
+let speed = +(brief.speed || cfg.speed), heard;
+if (retime) heard = listen();
+else for (let k = 1; ; k++) {
+  const r = await el(`/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`, { method: 'POST', body: JSON.stringify({
+    text, model_id: model,
+    voice_settings: { stability: cfg.stability, similarity_boost: cfg.similarity, style: cfg.style, speed, use_speaker_boost: true } }) });
+  fs.writeFileSync(V('raw.mp3'), Buffer.from(await r.arrayBuffer()));
+  heard = listen();
+  const pace = paceOf(heard), next = Math.min(1.2, Math.max(0.7, speed * rate / pace));
+  console.log(`take ${k}: speed ${speed.toFixed(3)} -> ${pace.toFixed(2)} words/s`);
+  if (inRange(pace)) break;
+  if (k >= tries || Math.abs(next - speed) < 0.005) {
+    console.log(`PACE MISSED: ${pace.toFixed(2)} words/s is outside ${cfg.rateMin}-${cfg.rateMax}` +
+      (!speedWorks ? ': v4 sets its own pace, so fix it in the script (too slow: join sentences with and/but/so and cut commas; too fast: add a full stop at a turn), then take it again'
+        : next >= 1.2 && pace < rate ? ' even at ElevenLabs\' top speed (1.2): tighten the script with shorter words and sentences, or ask the owner about the pace spec' : ''));
+    break;
+  }
+  speed = next;
 }
+if (!retime && speedWorks) fs.writeFileSync(path.join(P, 'brief.json'), JSON.stringify({ ...brief, speed: +speed.toFixed(3) }, null, 1)); // later takes start here
+fs.rmSync(path.join(P, 'mix.js'), { force: true }); // the old mix no longer matches this voice: render.mjs --audio makes a new one
+const SRC = V('raw.mp3');
 
 // ---- 3. line the heard words up with the script words, fill gaps by interpolation
 // Both sides are spelled out first ("500" -> five hundred, "29%" -> twenty nine percent) and aligned piece by piece,
@@ -126,7 +140,7 @@ for (let i = 0; i < n;) { // runs of unmatched words share the gap between their
 }
 for (let i = 1; i < n; i++) if (words[i].start < words[i - 1].end) words[i].start = words[i - 1].end; // keep order
 
-// ---- 4. cut the pauses in, set the lead-in, trim the tail; shift every time to match
+// ---- 4. trim the silence before the first word (to the lead-in) and after the last; shift every time to match
 const SR = 48000;
 const pcm = new Float32Array(new Uint8Array(ff(['-i', SRC, '-f', 'f32le', '-ac', '1', '-ar', String(SR), '-'])).buffer);
 // Whisper stretches the last words of a line into the pause after it (0.3-0.75 s late). End each line where the take
@@ -151,37 +165,23 @@ const pcm = new Float32Array(new Uint8Array(ff(['-i', SRC, '-f', 'f32le', '-ac',
       for (const w of ws.slice(a, b + 1)) { w.start = t0 + (w.start - r0) * k; w.end = t0 + (w.end - r0) * k; } }
   }
 }
-// Whisper's word edges are only roughly right, so each pause is cut at the quietest 10 ms near the boundary
-const quietest = (t0, t1) => { let best = t0, low = Infinity, win = SR / 100;
-  for (let s = Math.round(t0 * SR); s + win <= Math.round(t1 * SR); s += win / 2) { let e = 0; for (let k = s; k < s + win; k++) e += pcm[k] * pcm[k]; if (e < low) { low = e; best = (s + win / 2) / SR; } }
-  return best; };
-const cuts = pauses.filter((p) => p.after < n - 1).map((p) => {
-  const b = (words[p.after].end + words[p.after + 1].start) / 2;
-  return { at: quietest(Math.max(words[p.after].start + 0.05, b - 0.15), Math.min(words[p.after + 1].end - 0.05, b + 0.12)), dur: p.dur };
-});
-for (const c of cuts) for (const w of words) // a word that straddles a cut ends (or starts) at it, not across the silence
-  if (w.start < c.at && w.end > c.at) { if (c.at - w.start >= w.end - c.at) w.end = c.at; else w.start = c.at; }
 const from = Math.max(0, words[0].start - cfg.lead), pre = Math.max(0, cfg.lead - words[0].start), to = Math.min(pcm.length / SR, words[n - 1].end + cfg.tail);
-const shift = (t, isEnd) => pre + (t - from) + cuts.filter((c) => (isEnd ? c.at < t : c.at <= t)).reduce((a, c) => a + c.dur, 0);
-const parts = [new Float32Array(Math.round(pre * SR))]; let last = from;
-for (const c of cuts) { parts.push(pcm.subarray(Math.round(last * SR), Math.round(c.at * SR)), new Float32Array(Math.round(c.dur * SR))); last = c.at; }
-parts.push(pcm.subarray(Math.round(last * SR), Math.round(to * SR)));
-const out = new Float32Array(parts.reduce((a, p) => a + p.length, 0)); let o = 0; for (const p of parts) { out.set(p, o); o += p.length; }
-for (const w of words) { w.start = +shift(w.start).toFixed(3); w.end = +shift(w.end, true).toFixed(3); }
+const head = new Float32Array(Math.round(pre * SR)), speech = pcm.subarray(Math.round(from * SR), Math.round(to * SR));
+const out = new Float32Array(head.length + speech.length); out.set(head); out.set(speech, head.length);
+for (const w of words) { w.start = +(pre + w.start - from).toFixed(3); w.end = +(pre + w.end - from).toFixed(3); }
 fs.writeFileSync(V('voice.f32'), Buffer.from(out.buffer));
 ff(['-f', 'f32le', '-ar', String(SR), '-ac', '1', '-i', V('voice.f32'), V('voice.wav')]);
 ff(['-i', V('voice.wav'), '-b:a', '128k', V('voice.mp3')]);
-fs.rmSync(V('voice.f32')); fs.rmSync(V('raw16k.wav')); if (SRC !== V('raw.mp3')) fs.rmSync(SRC);
+fs.rmSync(V('voice.f32'));
 
 // ---- 5. timing.json + vo.js
 const dur = +(out.length / SR).toFixed(3);
-const T = { duration: dur, lead: cfg.lead, voiceId, model: brief.model || cfg.model, misheard,
-  pauses: pauses.map((p) => ({ after: p.after, word: words[p.after].w, dur: p.dur })),
+const T = { duration: dur, lead: cfg.lead, voiceId, model, misheard,
   lines: lines.map((l) => { const ws = words.filter((w) => w.line === l.n); return { n: l.n, scene: l.scene, text: l.text, start: ws[0].start, end: ws.at(-1).end }; }),
   words: words.map(({ i, w, start, end, line, scene }) => ({ i, w, start, end, line, scene })) };
 console.assert(T.words.every((w, i) => i === 0 || w.start >= T.words[i - 1].start), 'word times in order');
 fs.writeFileSync(path.join(P, 'timing.json'), JSON.stringify(T, null, 1));
 fs.writeFileSync(path.join(P, 'vo.js'), `window.VO_AUDIO = "${fs.readFileSync(V('voice.mp3')).toString('base64')}";\nwindow.TIMING = ${JSON.stringify(T)};\n`);
 const spoken = T.words.at(-1).end - T.words[0].start;
-console.log(`${n} words, ${dur.toFixed(2)} s of voice, ${(n / spoken).toFixed(2)} words/s (target ${rate}, take sped up x${tempo.toFixed(3)}${tempo >= 1.5 ? ': at the limit, the take is too slow' : ''}), ${cuts.length} pauses cut in, scenes ${[...new Set(words.map((w) => w.scene))].join(',')}`);
+console.log(`${n} words, ${dur.toFixed(2)} s of voice, ${(n / spoken).toFixed(2)} words/s at ElevenLabs speed ${speed.toFixed(3)} (target ${rate}, in range ${cfg.rateMin}-${cfg.rateMax}; the take is not re-timed), scenes ${[...new Set(words.map((w) => w.scene))].join(',')}`);
 if (misheard.length) console.log(`check these (Whisper heard something else; re-take if the voice really said it wrong):\n  ${misheard.reverse().join('\n  ')}`);

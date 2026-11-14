@@ -1,8 +1,8 @@
 # Spotlight Stage: notes from earlier videos
 
 - **9:16 staging:** build the stage taller than it is wide and set every full-figure shot so the boards meet the
-  back wall at ≤ 62 % of the frame. The subtitles then sit over the dark boards and their reflection, never over the
-  actor. Flown pieces (clouds, props, signs) hang low enough to fit between the floor line and the top 11.5 %.
+  back wall at ≤ 62 % of the frame, keeping the actors and props clear of the bottom 24 % that Instagram covers
+  (there are no captions any more). Flown pieces (clouds, props, signs) hang low enough to fit between the floor line and the top 11.5 %.
   (eat-less-than-you-think)
 - **One shadow per actor:** with two crossed washes, a follow spot and a top light all casting shadows, the actor
   throws 2–3 hard silhouettes on the back wall, and they read as extra people. Let the washes cast no shadow

@@ -11,8 +11,9 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   closer, and use a wider `fov` when the reference used a long lens on a wide scene.
 - **Instagram covers** the top 11.5 %, the bottom 24 % and the right 13 % (the player's **Safe** button shades them). Key
   action, labels and lettering stay out of those areas. The bottom band is for nothing important.
-- **Captions**: one white word per card, black outline, centred at 70 % of the height (`SUBS()` defaults; don't change
-  the colours or the height). Keep labels, lettering, faces and readable props out of about 64–76 % of the height.
+- **No captions** (owner's rule): never draw the narration's words on screen. Labels, signs and lettering that name
+  things are fine, and so is diegetic text (a carved message, a sign on a set). Every piece of text faces the camera
+  and reads the right way round: never mirrored (no negative scale on a text card, no text on the back face of a flat).
 
 ## Structure of src/style.js (same as the reference)
 ```js
@@ -23,17 +24,19 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   const shots = [ { t: 0, place: 'kitchen', size: 'wide' }, { t: T.seeIt, place: 'flies', size: 'wide', how: 'fly', dur: 0.45 }, ... ];
   const moves = [ { t: CUE.at('all'), size: 'full' }, ... ];        // every pan or zoom inside a shot
   const DURATION = CUE.snap(TIMING.duration + 1.0, DPS);            // hold 0.8–2 s on the payoff, no outro
-  const subs = SUBS();
   registerStyle({ id, name, duration: DURATION, shots, moves, payoff: T.payoff, fonts: [...], render: {...},
-    build(S) { ...; return { update(t) {...}, overlay(ctx, t, W, H) { /* labels */ subs(ctx, t, W, H); } }; },
+    build(S) { ...; return { update(t) {...}, overlay(ctx, t, W, H) { /* labels */ } }; },
     sound(k) { ... } });
 }
 ```
 - **Every time is a cue.** Events, camera moves, labels and sounds come from `CUE.at('<words>')` (the start of that
   phrase, snapped to the drawing grid) or offsets from it in frames. Never type a bare number of seconds for something
   the voice talks about. When the take changes, everything follows.
-- A thing lands **on the word that names it** (or 1–2 frames before). A sound starts on the same frame as its event,
-  using the same `T.x` value.
+- A thing lands **on the word that names it, 0–3 frames before it, never after** (`CUE.at` snaps to the drawing at or
+  just before the word). Every reaction, reveal and pose swap too: the eye leads, the ear confirms. A sound starts on
+  the same frame as its event, using the same `T.x` value.
+- **The voice is the clock and is never changed.** Never speed up, slow down or stretch the voice or the picture to
+  make something fit: move the picture's events to the words instead.
 - `shots`, `moves` and `payoff` are what QA measures the specs from (format in specs.md). **Drive the camera from the
   same two lists** (one camera function that eases to each entry's framing), so what's declared is what's shown.
 
@@ -80,8 +83,9 @@ the safe area, part of the payoff the video ends on. No App Store badge or other
 
 ## The look (from the atlas brief, kept)
 - The reference shows the look, not the story: don't reuse its objects or beats unless the topic needs them.
-- Things happen to objects or characters over the beats, and the picture does the telling. Words are labels and
-  captions, never the subject of a shot.
+- **Show, don't tell.** Things happen to objects or characters over the beats, and the picture does the telling: each
+  line's *We see* (script.md) is acted out, on its word. Words on screen are labels, never the subject of a shot, and
+  never a repeat of the narration.
 - Keep the reference's materials, beams, haze and way of moving; the lamp levels and grade follow specs.md §4.
 - `update(t)` sets the whole scene for time t and nothing builds up between calls (the kit calls it many times per
   frame, and QA calls it for every frame to measure the camera). No `Math.random`, `Date` or timers; use `K.rng(seed)`.
@@ -91,10 +95,16 @@ the safe area, part of the payoff the video ends on. No App Store badge or other
 - Phone viewing: words large and on screen long enough to read (≥ 1.2 s + 0.3 s per word), sharp, high contrast.
 
 ## Sound
-Voiceover mode: the narration is on top. Score the events that land (arrivals, impacts, scene changes, the key number,
-the result) with sounds the material would make, on the same frame as the event. No music bed under the voice
-(voiceover mode drops beds anyway). Small silences so the big hits read.
+The narration is on top. In `sound(k)`:
+- **A music bed under the whole piece:** `k.music('pad' | 'pulse', t0, t1, { bpm, chords, gain })` from 0 to the end,
+  changing chords on the story's turns (the twist, the payoff). Its level is set by `tools/mix.py` (the bed at −6 dB to
+  the voice), so the `gain` values only balance its parts. Ambience beds (`k.bed('room')`) don't reach the final mix.
+- **Effects** on the events that land (arrivals, impacts, scene changes, the key number, the result), with sounds the
+  material would make, on the same frame as the event. Keep the hits about even: mix.py caps the whole effects stem by
+  its loudest 50 ms, so one huge hit pulls every effect down.
+- Never mix by hand, never add ducking or compression: `render.mjs P --audio` renders the bed and the effects as
+  stems and mix.py sets every level (references/specs.md section 6).
 
 ## Before handing to QA
 `node SKILL/tools/build.mjs P` must pass, then open the preview once yourself (browser pane) and scrub through. Then
-run `node SKILL/tools/qa.mjs P` and fix every FAIL before the reviewer round.
+run `node SKILL/tools/qa.mjs P` and fix every FAIL before the review.

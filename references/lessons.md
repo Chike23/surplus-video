@@ -1,6 +1,6 @@
 # Lessons (read before building; check again in every review)
 
-One line per lesson: the general rule, then why, then the video it came from. Add to it after every review round and
+One line per lesson: the general rule, then why, then the video it came from. Add to it after the review and
 every round of the owner's notes. Fix the general cause, not only this video. Merge a new lesson into an existing line
 when it's the same rule; don't add duplicates.
 
@@ -17,8 +17,8 @@ when it's the same rule; don't add duplicates.
 - When one beat changes two props (a stamp on the phone, the needle on the dial), that shot has both in frame.
   (how-fast-to-gain: ON PACE with the needle off screen)
 - Two props side by side are wide for a 9:16 frame: lay out the hero props so they stack in depth or height, and
-  check each framing with a quick projection of the props' corners against the subtitle band and the safe areas
-  before rendering. (how-fast-to-gain: the cups could not fill the height and clear the subtitles)
+  check each framing with a quick projection of the props' corners against the safe areas before rendering.
+  (how-fast-to-gain: the cups could not fill the height)
 - The opening is wide (specs: every new place opens wide), but tight to the set: the hero about a third of the height
   and already moving, and the first push-in comes within about a second. A far, empty opening reads as nothing on a
   phone. (stomach-stretch: opening was too far)
@@ -30,6 +30,23 @@ when it's the same rule; don't add duplicates.
   can't fit large enough to read, show them in separate shots (pan from one to the other) rather than one wide
   frame. (eat-less-than-you-think: the penny scale stood in front of the balance's post)
 
+## Story, script and voice (owner's notes)
+- The hook must stop a stranger in the first second: open on the strangest true moment, already happening, as a fact.
+  No set-up, no name intro, no question. A hook that only states the topic didn't grab the owner. (2026-11-14)
+- A story is one surprising story, fact or experience with a want, rising stakes and a planted twist, not a generic
+  weight-gain explainer that exists to reach the app. Every beat is a "but" or a "so". (2026-11-14)
+- Show, don't tell: the picture acts out every line; the narration never names a feeling or describes the screen.
+  (2026-11-14)
+- No pauses and no re-timing: cutting silence into the take broke the flow and forced the rest of the voice to be
+  sped up in places. The voice keeps one natural pace from ElevenLabs; a wrong pace is fixed in the script, never by
+  an edit. (2026-11-14)
+- Voice (owner's pick after test takes): Mark - Natural Conversations on Eleven v4 at about 3 words a second.
+  Multilingual v2 sounded robotic and left 1–1.6 s stops at full stops; v4 is more expressive and its pauses stay
+  under half a second. v4 ignores the speed setting (1.0–1.2 all read about 3.0), so the script sets the pace:
+  bridges instead of full stops, one question, one exclamation, a dash before the reveal. (2026-11-14)
+- No captions (owner's rule, 2026-11-14): the 64–76 % band is free again; framing only has to clear Instagram's
+  covered areas.
+
 ## Characters and faces
 - Put eyes and faces on the broad, smooth part of a shape, never in a crease, joint or where the surface folds; make
   them big enough to read at phone size. (stomach-stretch: eyes sat in the gullet crease)
@@ -37,18 +54,11 @@ when it's the same rule; don't add duplicates.
   clear silhouette. (stomach-stretch: sweat drop read as a white triangle)
 
 ## Words on screen
-- Plan where every caption and label goes **per shot** before building: never over the subject or a prop in use, never
-  in the subtitle band or Instagram's covered areas. (stomach-stretch: caption covered the plate)
-- Burned-in subtitles are words on screen too: frame each shot so no readable prop (a dial face, a phone screen) and
-  no point of action sits in the subtitle band (y 0.64–0.76 of the frame). Fix it with the camera, not only the
-  labels. (how-fast-to-gain: subtitles over the dial and the phone's rows) The hero's own body and pointing hand
-  count too. In every full-figure shot, put the floor at ≤ 0.62 of the height. With the camera centred on the actor
-  plane, that means framing y ≤ 0.12 × the visible height. Or keep the character out of the subtitle column.
-  Check each shot's numbers, not only the plan. (eat-less-than-you-think: subtitles crossed Sam in 5 shots)
-- The subtitle's highlight colour must contrast with what sits behind the band (mustard on a mustard prop vanishes).
-  (how-fast-to-gain)
-- Check gaps between lettering, captions and props at the pop's overshoot (about 1.18×), not only at rest; two words
-  on screen at once in the same spot (a word and its caption) need a clear gap or one of them goes. (how-fast-to-gain)
+- Plan where every label goes **per shot** before building: never over the subject or a prop in use, never in
+  Instagram's covered areas. (stomach-stretch: a label covered the plate)
+- Lettering must contrast with what sits behind it (mustard on a mustard prop vanishes). (how-fast-to-gain)
+- Check gaps between lettering and props at the pop's overshoot (about 1.18×), not only at rest; two pieces of text
+  on screen at once in the same spot need a clear gap or one of them goes. (how-fast-to-gain)
 - Text drawn on a prop's screen: measure each string and shrink it to fit its column, and frame the screen big
   enough that its smallest text reads on a phone. (how-fast-to-gain: a food name ran into its number)
 - Props in a row each with a tag: spread the props and stagger the tag heights so tags can't collide; keep tags

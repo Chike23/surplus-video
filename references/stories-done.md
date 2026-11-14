@@ -1,6 +1,6 @@
 # Stories already done
 
-Every story already made into a video. Read it before suggesting topics or writing Story A and Story B (step 1), and
+Every story already made into a video. Read it before offering the 10 ideas (step 1), and
 add to it when a video is finished (step 12). Stories can be added here by hand too.
 
 ## Too similar = don't suggest it
@@ -17,7 +17,7 @@ calories and sets a daily surplus target) is in every video and doesn't count. W
 another.
 
 ## The list
-Newest first. Entry: date · title · folder · style and mode, then the four things above and the payoff.
+Newest first. Entry: date · title · folder · style and kind (twist or relatable; older ones say mode A or B), then the four things above and the payoff.
 
 ### 2026-11-13 · You eat less than you think
 `~/surplus-videos/2026-11-13-eat-less-than-you-think` · Spotlight Stage · mode A

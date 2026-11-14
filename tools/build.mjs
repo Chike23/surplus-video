@@ -1,7 +1,8 @@
 // Builds P/preview.html: inlines the /*@include path*/ markers of P/kit/player.src.html (paths relative to P), adds the
 // Google Fonts the style lists in `fonts: [...]`, and refuses style code that would break determinism.
+// An optional marker /*@include? path*/ is left out when the file is missing, or older than src/style.js or vo.js (a stale mix).
 // usage: node build.mjs <project dir>
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const P = resolve(process.argv[2] || '.');
@@ -18,8 +19,11 @@ const fontLink = q ? `<link rel="stylesheet" href="https://fonts.googleapis.com/
 
 const html = readFileSync(resolve(P, 'kit/player.src.html'), 'utf8')
   .replace('<!--@fonts-->', fontLink)
-  .replace(/\/\*@include ([^*]+)\*\//g, (_, p) => {
-    const code = readFileSync(resolve(P, p.trim()), 'utf8');
+  .replace(/\/\*@include(\?)? ([^*]+)\*\//g, (_, opt, p) => {
+    const f = resolve(P, p.trim()), age = (x) => (existsSync(resolve(P, x)) ? statSync(resolve(P, x)).mtimeMs : 0);
+    if (opt && !existsSync(f)) return '';
+    if (opt && age(p.trim()) < Math.max(age('src/style.js'), age('vo.js'))) { console.log(`${p.trim()} is older than style.js or vo.js: left out (run render.mjs P --audio)`); return ''; }
+    const code = readFileSync(f, 'utf8');
     if (/<\/script/i.test(code)) throw new Error(`${p} contains </script and would break the page`);
     return code;
   });

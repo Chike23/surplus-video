@@ -15,7 +15,7 @@ One self-contained HTML file (show it as an artifact if you can):
 - three.js 0.187.0 core only, loaded as an ES module from a CDN with an import map (no addons), then set window.THREE = THREE before running the kit and the style code.
 - A 1080x1920 (vertical 9:16) canvas scaled to fit the window, with a small control bar: play/pause, a scrub slider, the time, a sound toggle, loop on by default.
 - A new style object, built the same way as the reference (content block first, then build(S) returning update(t)), that tells MY CONTENT in this style. 45-60 seconds.
-- A narration track at 3.75 words a second, with one-word white captions with a black outline at 70% of the height.
+- A narration track at 3 words a second, and no captions (labels and lettering on the set are fine).
 - Run it with the kit: const S = await K.run(canvas, style, { samples }). Use a low sample count (2-4) while playing live and the style's full count when rendering frames. Expose window.seek = (t) => S.seek(t) and window.DURATION.
 - Play the style's sound(k) score in sync from the player: on play call stopSound = SOUND.live((k) => style.sound(k), currentT, { voiceover: false }), and call stopSound() on pause, on seek and when the sound toggle is turned off.
 - Include the STAGE kit and the SOUND kit below unchanged.
@@ -45,7 +45,7 @@ If you are Claude Code with a shell: render an MP4 in headless Chrome with the G
 
 STYLE CARD
 Name: Spotlight Stage
-Format: Vertical 9:16 (1080x1920), 30 fps, 45-60 seconds, with a narration track at 3.75 words a second and one-word white captions with a black outline at 70% of the height. The numbers for pace, shots, places, camera moves, shot sizes, lamps and movement are in the surplus-video skill's references/specs.md and beat anything here or in reference.js (whose slow stalls camera, 16:9 frame and darker grade are superseded).
+Format: Vertical 9:16 (1080x1920), 30 fps, 45-60 seconds, with a narration track at 3 words a second and no captions (labels and lettering on the set are fine). The numbers for pace, shots, places, camera moves, shot sizes, lamps and movement are in the surplus-video skill's references/specs.md and beat anything here or in reference.js (whose slow stalls camera, 16:9 frame and darker grade are superseded).
 Family: Spaces and journeys
 Use: story
 Look: A toy theatre at night: crimson velvet, a worn timber stage and a painted world of flat card cut-outs standing in layers, with an easel card at the front for the caption. The room is dark; whatever the story is about is picked out by shafts of light cutting through haze.

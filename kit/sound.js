@@ -3,6 +3,9 @@
 // (play(..., { minor: true }), tone/noise { minor: true }, or scheduled inside k.withMinor(() => ...)) at about 60%
 // volume instead of full, and sits all effects a little lower, so the narration stays on top while the piece still
 // sounds alive. In the full mix, minor sounds play at full volume. Scores can read k.vo to branch further.
+// Stems for tools/mix.py: { stem: 'sfx' } is voiceover mode (effects only); { stem: 'bed' } plays only music(). Ambience
+// beds (bed(): room tone, hiss) stay out of both, as they always did under narration.
+// A stem has no compressor, so mix.py sets every level with one linear gain (owner's rule: no compression).
 // A style adds   explainerSound(k) { k.bed('room', 0, D); k.play('pop', 1.25); ... }   and the same
 // call schedules into a live AudioContext (the player) or an OfflineAudioContext (the video render).
 // Times are seconds on the explainer's own clock. Randomness is seeded, so every render is identical.
@@ -31,7 +34,9 @@
 
   SOUND.kit = function (ctx, opts) {
     const o = opts || {};
-    const VO = !!o.voiceover;
+    const STEM = o.stem || null, BED = STEM === 'bed';
+    const VO = !!o.voiceover || STEM === 'sfx';
+    let inBed = false; // true while music() schedules; in the 'bed' stem nothing else sounds
     const MINOR = 0.6; // voiceover-mode volume for minor sounds
     let inMinor = false;
     const gainOf = (p, d) => (p.gain == null ? d : p.gain) * (VO && (p.minor || inMinor) ? MINOR : 1);
@@ -44,8 +49,8 @@
 
     // ---- buses: sfx, amb, music -> compressor -> master; one shared reverb send
     const master = ctx.createGain(); master.gain.value = o.master == null ? 0.9 : o.master;
-    const comp = ctx.createDynamicsCompressor();
-    comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 3; comp.attack.value = 0.004; comp.release.value = 0.18;
+    const comp = STEM ? ctx.createGain() : ctx.createDynamicsCompressor();
+    if (!STEM) { comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 3; comp.attack.value = 0.004; comp.release.value = 0.18; }
     comp.connect(master); master.connect(o.dest || ctx.destination);
     const bus = {};
     for (const [name, g] of Object.entries({ sfx: VO ? 0.7 : 0.85, amb: 0.5, music: 0.45 })) { bus[name] = ctx.createGain(); bus[name].gain.value = g; bus[name].connect(comp); }
@@ -122,6 +127,7 @@
     // ---- primitives
     // tone(t, { f, type, dur, gain, a, hold, pan, verb, bus, filter, f2 (filter freq), q, detune })
     function tone(time, p) {
+      if (BED && !inBed) return;
       let t = at(time), dur = p.dur || 0.2;
       if (t + dur < ctx.currentTime || (time < T0 - 0.001 && dur < 1.5)) return;
       const lt = late(t, dur, p); if (lt) { if (lt.skip) return; t = lt.t; dur = lt.dur; p = lt.p; }
@@ -136,6 +142,7 @@
     }
     // noise(t, { dur, color, filter, f, q, gain, a, hold, pan, verb, bus, rate })
     function noise(time, p) {
+      if (BED && !inBed) return;
       let t = at(time), dur = p.dur || 0.2;
       if (t + dur < ctx.currentTime || (time < T0 - 0.001 && dur < 1.5)) return;
       const lt = late(t, dur, p); if (lt) { if (lt.skip) return; t = lt.t; dur = lt.dur; p = lt.p; }
@@ -226,7 +233,7 @@
 
     // ---- beds: continuous sound under a stretch of time. bed(name, t0, t1, opts)
     function bed(name, t0, t1, p) {
-      if (VO) return;
+      if (VO || BED) return;
       p = p || {}; const g = p.gain == null ? 1 : p.gain, d = t1 - t0, fade = Math.min(0.4, d / 4);
       const long = (q) => Object.assign({ dur: d, a: fade, hold: d - fade * 2, bus: 'amb' }, q);
       if (name === 'room') noise(t0, long({ color: 'brown', filter: 'lowpass', f: 320, gain: 0.12 * g }));
@@ -262,7 +269,8 @@
       }
     }
 
-    return { play, bed, music, tone, noise, withMinor, hz, vo: VO, sounds: Object.keys(S) };
+    const onBed = (fn) => (...a) => { const was = inBed; inBed = true; try { return fn(...a); } finally { inBed = was; } };
+    return { play, bed, music: onBed(music), tone, noise, withMinor, hz, vo: VO, sounds: Object.keys(S) };
   };
 
   // Live playback for a player: SOUND.live(scoreFn, fromT, { voiceover, master }) starts the score from explainer time

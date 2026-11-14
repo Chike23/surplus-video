@@ -1,16 +1,37 @@
 // render.mjs: the final MP4, only after the user approved the preview. Every frame at the style's full sample count,
-// piped into ffmpeg; the effects score rendered offline in voiceover mode, mixed under the narration at about -15 LUFS.
-// usage: node render.mjs <P> [--samples 16] [--sfx -4]   -> P/out/<folder name>.mp4 + P/out/check-*.jpg
+// piped into ffmpeg. The sound score is rendered offline as two stems (effects, music bed) and mixed with the voice by
+// mix.py, the only mixer (references/specs.md section 6). Neither the picture nor the voice is sped up or slowed down.
+// usage: node render.mjs <P> [--samples 16]   -> P/out/<folder name>.mp4 + P/out/check-*.jpg
+//        node render.mjs <P> --audio          only the mix (P/voice/mix.wav, P/mix.js) and a rebuilt preview that plays it
 import fs from 'node:fs'; import path from 'node:path'; import { spawn, spawnSync, execFileSync } from 'node:child_process';
 import { openPreview, grab } from './chrome.mjs';
 
-const P = path.resolve(process.argv[2]);
+const P = path.resolve(process.argv[2]), HERE = path.dirname(new URL(import.meta.url).pathname);
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
 const FPS = 30, O = path.join(P, 'out'); fs.mkdirSync(O, { recursive: true });
-const name = path.basename(P), silent = path.join(O, 'picture.mp4'), sfx = path.join(O, 'sfx.f32'), final = path.join(O, `${name}.mp4`);
+const name = path.basename(P), silent = path.join(O, 'picture.mp4'), final = path.join(O, `${name}.mp4`), mixWav = path.join(P, 'voice', 'mix.wav');
 
 let { browser, page, gpu } = await openPreview(P);
 const D = await page.evaluate(() => window.DURATION);
+
+// the audio first (fast, and it stops here if a level rule can't be met): two stems, then mix.py
+for (const stem of ['sfx', 'bed']) {
+  const b64 = await page.evaluate(async (D, stem) => {
+    const r = await SOUND.renderOffline((k) => window.style.sound(k), D, 48000, { stem });
+    const u8 = new Uint8Array(r.inter.buffer); let s = '';
+    for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+    return btoa(s);
+  }, D, stem);
+  const raw = path.join(P, 'voice', `${stem}.f32`); fs.writeFileSync(raw, Buffer.from(b64, 'base64'));
+  execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'f32le', '-ar', '48000', '-ac', '2', '-i', raw, '-c:a', 'pcm_f32le', path.join(P, 'voice', `${stem}.wav`)]);
+  fs.rmSync(raw);
+}
+execFileSync('python3', [path.join(HERE, 'mix.py'), P], { stdio: 'inherit' });
+if (process.argv.includes('--audio')) {
+  await browser.close();
+  execFileSync('node', [path.join(HERE, 'build.mjs'), P], { stdio: 'inherit' });
+  process.exit(0);
+}
 const samples = +arg('samples', await page.evaluate(() => window.style.render.samples || 16));
 const N = Math.round(D * FPS);
 console.log(`rendering ${N} frames at ${samples} samples on ${gpu}`);
@@ -39,24 +60,12 @@ for (let i = 0; i < N; i++) {
 }
 ff.stdin.end(); await done;
 
-// effects score, offline, voiceover mode (beds and music drop out, minor sounds sit lower)
-const b64 = await page.evaluate(async (D) => {
-  const r = await SOUND.renderOffline((k) => window.style.sound(k), D, 48000, { voiceover: !!window.VO_AUDIO });
-  const u8 = new Uint8Array(r.inter.buffer); let s = '';
-  for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
-  return btoa(s);
-}, D);
 await browser.close();
-fs.writeFileSync(sfx, Buffer.from(b64, 'base64'));
 
-const voice = path.join(P, 'voice', 'voice.wav'), hasVoice = fs.existsSync(voice);
-const inputs = ['-i', silent, '-f', 'f32le', '-ar', '48000', '-ac', '2', '-i', sfx, ...(hasVoice ? ['-i', voice] : [])];
-const mix = hasVoice
-  ? `[1:a]volume=${arg('sfx', -4)}dB[s];[2:a]aresample=48000,aformat=channel_layouts=stereo[v];[s][v]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=11[a]`
-  : '[1:a]loudnorm=I=-15:TP=-1.5:LRA=11[a]';
-execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...inputs, '-filter_complex', mix, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k',
+// the picture and mix.py's mix, as they are (no re-timing, no further processing)
+execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', silent, '-i', mixWav, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k',
   '-ar', '48000', '-t', D.toFixed(3), '-movflags', '+faststart', final]);
-fs.rmSync(sfx); fs.rmSync(silent);
+fs.rmSync(silent);
 
 // frames to look at before calling it done: start, quarter points, last frame
 for (const [k, t] of [0.05, D * 0.25, D * 0.5, D * 0.75, D - 0.05].entries())

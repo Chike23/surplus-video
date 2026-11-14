@@ -17,11 +17,20 @@ These come from the owner. They are rules, not suggestions. Every video meets al
 - The first frame shows a character already moving, fully lit. Never black, never a title, never a logo. *QA + look*
 
 **How fast it talks**
-- About 3.75 words a second (3.35–3.91). *QA* (voice.mjs paces the take to it)
-- A 45-second video has about 165–185 words; a 60-second one has about 220–245. *script*
-- Captions show about 2.9 cards a second (2.5–3.3): one white word per card, with a black outline, 70% down the
-  frame, no coloured words. *QA* (short words of 1–3 letters ride on the next word's card, which is how one word per
-  card comes out at about 2.9 a second)
+- About 3 words a second (2.8–3.2), at the narrator's own pace: always Mark - Natural Conversations on Eleven v4,
+  which ignores the speed setting, so the script sets the pace. *QA*
+- The voice is never edited or re-timed: no speeding up, slowing down, cutting or added pauses. Only the silence
+  before the first word and after the last is trimmed. The picture is never sped up or slowed down either. *QA*
+- A 45-second video has about 130–150 words; a 60-second one has about 175–195. *script*
+- No captions: no word-by-word subtitles of the narration. Labels, lettering and diegetic text (a carved message, a
+  sign) are fine, and every piece of text reads correctly, never mirrored. *look*
+- Every visual reaction, reveal and big action lands 0–3 frames before its word, never after it. *look* (bursts)
+
+**The story** *script + look*
+- Show, don't tell: every line has a picture that tells it; the narration never names a feeling or describes what's
+  on screen.
+- No real, named living people as characters, no brand mascots or logos, nothing graphic or political; stories,
+  characters and shots are original.
 
 **The first 4 seconds (the hook)**
 - A surprising action, stated as fact, inside the first 4 seconds. *script + look*
@@ -78,7 +87,7 @@ shoulders, about half the frame. **insert** a close-up of an object.
   blocker). *QA*
 - Keep the in-view scene changes (flats sliding, cards pulled, light changing colour), but each must take a quarter to
   half a second, not a full second or more. *QA (declared) + look*
-- A narration track at 3.75 words a second and the outlined one-word captions. *QA*
+- A narration track at 3 words a second, and no captions. *QA + look*
 - The easel card stays as the scene's name, with a black outline too. *look*
 
 ## 4. Theatre lamps
@@ -93,8 +102,9 @@ shoulders, about half the frame. **insert** a close-up of an object.
 - Add a little colour, taking colour strength from 35% to about 45–50% (42–53 %). *QA*
 - Keep the dark theatre mood: the beams through the haze and the pools of light stay. *look*
 
-(QA measures the sheet frames without the subtitle band: brightness = mean luma, colour strength = mean HSV
-saturation, pure black = pixels with no channel above 10/255.)
+(QA measures the sheet frames without the band at 64–76 % of the height, where captions used to sit, so the numbers
+stay comparable: brightness = mean luma, colour strength = mean HSV saturation, pure black = pixels with no channel
+above 10/255.)
 
 ## 5. Character movement *look* (sheets, plus `qa.mjs P --burst <t>` for 12 frames in a row at each big action)
 - **Travel in every shot.** The cut-out slides along its floor slot across the stage, enters and exits through the
@@ -110,6 +120,14 @@ saturation, pure black = pixels with no channel above 10/255.)
 - **Impacts.** A 3-frame freeze, then a recoil, with a sound effect on that frame.
 - **Props act too.** Food flies in on rods, and the scale needle swings, overshoots and settles.
 - **No lip-sync.** The character reacts and acts the story out.
+
+## 6. Audio *mix.py* (prints each level; render.mjs stops if a rule is missed)
+- Always mixed with `tools/mix.py`, never by hand.
+- The music bed sits at 50 % of the voice level: −6 dB, gated RMS (400 ms blocks, gated like loudness meters).
+- SFX sit at 50 % of the voice level or slightly less (≤ −6 dB, gated RMS), with peaks capped: no 50 ms of effects is
+  louder than the narration's loud syllables (the 95th percentile of its 50 ms levels), so no hit pokes out over it.
+- No ducking or compression that would change these ratios. The whole mix gets one linear gain (to about −15 LUFS)
+  plus a peak limiter (−1.5 dBFS) and nothing else.
 
 ## How the build declares what QA measures (in `src/style.js`, passed to `registerStyle`)
 ```js
@@ -127,6 +145,6 @@ The size holds from its entry until the next shot or move. QA builds the timelin
 the camera itself (speed, stillness, angle) every frame, so a declared move that doesn't happen shows up there.
 
 ## The spec table (the reviewer's report ends with it)
-One row per bullet in sections 1–5: `| spec | measured / seen | met? | times |`. Met only when the number or the frames
+One row per bullet in sections 1–5 (section 6 is checked by mix.py at the mix): `| spec | measured / seen | met? | times |`. Met only when the number or the frames
 show it. Every "no" is a blocker, except script-side misses in a script the user pasted: those go in a separate
 line for the owner.

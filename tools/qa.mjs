@@ -17,7 +17,7 @@ const tile = (pattern, start, out, c = cols, r = rows) => execFileSync('ffmpeg',
 
 const { browser, page, errors, gpu } = await openPreview(P);
 const info = await page.evaluate(() => ({ D: window.DURATION, shots: window.style.shots || null, moves: window.style.moves || null,
-  payoff: window.style.payoff ?? null, T: window.TIMING || null, subs: (window.SUBS && window.SUBS.info) || null,
+  payoff: window.style.payoff ?? null, T: window.TIMING || null,
   W: window.S.W, H: window.S.H, fps: window.S.R.fps, canProbe: typeof window.S.update === 'function' }));
 
 if (times) { // close look
@@ -42,8 +42,7 @@ const out = [], ok = (c, msg) => out.push(`${c ? 'OK  ' : 'FAIL'} ${msg}`), warn
 const head = (s) => out.push(`\n## ${s}`), note = (s) => out.push(`INFO ${s}`);
 const within = (x, a, b) => x >= a - 1e-9 && x <= b + 1e-9, f2 = (x) => x.toFixed(2), pc = (x) => `${Math.round(x * 100)} %`;
 const at = (ts) => ts.slice(0, 8).map(f2).join(', ') + (ts.length > 8 ? ` (+${ts.length - 8} more)` : '');
-const rgb = (h) => { const m = String(h).replace('#', ''); return m.length === 3 ? [...m].map((c) => parseInt(c + c, 16)) : [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16)); };
-const { D, T, subs, W, H, fps, payoff } = info, SIZES = ['xwide', 'wide', 'full', 'medium', 'close', 'insert'];
+const { D, T, W, H, fps, payoff } = info, SIZES = ['xwide', 'wide', 'full', 'medium', 'close', 'insert'];
 
 head('Format and voice');
 ok(W === 1080 && H === 1920, `frame ${W}x${H} (spec 1080x1920)`);
@@ -54,8 +53,8 @@ if (T) {
   const sc = [...new Set(T.words.map((w) => w.scene))];
   ok(sc.length >= 3 && sc.length <= 4, `${sc.length} story parts [S#] (want 3-4)`);
   spoken = T.words.at(-1).end - T.words[0].start; const rate = T.words.length / spoken;
-  ok(within(rate, 3.35, 3.91), `speech ${f2(rate)} words/s (spec 3.75, 3.35-3.91; fix with voice.mjs --retime --rate)`);
-  const lo = 165 + ((D - 45) * 55) / 15, hi = 185 + ((D - 45) * 60) / 15;
+  ok(within(rate, 2.8, 3.2), `speech ${f2(rate)} words/s (spec 3, 2.8-3.2; fix it in the script and take it again: v4 ignores the speed setting; never re-time the audio)`);
+  const lo = 130 + ((D - 45) * 45) / 15, hi = 150 + ((D - 45) * 45) / 15;
   warn(within(T.words.length, lo * 0.97, hi * 1.03), `${T.words.length} words for ${f2(D)} s (spec about ${Math.round(lo)}-${Math.round(hi)}; rewrite a script you wrote; tell the user if it's theirs)`);
   warn(!T.misheard.length, `Whisper matched every word${T.misheard.length ? ': ' + T.misheard.join('; ') : ''}`);
   const hold = D - T.words.at(-1).end;
@@ -65,14 +64,6 @@ if (T) {
 } else out.push('FAIL no TIMING (run voice.mjs)');
 if (payoff != null) warn(within((D - payoff) / D, 0.10, 0.15), `payoff at ${f2(payoff)} s, the last ${pc((D - payoff) / D)} (spec 10-15 %; rewrite a script you wrote; tell the user if it's theirs)`);
 else out.push('FAIL style has no `payoff` time (references/specs.md)');
-
-head('Captions');
-if (subs && spoken) {
-  const cps = subs.cards / spoken;
-  ok(within(cps, 2.5, 3.3), `${subs.cards} caption cards, ${f2(cps)} a second (spec about 2.9, 2.5-3.3)`);
-  ok(rgb(subs.fill).every((v) => v >= 245) && rgb(subs.hi).every((v) => v >= 245) && rgb(subs.stroke).every((v) => v <= 25) && subs.strokeW > 0 && Math.abs(subs.y - 0.7) <= 0.02,
-    `captions ${subs.fill}/${subs.hi} with a ${subs.stroke} outline at ${pc(subs.y)} (spec: white, black outline, 70 %, no coloured words)`);
-} else out.push('FAIL no caption info: use SUBS() from the current kit/voice.js');
 
 // ---- the declared timeline: shots (scene changes) and moves (pans and zooms inside a shot)
 const shotsOk = Array.isArray(info.shots) && info.shots.length && info.shots.every((s) => s && typeof s.t === 'number' && s.place && SIZES.includes(s.size));

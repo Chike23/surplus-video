@@ -1,8 +1,9 @@
 # Reviewer brief (give this whole file to a fresh agent, with the paths filled in)
 
 You are the reviewer for a 45–60 s vertical (1080×1920) three.js video in the Spotlight Stage style (a toy theatre of
-card cut-outs), before its owner sees it. You did not build it. Your job is to find what's wrong, not to praise. Be
-specific: every finding has a time. **You also check the video against every spec in `SKILL/references/specs.md` and
+card cut-outs), before its owner sees it. You did not build it. **This is the only review this video gets**: after
+your report the builder fixes what you found and the video goes to the owner, so be thorough the first time. Your job
+is to find what's wrong, not to praise. Be specific: every finding has a time. **You also check the video against every spec in `SKILL/references/specs.md` and
 say, for each one, whether it is met.** A spec is met only when a number or the frames show it.
 
 **Inputs**
@@ -35,13 +36,17 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
 3. **Framing**: the subject cut by the frame edge; objects or arcs leaving frame mid-action, especially during camera
    moves; a set's edge or a black gap showing in a pan or pull-out; anything important in Instagram's covered areas
    (top 11.5 %, bottom 24 %, right 13 %); a first frame that isn't a lit, moving character; an end that doesn't hold.
-4. **Words on screen**: captions, labels, lettering and the easel card overlapping each other or the subject; too small
-   to read on a phone (cap height under about 45 px at 1080 wide); on screen too briefly; spelling; numbers that disagree
-   with the narration; captions out of sync with timing.json; anything that matters in the caption band (64–76 %).
+4. **Words on screen**: **any word-by-word caption of the narration is a blocker** (owner's rule: no captions).
+   Labels, lettering, diegetic text and the easel card: mirrored or back-to-front text (a blocker), overlapping each
+   other or the subject, too small to read on a phone (cap height under about 45 px at 1080 wide), on screen too
+   briefly, spelling, numbers that disagree with the narration, a label that just repeats the narration.
 5. **Sync**: the thing being talked about not on screen when the word is said (compare sheet times with timing.json);
-   each big action and reaction on its word; sound events vs picture (the style's `sound(k)` times vs `update` times).
-6. **Story**: does each part show what the narration says? Is the hook's surprising action pictured inside the first
-   4 s? Does it end on the payoff, with the CTA the brief asks for, readable, inside the safe area, and nothing after it?
+   every reaction, reveal and big action landing 0–3 frames **before** its word, never after (check with bursts against
+   timing.json's word start); sound events vs picture (the style's `sound(k)` times vs `update` times).
+6. **Story**: does each part show what the narration says? **Show, don't tell:** does the picture act out each line's
+   *We see* in script.md, or does it just sit there while the narration explains (a blocker when a beat has no
+   picture)? Is the hook's surprising action pictured in the very first frames? No real, named living person as a
+   character, no brand mascot or logo anywhere (blockers). Does it end on the payoff, with the CTA the brief asks for, readable, inside the safe area, and nothing after it?
    **Surplus is never shown:** any phone, screen, app icon or app-like picture (calorie ring, dashboard, progress bar)
    anywhere in the video is a blocker. The plug must come through the character acting out the change.
 7. **Style**: materials, beams, haze, line and the way things move, as the style card says, with the specs' camera and
@@ -63,7 +68,7 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
    - the script-side items (word count, hook stated as fact, "You see,", payoff in the last 10–15 %): blockers when
      the skill wrote the script (`P/brief.json` has a `"story"`); notes for the owner when the user pasted it.
 
-**Report** (write it to `P/qa/review-<round>.md`, and return the same text):
+**Report** (write it to `P/qa/review.md`, and return the same text):
 ```
 ## Blockers (must fix before the owner sees it)
 - [00:12.40–00:12.80] <what is wrong, where in the frame> → <likely cause in src/style.js if you can tell> → <fix>

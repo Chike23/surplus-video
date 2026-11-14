@@ -4,7 +4,7 @@
 //   - accumulation rendering: each frame is the average of N sub-renders, which gives real motion blur, anti-aliasing,
 //     true depth of field (the camera moves across a lens aperture) and soft area-light shadows (lights move across
 //     their own surface), all without post-process tricks
-//   - HDR bloom, tone mapping, vignette, grain, chromatic aberration and a crisp 2D overlay for captions
+//   - HDR bloom, tone mapping, vignette, grain, chromatic aberration and a crisp 2D overlay for labels
 //   - code-built lighting environments (no HDRI files), a real mirror floor, canvas textures, text planes, easing,
 //     seeded random and noise
 // Globals: K (helpers) and registerStyle(). A style is { id, name, ..., render: {...}, build(S) -> { update(t), overlay? } }.
