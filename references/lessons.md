@@ -22,15 +22,44 @@ when it's the same rule; don't add duplicates.
 - The opening is wide (specs: every new place opens wide), but tight to the set: the hero about a third of the height
   and already moving, and the first push-in comes within about a second. A far, empty opening reads as nothing on a
   phone. (stomach-stretch: opening was too far)
-- In-view scene changes: an outgoing flown or slid piece must be out of frame before the next piece enters the same
+- Scene changes are straight cuts now (owner's note, 2026-11-14: flats and cards crossing the screen were too much).
+  Inside a shot, an outgoing flown or slid prop must be out of frame before the next piece enters the same
   part of the frame. Stagger by the out-move plus the time the incoming piece is already visible before it lands
   (about 1.2–1.5 s for a 0.75 s fly-out). If you don't, they cross and read as collisions. (eat-less-than-you-think: the balance
   rose through the incoming cloud, a page landed on a hanging pan)
 - Never park a prop on the same screen spot as one already standing there. Give each prop its own place. If both
   can't fit large enough to read, show them in separate shots (pan from one to the other) rather than one wide
   frame. (eat-less-than-you-think: the penny scale stood in front of the balance's post)
+- A camera move onto a reaction or a prop change lands **before** the word, it doesn't start on it: start it at least
+  its duration earlier (on an earlier word start), or have the framing before it already hold the subject (a
+  two-shot of the trigger and the reacting face). A 0.48 s push that starts on the word shows the hit 10–15 frames
+  late or off screen. (bakers-thirteenth-loaf: the flinch on "light", the 13th loaf, the needle and "moves")
+- A framing on a character who travels during it (a hop, a walk-off) follows his track; a framing set for where he
+  started leaves him half out of frame. (bakers-thirteenth-loaf: the hop onto the scale)
+- Hand-set camera drift must continue the move it follows (a pull-out never gets a push-in drift). Leave `d` to the
+  auto rule unless it points the same way. (bakers-thirteenth-loaf: six drifts reversed their moves)
+- Spring actions land on the word: start the spring about 5 drawings early (the kit's spring needs 4–5 drawings to
+  reach the pose), with the lean-back before that. (bakers-thirteenth-loaf)
+- Impacts are coded: the contact drawing holds 3 frames, then the recoil or reaction spring (damp 0.5 keeps the
+  overshoot at 10–20 %; 0.35 gives 30 %). Things that hit accelerate into the hit (ease in), never ease out into it.
+  Springs never stop on their own. (bakers-thirteenth-loaf: weight, oven door, 13th loaf, pan crash, catch, hop)
+- Aim close-ups at the head as drawn, through the character's lean, not the body origin: a profile head sits off the
+  body's axis and drifts into the right-hand band. (bakers-thirteenth-loaf)
+- A prop handed from a hand to a target moves over the last 2–3 drawings of the reach, and the reach arrives on the
+  word. Never move the prop on the word and reach afterwards. (bakers-thirteenth-loaf: the sealed weight)
 
 ## Story, script and voice (owner's notes)
+- Tell it like you're telling your best friend, not like a narrator describing an event: present tense, the teller's
+  own reactions ("wait, what?"), and two to four characters' lines voiced at the turns. The hook starts with
+  He, She or They; the main character is never named, everyone else is what they are (the guards, the baker).
+  (owner's note, 2026-11-14)
+- The owner's eight model videos (millions of views, measured 2026-11-14) share one format, now in script.md: a
+  past-tense hook of one strange act plus a pressure beat, then present tense; an underdog or backfire arc; the
+  doubters voiced; the viewer voiced ("Wait, …? Well, …"); a time ladder in threes; a joke about every ten seconds;
+  the why held back for a late "You see,"; the last story line a callback to the hook's object. The baker video
+  missed most of it (a name, "the needle finally moves", the why told early): that's the gap this closes.
+- Say it as it is: the real result and the real thing in plain words ("he finally gained weight", "one underweight
+  loaf"), never a stand-in ("the needle finally moved", "one light loaf"). (owner's note, 2026-11-14)
 - The hook must stop a stranger in the first second: open on the strangest moment, already happening, said straight.
   No set-up, no name intro, no question. A hook that only states the topic didn't grab the owner. (2026-11-14)
 - A story is one surprising story, fact or experience with a want, rising stakes and a planted twist, not a generic
@@ -46,7 +75,8 @@ when it's the same rule; don't add duplicates.
 - Voice (owner's pick after test takes): Mark - Natural Conversations on Eleven v4 at about 3 words a second.
   Multilingual v2 sounded robotic and left 1–1.6 s stops at full stops; v4 is more expressive and its pauses stay
   under half a second. v4 ignores the speed setting (1.0–1.2 all read about 3.0), so the script sets the pace:
-  bridges instead of full stops, one question, one exclamation, a dash before the reveal. (2026-11-14)
+  bridges instead of full stops, a dash before the reveal. Measured on the baker video: a full stop or question is
+  0.4–0.6 s, a comma 0.15–0.45 s, so a few short punch sentences at the turns are fine. (2026-11-14)
 - No captions (owner's rule, 2026-11-14): the 64–76 % band is free again; framing only has to clear Instagram's
   covered areas.
 

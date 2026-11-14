@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """mix.py: the only way a video's audio is mixed (owner's rule, references/specs.md section 6).
 
-  Music bed: gated RMS set to the voice's gated RMS - 6 dB (50 %).
+  Music bed: gated RMS set to the voice's gated RMS - 19 dB, the level under the owner's eight model videos
+             (measured in their pauses: -17.8 to -19.7 dB, median -18.9).
   SFX:       gated RMS at the voice - 6 dB or less, capped so no 50 ms of effects is louder than the narration's loud
              syllables (the 95th percentile of its 50 ms levels): no hit pokes out over the narration.
   Whole mix: one linear gain to about -15 LUFS, then a peak limiter at -1.5 dBFS. No ducking, no compression.
@@ -19,7 +20,8 @@ under the mean of the rest dropped (the loudness-meter gate, without K-weighting
 import array, base64, math, operator, os, re, subprocess, sys
 
 SR = 48000
-HALF = 10 ** (-6 / 20)  # -6 dB, "50 %"
+BED = 10 ** (-19 / 20)  # -19 dB: the music bed under the model videos (owner, 2026-11-14)
+HALF = 10 ** (-6 / 20)  # -6 dB, "50 %": the most the effects may sit at
 
 
 def db(x):
@@ -92,7 +94,7 @@ def main():
         sys.exit('mix.py: the voice is silent')
     if b == 0:
         sys.exit('mix.py: no music bed: add k.music(...) under the whole piece in sound(k) (references/build.md, Sound)')
-    g_bed = v * HALF / b
+    g_bed = v * BED / b
     s_peak, s_at = loudest_50ms(sfx)
     v_loud = loud_syllables(voice)
     g_sfx = min(v * HALF / s, v_loud / s_peak) if s else 0.0  # 50 % or less, and no hit over the narration's loud syllables
@@ -119,7 +121,7 @@ def main():
 
     rel = lambda x: f'{db(x) - db(v):+.1f} dB'
     print(f'voice      gated RMS {db(v):.1f} dBFS (reference)')
-    print(f'music bed  {rel(b * g_bed)} to the voice (rule -6.0)')
+    print(f'music bed  {rel(b * g_bed)} to the voice (rule -19.0)')
     if s:
         print(f'sfx        {rel(s * g_sfx)} to the voice (rule -6.0 or slightly less); loudest 50 ms {rel(s_peak * g_sfx)} at {s_at:.2f} s (cap {rel(v_loud)}, the loud syllables)')
         if db(s * g_sfx) - db(v) < -9:

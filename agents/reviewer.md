@@ -56,7 +56,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
 9. **The specs, every line of `references/specs.md` sections 1–5.** For the *QA* lines, take the number from
    checks.md and confirm it on the sheets. For the *look* lines, check them yourself:
    - shot sizes: spot-check 10 framings across the video against the size definitions in specs.md;
-   - every scene change quick (0.25–0.5 s) and shown on screen, the wash colour changing on it, never a dip to black;
+   - every scene change a straight cut (nothing sliding, wiping or crossing the screen to change it; a blocker if it
+     does) or a 0.25–0.5 s camera flight, the wash colour changing on it, never a dip to black;
    - after each fast move a very slow drift the same way, not a dead stop or a swing back;
    - sets wider than every framing (no edges), every visible area lit (no black gaps), deep indigo instead of black,
      beams and pools of light kept, follow spots on the actors through every fast move;
@@ -65,7 +66,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
      on a readable face, a 1–2° sway on every hold, impacts frozen 3 frames then a recoil with a sound, props acting,
      no lip-sync), using bursts;
    - the easel card naming the scene, outlined in black;
-   - the script-side items (word count, hook stated as fact, "You see,", payoff in the last 10–15 %, a changed or
+   - the script-side items (word count, hook stated as fact (a past-tense act plus a pressure beat), "You see,", the
+     why held back for the reveal, the callback before the payoff, payoff in the last 10–15 %, a changed or
      made-up story never called true, Surplus not named before the payoff): blockers when
      the skill wrote the script (`P/brief.json` has a `"story"`); notes for the owner when the user pasted it.
 

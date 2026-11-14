@@ -21,7 +21,7 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   // content first: words, numbers, cues (all times come from CUE: the narration's clock)
   const DPS = 30;
   const T = { hook: CUE.at('eat all day'), seeIt: CUE.at('you see'), ... };
-  const shots = [ { t: 0, place: 'kitchen', size: 'wide' }, { t: T.seeIt, place: 'flies', size: 'wide', how: 'fly', dur: 0.45 }, ... ];
+  const shots = [ { t: 0, place: 'kitchen', size: 'wide' }, { t: T.hungry, place: 'pantry', size: 'wide', how: 'cut' }, { t: T.seeIt, place: 'flies', size: 'wide', how: 'fly', dur: 0.45 }, ... ];
   const moves = [ { t: CUE.at('all'), size: 'full' }, ... ];        // every pan or zoom inside a shot
   const DURATION = CUE.snap(TIMING.duration + 1.0, DPS);            // hold 0.8–2 s on the payoff, no outro
   registerStyle({ id, name, duration: DURATION, shots, moves, payoff: T.payoff, fonts: [...], render: {...},
@@ -38,7 +38,8 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
 - **The voice is the clock and is never changed.** Never speed up, slow down or stretch the voice or the picture to
   make something fit: move the picture's events to the words instead.
 - `shots`, `moves` and `payoff` are what QA measures the specs from (format in specs.md). **Drive the camera from the
-  same two lists** (one camera function that eases to each entry's framing), so what's declared is what's shown.
+  same two lists** (one camera function: it eases to each move's or flight's framing, and jumps to a cut's framing on its frame), so
+  what's declared is what's shown.
 
 ## Places, shots and the camera (numbers in specs.md)
 - The script's `[S1]`–`[S4]` are story parts. Each part has several **places** (areas of the stage: centre, a wing,
@@ -46,9 +47,10 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   Build every set wider and deeper than any framing that looks at it, and light all of it, so no pan shows an edge
   or a black gap.
 - **Shots**: a scene change about every 4.3 s, ~1 in 10 short (under 1.1 s), none over 8.6 s, 7 in 10 to a new place.
-  A change takes 0.25–0.5 s and is shown on screen: `how: 'change'` (a flat or drop wipes across the frame, the next
-  set is behind it, the wash changes colour on the same frame) or `how: 'fly'` (the camera flies to the next area of
-  the stage; about 1 in 5 place changes). Never a dip to black. A new place opens wide (`xwide` or `wide`).
+  A change is `how: 'cut'` (a straight cut: the camera jumps to the new framing, or the set swaps, and the wash
+  changes colour, all on one frame; nothing slides, wipes or flies across the screen to do it) or `how: 'fly'` (the
+  camera flies to the next area of the stage, 0.25–0.5 s; about 1 in 5 place changes). Never a dip to black. A new
+  place opens wide (`xwide` or `wide`). Where the reference slides flats or pulls cards for a scene change, cut instead.
 - **Moves**: the framing changes about every 1.4 s. Each move is a fast eased pan or zoom (about 0.3–0.5 s) to the new
   framing, then a very slow drift the same way until the next move. The camera is never still more than ~8 % of the
   time, and no move smears (QA flags image speed over 4 frame-heights a second).
@@ -97,7 +99,7 @@ the safe area, part of the payoff the video ends on. No App Store badge or other
 ## Sound
 The narration is on top. In `sound(k)`:
 - **A music bed under the whole piece:** `k.music('pad' | 'pulse', t0, t1, { bpm, chords, gain })` from 0 to the end,
-  changing chords on the story's turns (the twist, the payoff). Its level is set by `tools/mix.py` (the bed at −6 dB to
+  changing chords on the story's turns (the twist, the payoff). Its level is set by `tools/mix.py` (the bed at −19 dB to
   the voice), so the `gain` values only balance its parts. Ambience beds (`k.bed('room')`) don't reach the final mix.
 - **Effects** on the events that land (arrivals, impacts, scene changes, the key number, the result), with sounds the
   material would make, on the same frame as the event. Keep the hits about even: mix.py caps the whole effects stem by

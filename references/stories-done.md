@@ -19,6 +19,17 @@ another.
 ## The list
 Newest first. Entry: date · title · folder · style and kind (twist or relatable; older ones say mode A or B) · source (true, inspired or fiction; older ones are true), then the four things above and the payoff.
 
+### 2026-11-14 · The baker's thirteenth loaf
+`~/surplus-videos/2026-11-14-bakers-thirteenth-loaf` · Spotlight Stage · twist · inspired (medieval London bread
+laws; Will and his near-misses are made up; the baker's dozen told as "the story goes")
+- **Core fact:** a loaf steams off a tenth or more of its weight in the oven, and the body burns most of what you eat
+  (resting energy about 60–70 % of the day's total) just to keep you alive, so gaining takes food beyond that.
+- **Hook:** "One light loaf got a London baker dragged through the streets."
+- **Lesson:** build a margin on purpose: eat a set amount over what you burn, every day (the "thirteenth loaf").
+- **Character:** Will, a medieval London baker whose loaves keep weighing light until he finds the oven is eating
+  them; his modern twin's body is an oven too.
+- **Payoff:** Surplus sets Will's day a loaf over and the scale's needle finally moves. CTA: comment BULK.
+
 ### 2026-11-13 · You eat less than you think
 `~/surplus-videos/2026-11-13-eat-less-than-you-think` · Spotlight Stage · mode A
 - **Core fact:** people who "eat a lot but can't gain" misjudge their intake. Sam's remembered big day was really a

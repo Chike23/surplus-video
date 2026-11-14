@@ -1,6 +1,6 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script with a scroll-stopping hook (or uses one the user pastes); Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -6 dB to the voice), shows the preview, and renders the MP4 only after approval. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), shows the preview, and renders the MP4 only after approval. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
@@ -25,9 +25,9 @@ Read the others at their step: `references/stories-done.md`, `references/build.m
   slowing down, no cutting, no pauses added. Only the silence before the first word and after the last is trimmed.
   The picture is timed to the voice, and every visual reaction lands 0–3 frames before its word. The video is never
   sped up or slowed down either.
-- **Audio levels:** the music bed sits at 50 % of the voice level (−6 dB, gated RMS). SFX sit at 50 % or slightly
-  less, with peaks capped so no hit pokes out over the narration. Always mix with `tools/mix.py`, never by hand. No
-  ducking or compression that would change this ratio; only one linear gain plus a peak limiter goes on the whole mix.
+- **Audio levels:** the music bed sits at −19 dB to the voice (gated RMS), the level under the owner's model videos
+  (owner's change, 2026-11-14; it was −6 dB). SFX sit at 50 % (−6 dB) or slightly less, with peaks capped so no hit pokes out over the narration. Always mix with `tools/mix.py`, never by hand. No
+  ducking or compression that would change these ratios; only one linear gain plus a peak limiter goes on the whole mix.
 - **Keys:** the ElevenLabs key lives in `~/.surplus-video-keys` or `~/.make-short-keys`. Never print, open or ask for it.
 - **Nothing is posted anywhere.** The output is a file on this Mac.
 - **Look before you show.** Look at frames yourself before showing the user anything. Passing checks is not the same as looking right.
@@ -104,12 +104,18 @@ that the voice isn't found, ask the user to add "Mark - Natural Conversations" t
 with the reviewed preview. Say in one line what you're starting at each step.
 
 ## 4. The script → `P/script.md`
-Write it from the picked idea, following `references/script.md`: the shape for its kind, the hook (ten written, the
-best kept), the story engine (want and stakes by second eight, "but" and "so" beats, a loop open at all times, the
-twist planted), show don't tell (a *We see* line under every line), no pauses, the specs' word count (aim for
-150–170 words, about 50–57 s), written to flow ("Writing for the ear": bridges instead of full stops, one question,
-one exclamation, a dash before the reveal), "You see," after the hook or about two-thirds in, a new place every ~20 words, and the
-payoff (the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every real fact, number and
+Write it from the picked idea, following `references/script.md` (the format of the owner's eight model videos; its
+model script shows the rhythm): the beat map for its kind, the hook (He, She or They, one strange act with one object
+in the past tense, then a pressure beat in the same breath; ten written, the best kept), told like you're telling your
+best friend (present tense, the viewer voiced with "Wait, …? Well, …", a comedy aside about every ten seconds, two to
+four short voiced lines, mostly the doubters), said as it is (plain results and things; the main character as he, she
+or they, everyone else by role, no names), the story engine (an underdog or backfire arc, want and stakes by second
+eight, "but" and "so" beats, a time ladder in threes, a loop open at all times, a planted detail, the why held back for
+the "You see," reveal 60–75 % in, the story ending on a callback to the hook's object), show don't tell (a *We see*
+line under every line), no pauses, the specs' word count (aim for 150–170 words, about 50–57 s), written to flow
+("Writing for the ear": commas and bridges between beats, full stops only for the hook, a few punch sentences, the
+callback and the CTA), a new place every ~20 words, and the payoff (the bridge carrying the story's trick into today,
+the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every real fact, number and
 health claim checked (web search) and listed under Sources, the story's source under Story source, a changed or
 made-up story never called true, and Surplus only in the payoff; Surplus claims only from `references/surplus.md`. Run the
 checklist at the end of script.md, then add the numbered script to the ideas doc under a heading **Script**, so the
@@ -123,8 +129,8 @@ preview). Script-side specs it misses: list them in one line each at step 9; nev
 `node SKILL/tools/voice.mjs P` → `P/voice/voice.mp3`, `P/timing.json` (every word's start and end, scenes), `P/vo.js`.
 - **The pace comes from the script.** Mark on v4 reads at about 3 words a second at his own pace, and v4 ignores
   ElevenLabs' speed setting, so voice.mjs makes one take, measures it and says if it's outside 2.8–3.2. Fix a miss
-  in script.md, never in the audio: too slow, join more sentences with "and", "but", "so" and cut commas (every full
-  stop is about a second of breath); too fast, add a full stop at a turn. Then take it again (at most 2 re-takes, then
+  in script.md, never in the audio: too slow, join more sentences with "and", "but", "so" and cut commas (a full
+  stop is about half a second of breath, a comma about a third); too fast, add a full stop at a turn. Then take it again (at most 2 re-takes, then
   tell the user). It never speeds up, slows down, cuts or stretches the audio.
 - It prints words Whisper heard differently. Number formats and homophones are fine. A skipped or wrong word means
   a new take (`node SKILL/tools/voice.mjs P` again). At most 2 re-takes, then rephrase that line in script.md, same
@@ -137,8 +143,8 @@ preview). Script-side specs it misses: list them in one line each at step 9; nev
 ## 6. Plan → `P/plan.md`
 Plan to `references/specs.md`. For each scene: its time range (from timing.json), the **places** (areas of the stage,
 about 7–9 for the video), and for each line **what we see** (from the script's *We see* lines: the picture tells it,
-the narration never describes it). Then every **shot** (time, the phrase, the place, how it changes: an in-view change
-or a camera flight, 0.25–0.5 s) and every **move** inside it (time, pan or zoom, the size it lands on), so the counts
+the narration never describes it). Then every **shot** (time, the phrase, the place, how it changes: a straight cut, or
+a camera flight of 0.25–0.5 s) and every **move** inside it (time, pan or zoom, the size it lands on), so the counts
 and shares in specs.md come out right (add them up in the plan: shots, average shot length, place visits, framing
 changes, the first 4 s, share of each size). Then each big character action and reaction (time, the word, the pose
 swap; it lands 0–3 frames before its word), every label or piece of lettering and where on screen it sits (outside

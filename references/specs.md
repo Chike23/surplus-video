@@ -29,6 +29,12 @@ These come from the owner. They are rules, not suggestions. Every video meets al
 **The story** *script + look*
 - Show, don't tell: every line has a picture that tells it; the narration never names a feeling or describes what's
   on screen.
+- Told like to a best friend, said as it is: the hook starts with He, She or They; the main character is he, she or
+  they, everyone else is named by role (the guard, the baker), nobody by name; results and things in plain words ("he
+  gained weight", "one underweight loaf"); two to four short voiced lines at the turns. *script*
+- The models' format (`references/script.md`): the hook is one strange act in the past tense plus a pressure beat,
+  then the story in the present tense; the why is held back for the "You see," reveal; the story's last line calls
+  back to the hook's object before the payoff. *script*
 - No real, named living people as characters, no brand mascots or logos, nothing graphic or political; stories,
   characters and shots are original.
 - The story is true, inspired by a true story, or fiction (brief.json `source`). A changed or made-up story is never
@@ -48,7 +54,9 @@ These come from the owner. They are rules, not suggestions. Every video meets al
 - Shot lengths vary: 1 in 10 is under 1.1 seconds (5–20 % of shots), and none is over 8.6 seconds. *QA*
 - 7 in 10 shot changes move to a new place (55–85 %), so the place changes about every 6–7 seconds (5–8). *QA*
 - A 45-second video visits about 7 places; a 60-second one about 9 (7–13). *QA* (visits: each stretch in one place)
-- Every change is quick (a quarter to half a second) and shown on screen, never a dip to black. *QA + look*
+- Every scene change is a **straight cut**: the set and the wash change on the same frame, and nothing slides, wipes
+  or flies across the screen to do it (owner's rule: crossing flats and cards are too much). The only other way is a
+  camera flight to the next area of the stage (0.25–0.5 s). Never a dip to black. *QA + look*
 
 **How often the camera pans or zooms meaningfully**
 - The framing changes about every 1.4 seconds (1.1–1.8 on average): about 33 times in 45 seconds, about 44 in 60. *QA*
@@ -89,8 +97,8 @@ shoulders, about half the frame. **insert** a close-up of an object.
   stalls".) *QA + look*
 - Keep the camera within about 25° of straight-on, so the flat cut-outs never turn edge-on (≤ 25°; over 30° is a
   blocker). *QA*
-- Keep the in-view scene changes (flats sliding, cards pulled, light changing colour), but each must take a quarter to
-  half a second, not a full second or more. *QA (declared) + look*
+- Scene changes are straight cuts, not in-view changes: no flats sliding, cards pulled or drops wiping across the
+  frame, and no easel card being pulled (replaces the in-view changes). *QA (declared) + look*
 - A narration track at 3 words a second, and no captions. *QA + look*
 - The easel card stays as the scene's name, with a black outline too. *look*
 
@@ -98,7 +106,7 @@ shoulders, about half the frame. **insert** a close-up of an object.
 - Light every area the camera can see, including the wings, the flies and the extra places, so no shot shows a black
   gap. *QA (black share) + look*
 - Follow spots stay on the actors through every fast pan and zoom, so faces never drop into the dark. *look*
-- Change the wash colour at the same moment as each quick scene change, so every new place reads instantly. *look*
+- Change the wash colour on the same frame as each cut, so every new place reads instantly. *look*
 - Light the first frame fully: no fade-up from dark. *QA*
 - Raise the front washes about 20%, so the average brightness goes from 35% to about 40% (36–44 %). *QA*
 - Let the unlit areas fall to deep indigo, not pure black (pure black on about 1% of the picture at most, down from
@@ -127,7 +135,9 @@ above 10/255.)
 
 ## 6. Audio *mix.py* (prints each level; render.mjs stops if a rule is missed)
 - Always mixed with `tools/mix.py`, never by hand.
-- The music bed sits at 50 % of the voice level: −6 dB, gated RMS (400 ms blocks, gated like loudness meters).
+- The music bed sits at −19 dB to the voice, gated RMS (400 ms blocks, gated like loudness meters): the level
+  under the owner's eight model videos (−17.8 to −19.7 dB, measured in their pauses). It was −6 dB until
+  2026-11-14.
 - SFX sit at 50 % of the voice level or slightly less (≤ −6 dB, gated RMS), with peaks capped: no 50 ms of effects is
   louder than the narration's loud syllables (the 95th percentile of its 50 ms levels), so no hit pokes out over it.
 - No ducking or compression that would change these ratios. The whole mix gets one linear gain (to about −15 LUFS)
@@ -137,7 +147,7 @@ above 10/255.)
 ```js
 shots: [ // every scene change; the first at t 0. place: a name per area; size: xwide|wide|full|medium|close|insert
   { t: 0, place: 'kitchen', size: 'wide' },
-  { t: CUE.at('every day'), place: 'wings-left', size: 'xwide', how: 'change', dur: 0.35 }, // flat wipes across, new wash
+  { t: CUE.at('every day'), place: 'wings-left', size: 'xwide', how: 'cut' },               // straight cut, new wash, same frame
   { t: CUE.at('you see'), place: 'flies', size: 'wide', how: 'fly', dur: 0.45 },             // camera flies there, no cut
 ],
 moves: [ // every pan or zoom inside a shot: when it starts, and the size it lands on

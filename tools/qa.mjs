@@ -86,8 +86,8 @@ else {
   ok(within(visits, 7, 13), `${visits} place visits, ${new Set(shots.map((s) => s.place)).size} different places (spec about 7 at 45 s, 9 at 60 s; 7-13)`);
   const flies = moved.filter((s) => s.how === 'fly');
   ok(moved.length && within(flies.length / moved.length, 0.1, 0.35), `${flies.length} of ${moved.length} place changes are camera flights, no cut (spec about 1 in 5, 10-35 %)`);
-  const badHow = changes.filter((s) => !['change', 'fly'].includes(s.how) || !within(s.dur, 0.25, 0.5));
-  ok(!badHow.length, `every scene change is 'change' or 'fly' and takes 0.25-0.5 s${badHow.length ? ': not at ' + at(badHow.map((s) => s.t)) : ''}`);
+  const badHow = changes.filter((s) => !(s.how === 'cut' && !s.dur) && !(s.how === 'fly' && within(s.dur, 0.25, 0.5)));
+  ok(!badHow.length, `every scene change is a straight 'cut' or a 0.25-0.5 s 'fly' (no wipes)${badHow.length ? ': not at ' + at(badHow.map((s) => s.t)) : ''}`);
   const notWide = shots.filter((s, i) => (i === 0 || s.place !== shots[i - 1].place) && !['xwide', 'wide'].includes(s.size));
   ok(!notWide.length, `every new place opens wide${notWide.length ? ': not at ' + at(notWide.map((s) => s.t)) : ''}`);
 }
@@ -138,7 +138,7 @@ else {
   const still = sp.filter((s) => s < 0.01).length / N, fast = sp.filter((s) => s >= 0.5).length / N;
   ok(still <= 0.08, `camera still ${pc(still)} of the time (spec at most about 8 %)`);
   ok(within(fast, 0.12, 0.3), `fast moves on ${pc(fast)} of frames (spec about 1 in 5, 12-30 %)`);
-  const inChange = (t) => shots.some((s) => t >= s.t - 0.04 && t <= s.t + (s.dur || 0.5) + 0.04);
+  const inChange = (t) => shots.some((s) => t >= s.t - 0.04 && t <= s.t + (s.how === 'cut' ? 0 : s.dur || 0.5) + 0.04); // a cut's jump is one frame
   const smear = sp.map((s, i) => [s, tAt(i)]).filter(([s, t]) => s > 4 && !inChange(t)).map(([, t]) => t);
   ok(!smear.length, `no smeared whip: the picture never moves over 4 frame heights a second${smear.length ? ': at ' + at(smear) + ' (look closer)' : ''}`);
   let runs = 0; for (let i = 0, gap = 9; i < N; i++) { if (sp[i] >= 0.5) { if (gap >= 2) runs++; gap = 0; } else gap++; }
@@ -174,7 +174,7 @@ warn(!gaps.length, `no frame with a black gap over 5 % of the picture${gaps.leng
 ok(st[0].black <= 0.01 && st[0].luma >= 0.75 * med, `first frame fully lit: brightness ${pc(st[0].luma)} (video median ${pc(med)}), black ${(st[0].black * 100).toFixed(1)} %`);
 const dips = [];
 for (const s of shots.slice(1)) { // the middle of each scene change: never a dip to black
-  const t = Math.min(D - 0.02, s.t + (s.dur || 0.4) / 2); await grab(page, t, { samples: 1, w: 120 });
+  const t = Math.min(D - 0.02, s.t + (s.how === 'cut' ? 2 / 30 : (s.dur || 0.4) / 2)); await grab(page, t, { samples: 1, w: 120 });
   const x = await page.evaluate(() => window.__stats); if (x.luma < 0.6 * med || x.black > 0.05) dips.push(t);
 }
 if (shots.length > 1) ok(!dips.length, `no scene change dips to black (middle of each change)${dips.length ? ': at ' + at(dips) : ''}`);

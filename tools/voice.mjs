@@ -55,7 +55,8 @@ for (const l of lines) {
   l.scene = scene;
   l.text = l.raw.replace(/\[(S\d+|pause[^\]]*)\]/gi, '').replace(/\s+/g, ' ').trim();
   // spoken words only: a lone dash or a tone tag for Eleven v3 ([excited]) is sent to ElevenLabs but isn't a word
-  for (const tok of l.text.split(' ')) if (/[a-z0-9]/i.test(tok) && !/^\[[a-z ]+\]$/i.test(tok)) words.push({ i: words.length, w: tok, line: l.n, scene });
+  // delivery cues ([gruff], [deep voice]) go to ElevenLabs but are never spoken, counted or timed
+  for (const tok of l.text.replace(/\[[^\]]*\]/g, ' ').split(/\s+/)) if (/[a-z0-9]/i.test(tok)) words.push({ i: words.length, w: tok, line: l.n, scene });
 }
 const text = lines.map((l) => l.text).join(' ');
 

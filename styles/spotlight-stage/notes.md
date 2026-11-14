@@ -24,7 +24,12 @@
   front washes about 1.2× the reference's power (620 → ~745); `render.background` a deep indigo (about `#0c0a24`, not
   `#010102`); a weak indigo `HemisphereLight` (about `#2a2466` over `#0a0818`, 0.15–0.3) so unlit card reads as dark
   indigo; `render.saturation` about 1.2–1.3. Give the wings, the flies and every extra place their own wash or special.
-  The wash colour track changes on the scene-change frame (0.25–0.5 s), not over a second.
+  The wash colour changes on the cut's frame, not over a second.
+  Under the filmic tone curve, PointLights near the drops (horizon, cyc) set the mean brightness; turning spot power
+  up barely moves it (the curve's shoulder). Tune those first, and fill black gaps (the proscenium above the valance,
+  the far apron) with footlights, apron lights or a little emissive on the cut-out. (bakers-thirteenth-loaf)
+- **Motion blur:** at 8 samples a fast move breaks into separate copies with `shutter` 0.4; 0.3 keeps them closer.
+  Look at a mid-move check frame (a push or a flight) before sending. (bakers-thirteenth-loaf)
 - **The camera to specs:** drive it from the style's `shots` and `moves` lists: each entry is a framing (position and
   aim); ease to it in 0.3–0.5 s, then drift 2–4 % of the frame per second the same way until the next entry. Keep the
   aim's yaw and pitch within 25° of straight down −z.
