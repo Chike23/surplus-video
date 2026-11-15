@@ -22,6 +22,9 @@ check each one against the plan, before the animation is built on top. You did n
    prop or in front of a face).
 5. **Concepts:** for a frame that shows a concept picture, does it say the concept with the sound off, nothing left
    to imagine? A number is a count of things, and a comparison has both things whole and visibly different.
+6. **The place, without words:** on the first frame in each place, could you tell where this is from the set alone?
+   If not, name 2–3 set pieces to add. Any card, sign or lettering that names the place or the scene, or announces
+   what happens next or when, is a failure: it has to go.
 
 **Report** (write it to `P/qa/layout.md`, and return the same text):
 ```

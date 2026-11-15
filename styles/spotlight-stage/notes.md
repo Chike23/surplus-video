@@ -40,7 +40,8 @@
 - **Dark sets:** a wood or amber set in an extreme wide reads as a dip at its cut (QA's dip check is 60 % of the median
   brightness). Lighten the drop's paint first; lamp level barely moves it and over-brightens the closer shots.
   (calf-on-his-shoulders: the barn)
-- **Cards:** the card is 1.3 × 0.56 at scale 1. In an extreme wide (h 11.5) its letters fall under 45 px: scale it per
-  scene (1.4–1.6 for xwide openers) and keep names to about 10 letters. The card hangs at Z.card, behind the slate
-  and most flats: place it clear of them. (calf-on-his-shoulders)
+- **Easel card, for the CTA only:** no scene names on it any more (owner's rule, 2026-11-15). The card is 1.3 × 0.56
+  at scale 1; in an extreme wide (h 11.5) its letters fall under 45 px, so scale it for the framing the CTA is seen
+  in (1.4–1.6 for an xwide). It hangs at Z.card, behind the slate and most flats: place it clear of them.
+  (calf-on-his-shoulders)
 

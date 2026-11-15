@@ -11,8 +11,10 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   closer, and use a wider `fov` when the reference used a long lens on a wide scene.
 - **Instagram covers** the top 11.5 %, the bottom 24 % and the right 13 % (the player's **Safe** button shades them). Key
   action, labels and lettering stay out of those areas. The bottom band is for nothing important.
-- **No captions** (owner's rule): never draw the narration's words on screen. Labels, signs and lettering that name
-  things are fine, and so is diegetic text (a carved message, a sign on a set). Every piece of text faces the camera
+- **No captions** (owner's rule): never draw the narration's words on screen. Labels that name things are fine, and
+  so is diegetic text (a carved message, the numbers on a dial). **No place or what's-next labels** (owner's rule,
+  2026-11-15): nothing names the place or the scene, and nothing announces what happens next or when, including a
+  sign on the set with the place's name. Every piece of text faces the camera
   and reads the right way round: never mirrored (no negative scale on a text card, no text on the back face of a flat).
 
 ## Structure of src/style.js (same as the reference)
@@ -45,7 +47,10 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
 - The script's `[S1]`–`[S4]` are story parts. Each part has several **places** (areas of the stage: centre, a wing,
   up on the flies, a close-up area on the apron, a second room behind a gauze), and the video visits about 7–9 of them.
   Build every set wider and deeper than any framing that looks at it, and light all of it, so no pan shows an edge
-  or a black gap.
+  or a black gap. Each place reads at a glance from what's in it, never from words: 2–3 set pieces that say what it
+  is, big enough to read in its opening wide (a barn: plank walls, hay bales, a manger, a hanging lantern). If it
+  doesn't read, add more set pieces. Time passing shows in the picture too (the calf grows, the sun moves, the
+  stack of bowls gets taller).
 - **Shots**: a scene change about every 4.3 s, ~1 in 10 short (under 1.1 s), none over 8.6 s, 7 in 10 to a new place.
   A change is `how: 'cut'` (a straight cut: the camera jumps to the new framing, or the set swaps, and the wash
   changes colour, all on one frame; nothing slides, wipes or flies across the screen to do it) or `how: 'fly'` (the

@@ -1,6 +1,6 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, plans each scene's contents, camera focus and prop states, takes props from a reusable prop library (each new one judged by a Sonnet agent), has a Sonnet agent check every framing in a layout pass before animating, builds the animation to fixed specs (the camera moves only for a reason; full and waist-up shots are home base) with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, plans each scene's contents, camera focus and prop states, takes props from a reusable prop library (each new one judged by a Sonnet agent), has a Sonnet agent check every framing in a layout pass before animating, builds the animation to fixed specs (the camera moves only for a reason; full and waist-up shots are home base) with no word captions and no labels naming places or what's next (the set shows where we are), has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
@@ -21,8 +21,11 @@ Read the others at their step: `references/stories-done.md`, `references/build.m
 - **No real, named living people as characters**, and no real living person as the butt of a joke. No brand mascots or
   logos. Nothing graphic, nothing political.
 - **Show, don't tell.** The picture tells the story; the narration says only what the picture can't (`references/script.md`).
-- **No captions.** No word-by-word subtitles of the narration. Labels, signs and lettering are fine, and diegetic text
-  (a carved message, a sign) is fine; all text reads correctly, never mirrored.
+- **No captions.** No word-by-word subtitles of the narration. Labels on things and diegetic text (a carved message,
+  the numbers on a dial) are fine; all text reads correctly, never mirrored.
+- **No labels for places or for what happens next** (owner's rule, 2026-11-15). No card, sign or lettering names the
+  place or the scene ("THE HILL", "THE BARN"), and none announces what's about to happen or when ("WEEK FOUR"). Show,
+  don't tell: the set says where we are (add set pieces until it does), and the picture shows time passing.
 - **Never edit or re-time the voice.** ElevenLabs speaks at the pace the specs need on its own: no speeding up, no
   slowing down, no cutting, no pauses added. Only the silence before the first word and after the last is trimmed.
   The picture is timed to the voice, and every visual reaction lands 0–3 frames before its word. The video is never
@@ -146,7 +149,7 @@ video). Script-side specs it misses: list them in one line each at step 10; neve
 ## 6. Plan → `P/plan.md`
 Plan to `references/specs.md`, from the script's *We see*, *Scene* and *Camera* lines. For each scene: its time range
 (from timing.json), the **places** (areas of the stage, about 7–9 for the video), and **what's in it** (set pieces,
-characters, props). Then every **shot** (time, the phrase, the place, how it changes: a straight cut, or a camera
+characters, props), including the 2–3 things that say where we are without a word. Then every **shot** (time, the phrase, the place, how it changes: a straight cut, or a camera
 flight of 0.25–0.5 s) and every **move** inside it (time, pan or zoom, the size it lands on, and its why: follow,
 reveal or react), and for every framing a **camera description**: what it sees (everything in frame that matters) and
 its **focus** (the one thing it aims at and keeps whole). Add up the counts and shares from specs.md in the plan

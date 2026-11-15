@@ -22,8 +22,11 @@ These come from the owner. They are rules, not suggestions. Every video meets al
 - The voice is never edited or re-timed: no speeding up, slowing down, cutting or added pauses. Only the silence
   before the first word and after the last is trimmed. The picture is never sped up or slowed down either. *QA*
 - A 45-second video has about 130–150 words; a 60-second one has about 175–195. *script*
-- No captions: no word-by-word subtitles of the narration. Labels, lettering and diegetic text (a carved message, a
-  sign) are fine, and every piece of text reads correctly, never mirrored. *look*
+- No captions: no word-by-word subtitles of the narration. Labels on things and diegetic text (a carved message, the
+  numbers on a dial) are fine, and every piece of text reads correctly, never mirrored. *look*
+- No labels for places or for what happens next (owner's rule, 2026-11-15): no card, sign or lettering names the
+  place or the scene, and none announces what's about to happen or when. Every place reads from its set alone, and
+  time passing is shown in the picture. *look*
 - Every visual reaction, reveal and big action lands 0–3 frames before its word, never after it. *look* (bursts)
 
 **The story** *script + look*
@@ -106,7 +109,8 @@ shoulders, about half the frame. **insert** a close-up of an object.
 - Scene changes are straight cuts, not in-view changes: no flats sliding, cards pulled or drops wiping across the
   frame, and no easel card being pulled (replaces the in-view changes). *QA (declared) + look*
 - A narration track at 3 words a second, and no captions. *QA + look*
-- The easel card stays as the scene's name, with a black outline too. *look*
+- No easel card naming the scene (owner's change, 2026-11-15: the set shows where we are). The easel card or the
+  marquee carries only the Surplus name and the CTA at the end. *look*
 
 ## 4. Theatre lamps
 - Light every area the camera can see, including the wings, the flies and the extra places, so no shot shows a black

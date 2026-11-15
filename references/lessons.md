@@ -123,9 +123,9 @@ when it's the same rule; don't add duplicates.
 - Dials and gauges: a needle must never cover the key number at its rest or final position. Put labels outside the
   needle's sweep. (stomach-stretch: needle hid "+0.5")
 
-- Size each scene card for its opening framing: cap height ≥ 45 px at 1080 wide in a wide or extreme wide. A long
-  name shrinks to fit its card, so keep names short. Every cut, even within one place, gets its own wash shade.
-  (calf-on-his-shoulders: THE TRAINER'S BOARD unreadable, two gym shots with one wash)
+- No scene-name cards or what's-next labels (owner's note, 2026-11-15): the place reads from its set (add set pieces
+  until it does) and time passing shows in the picture. Every cut, even within one place, gets its own wash shade.
+  (calf-on-his-shoulders: THE HILL, THE BARN cards; two gym shots with one wash)
 
 ## Code
 - `K.seg(q, a, b)` with a == b divides by zero (NaN): never build a zero-width window. (stomach-stretch)

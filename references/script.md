@@ -185,12 +185,14 @@ The picture tells the story. The narration says only what the picture can't.
   Test: with the sound off, would a viewer understand it? If no picture can do that, rewrite the line.
 - **Plan the shot with the line.** Under the *We see* line, a *Camera* line gives the size, what the frame takes in
   and the one thing it's focused on. The first line in each new place also gets a *Scene* line: what's in the place
-  (set pieces, characters, props and the state each prop starts in). A line whose shot won't work is fixed now, before
+  (set pieces, characters, props and the state each prop starts in), with the 2–3 things that say where we are
+  without a word. A line whose shot won't work is fixed now, before
   the voice is paid for.
 - **The picture lands first:** the reaction or reveal happens 0–3 frames before its word, so the eye leads and the
   ear confirms.
 - Verbs and objects over adjectives: "He ate the whole loaf" beats "He ate a lot".
-- Labels and lettering name things (a sign, a sack, a number on a dial). They never repeat the narration as a caption.
+- Labels and lettering name things (a sack, a number on a dial). They never repeat the narration as a caption, and
+  never name the place or announce what's next or when: the set says where we are, and the picture shows time passing.
 
 ## The beat map (about 55 s, about 160 words)
 The models' story fills the whole video; ours fills the first ~85 % and the bridge to Surplus takes the rest.

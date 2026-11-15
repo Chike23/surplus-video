@@ -40,7 +40,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
    moves; a set's edge or a black gap showing in a pan or pull-out; anything important in Instagram's covered areas
    (top 11.5 %, bottom 24 %, right 13 %); a first frame that isn't a lit, moving character; an end that doesn't hold.
 4. **Words on screen**: **any word-by-word caption of the narration is a blocker** (owner's rule: no captions).
-   Labels, lettering, diegetic text and the easel card: mirrored or back-to-front text (a blocker), overlapping each
+   **Any card, sign or lettering naming the place or the scene, or announcing what happens next or when, is a
+   blocker** (owner's rule, 2026-11-15). Labels, lettering, diegetic text and the CTA: mirrored or back-to-front text (a blocker), overlapping each
    other or the subject, too small to read on a phone (cap height under about 45 px at 1080 wide), on screen too
    briefly, spelling, numbers that disagree with the narration, a label that just repeats the narration.
 5. **Sync**: the thing being talked about not on screen when the word is said (compare sheet times with timing.json);
@@ -70,7 +71,7 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
      overshoot 10–20 % → settle 8–14 frames, eyes ~3 frames first, pose swaps with a bounce, reactions held ≥ 0.5 s
      on a readable face, a 1–2° sway on every hold, impacts frozen 3 frames then a recoil with a sound, props acting,
      no lip-sync), using bursts;
-   - the easel card naming the scene, outlined in black;
+   - every place reads from its set alone (you can tell where we are with no words), with no scene-name card;
    - the script-side items (word count, hook stated as fact (a past-tense act plus a pressure beat), "You see,", the
      why held back for the reveal, the callback before the payoff, payoff in the last 10–15 %, a changed or
      made-up story never called true, Surplus not named before the payoff): blockers when
