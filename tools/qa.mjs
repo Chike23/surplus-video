@@ -72,7 +72,7 @@ if (T) {
   const ys = T.words.findIndex((w, i) => /^you$/i.test(w.w.replace(/[^a-z]/gi, '')) && /^see/i.test((T.words[i + 1]?.w || '').replace(/[^a-z]/gi, '')));
   note(ys >= 0 ? `"You see" at ${f2(T.words[ys].start)} s (${pc(T.words[ys].start / D)} of the way; spec: right after the hook, or about two-thirds in)` : '"You see" is not in the script (rewrite a script you wrote; tell the user if it\'s theirs)');
 } else out.push('FAIL no TIMING (run voice.mjs)');
-if (payoff != null) warn(within((D - payoff) / D, 0.10, 0.15), `payoff at ${f2(payoff)} s, the last ${pc((D - payoff) / D)} (spec 10-15 %; rewrite a script you wrote; tell the user if it's theirs)`);
+if (payoff != null) warn(within((D - payoff) / D, 0.05, 0.15), `payoff at ${f2(payoff)} s, the last ${pc((D - payoff) / D)} (spec 5-15 %; rewrite a script you wrote; tell the user if it's theirs)`);
 else out.push('FAIL style has no `payoff` time (references/specs.md)');
 
 // ---- the declared timeline: shots (scene changes) and moves (pans and zooms inside a shot)

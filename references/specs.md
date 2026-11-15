@@ -42,8 +42,10 @@ These come from the owner. They are rules, not suggestions. Every video meets al
   characters and shots are original.
 - The story is true, inspired by a true story, or fiction (brief.json `source`). A changed or made-up story is never
   called true; the food, body and weight facts it teaches are real and sourced.
-- Not an ad: Surplus isn't named before the payoff, the payoff is one thing Surplus does and the character's result,
-  and the story stands on its own with the payoff cut.
+- Story first, Surplus last (owner's rule, 2026-11-15): the whole story was written before the ending, and no
+  beat bends towards the app. Surplus isn't named before the payoff. The payoff is a bridge (one thing Surplus does
+  for the character, and the result) or a plain plug ("If you want to gain weight or bulk, Surplus is a bulking app that helps you do it", no features), and the story
+  stands on its own with the payoff cut.
 
 **The first 4 seconds (the hook)**
 - A surprising action, stated as fact, inside the first 4 seconds. *script + look*
@@ -88,10 +90,11 @@ head to foot, about half to two-thirds of the height. **medium** an actor from t
 shoulders, about half the frame. **insert** a close-up of an object.
 
 **The ending**
-- The payoff lands in the last 10–15% and the video ends on it, with no outro. *script + QA* (the picture holds
-  0.8–2 s after the last word, on the payoff)
-- Surplus is never shown: no phone, screen, app, app icon or anything that looks like the app. The character brings it
-  in through the story at the end, and acts out the change. *look* (owner's rule)
+- The payoff (the bridge or the plug) lands in the last 5–15 % and the video ends on it, with no outro. *script + QA*
+  (the picture holds 0.8–2 s after the last word, on the payoff)
+- Surplus is never shown: no phone, screen, app, app icon or anything that looks like the app. A bridge brings it in
+  through the character, who acts out the change; a plug gets a new scene of its own after a straight cut. *look*
+  (owner's rule)
 
 ## 2. Sets and places
 - Build every set wider and deeper than the frame, so pull-outs and pans never show an edge. *look*

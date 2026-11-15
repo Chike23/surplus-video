@@ -83,9 +83,12 @@ when it's the same rule; don't add duplicates.
   No set-up, no name intro, no question. A hook that only states the topic didn't grab the owner. (2026-11-14)
 - A story is one surprising story, fact or experience with a want, rising stakes and a planted twist, not a generic
   weight-gain explainer that exists to reach the app. Every beat is a "but" or a "so". (2026-11-14)
-- Stories don't have to be true (owner, 2026-11-14): rework a true one for a sharper twist and bend it towards eating
-  and gaining, or make one up, as long as it's never called true and the food and body facts stay real. Build the
-  story's problem around what Surplus solves, but keep Surplus to the payoff so it never feels like an ad.
+- Stories don't have to be true (owner, 2026-11-14): make one up or put our twist on a real one, as long as it's never
+  called true and the food and body facts stay real.
+- Story first, Surplus last (owner, 2026-11-15): never build or bend the story around what Surplus solves. Pick it
+  and write it all for how captivating it is, then bridge only if the story hands one over, or else cut to a new
+  scene for a plain plug ("If you want to gain weight or bulk, Surplus is a bulking app that helps you do it": what
+  it's for, never how it works), then "Comment BULK and I'll send you the app". Working backwards from the app made the stories serve the plug.
 - Show, don't tell: the picture acts out every line; the narration never names a feeling or describes the screen.
   (2026-11-14)
 - No pauses and no re-timing: cutting silence into the take broke the flow and forced the rest of the voice to be

@@ -53,7 +53,9 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
    surprising action pictured in the very first frames? No real, named living person as a
    character, no brand mascot or logo anywhere (blockers). Does it end on the payoff, with the CTA the brief asks for, readable, inside the safe area, and nothing after it?
    **Surplus is never shown:** any phone, screen, app icon or app-like picture (calorie ring, dashboard, progress bar)
-   anywhere in the video is a blocker. The plug must come through the character acting out the change.
+   anywhere in the video is a blocker. The ending is what `P/brief.json` `ending` says: a bridge with the character
+   acting out the change, or a plug in a new scene after a straight cut, its line plain (what Surplus is for, no
+   features), then "Comment BULK and I'll send you the app".
 7. **Style**: materials, beams, haze, line and the way things move, as the style card says, with the specs' camera and
    lamp changes.
 8. **Technical**: black or broken frames, NaN-looking explosions, aliasing on thin lines, banding, text rendered in a
@@ -73,7 +75,7 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
      no lip-sync), using bursts;
    - every place reads from its set alone (you can tell where we are with no words), with no scene-name card;
    - the script-side items (word count, hook stated as fact (a past-tense act plus a pressure beat), "You see,", the
-     why held back for the reveal, the callback before the payoff, payoff in the last 10–15 %, a changed or
+     why held back for the reveal, the callback before the payoff, payoff in the last 5–15 %, a changed or
      made-up story never called true, Surplus not named before the payoff): blockers when
      the skill wrote the script (`P/brief.json` has a `"story"`); notes for the owner when the user pasted it.
 

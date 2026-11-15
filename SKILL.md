@@ -1,6 +1,6 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, plans each scene's contents, camera focus and prop states, takes props from a reusable prop library (each new one judged by a Sonnet agent), has a Sonnet agent check every framing in a layout pass before animating, builds the animation to fixed specs (the camera moves only for a reason; full and waist-up shots are home base) with no word captions and no labels naming places or what's next (the set shows where we are), has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). Story first, Surplus last: first asks the kind of story (a story with a twist, usually made up or a real topic with our twist, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind picked only for how captivating they are, then writes the whole story with no Surplus in it, and only then adds a bridge to Surplus if the story hands one over, or else cuts to a new scene for a plain plug ("If you want to gain weight or bulk, Surplus is a bulking app that helps you do it"). It writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, plans each scene's contents, camera focus and prop states, takes props from a reusable prop library (each new one judged by a Sonnet agent), has a Sonnet agent check every framing in a layout pass before animating, builds the animation to fixed specs (the camera moves only for a reason; full and waist-up shots are home base) with no word captions and no labels naming places or what's next (the set shows where we are), has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
@@ -12,8 +12,8 @@ changes, and each round is rendered again. You do everything else, the script in
 **Names:** SKILL = this skill's folder (its base directory). P = the project folder, `~/surplus-videos/<yyyy-mm-dd>-<slug>`.
 **Read first:** `references/specs.md` (the owner's specs: every video meets them), `references/surplus.md` (what we
 sell, the CTAs, health guard rails), `references/script.md` (how the stories work) and `references/lessons.md` (every time).
-Read the others at their step: `references/stories-done.md`, `references/build.md`, `agents/prop-judge.md`,
-`agents/layout-check.md`, `agents/reviewer.md`.
+Read the others at their step: `references/stories-done.md`, `references/build.md`,
+`agents/prop-judge.md`, `agents/layout-check.md`, `agents/reviewer.md`.
 
 ## Rules, always
 - **Original.** Stories, characters and shots are always original. Never recreate another creator's video shot for
@@ -45,19 +45,21 @@ Read the others at their step: `references/stories-done.md`, `references/build.m
 - **You write the script**, from the idea the user picked (step 1). Never script an idea they haven't picked. If the
   user pastes their own script instead, use it word for word.
 - **Surplus is never shown.** No phone, no screen, no app, no app icon, nothing that looks like the app (calorie rings,
-  dashboards, progress bars). The plug is told through the story's character at the end: the narration says what
-  Surplus does for them, and the character acts out the change. The name and the CTA may be lettered in the style
-  (the easel card, a marquee).
+  dashboards, progress bars). At the end it comes as a bridge through the character (they act out the change) or as a
+  plain plug in a new scene of its own (`references/script.md`, "Surplus, last"). The name and the CTA may be lettered in
+  the style (the easel card, a marquee).
 - **One style only:** #6 Spotlight Stage (`spotlight-stage`). Never ask which style. If the user asks for another
   one, say the skill is set to Spotlight Stage.
-- **Stories can be true, reworked or made up; facts can't.** A story may be true, a true one made better (a sharper
-  twist, higher stakes, bent towards eating and gaining) or fiction (`references/script.md`, "Where the story comes
-  from"). A changed or made-up story is never called true, and a reworked one uses invented characters instead of the
+- **Stories can be made up or reworked (true only when it's better); facts can't.** A story may be fiction told
+  straight or as "legend has it", a real story or topic with our twist, or true (`references/script.md`, "Where the
+  story comes from"). A changed or made-up story is never called true, and a reworked one uses invented characters instead of the
   real people. The food, body and weight facts a story teaches are real: checked with a web search and listed under
   Sources in `P/script.md`. Surplus claims only from `references/surplus.md`. Never write a fact you can't source:
   leave it out. (In a script the user pasted, a wrong or unsupported claim goes back to them, step 4.)
-- **Fits Surplus, never an ad.** The story's problem is one Surplus solves, but Surplus only appears in the payoff,
-  as one thing it does for the character (`references/script.md`, "Fit the app, don't sell it").
+- **Story first, Surplus last** (owner's rule, 2026-11-15). Ideas are picked, and the whole story is written, for how
+  captivating it is, never shaped to reach the app. Only then look for a bridge to Surplus. A bridge never
+  changes the story, and if none is good enough the video ends on a plain plug. Surplus is never named before the
+  payoff (`references/script.md`, "Story first, Surplus last" and "Surplus, last").
 - **Ask before downloading** anything (models, packages), with name, source and size.
 - Keep messages between steps short: what happened, in a line or two. No code or stack traces for the user.
 
@@ -74,7 +76,7 @@ Then `touch SKILL/.checked`.
      comes in at the end) /
      **Relatable story** (an everyday moment the viewer lives and the surprising truth behind it; Surplus is the fix).
    - *Call to action:* *Link in bio* / *Search Surplus on the App Store* / *Comment a keyword* (then ask the keyword:
-     one word in caps).
+     one word in caps). This CTA ends a bridge; a plug always ends on "Comment BULK and I'll send you the app".
 2. **Ten ideas of that kind.** First read `references/script.md` (all of it), `references/surplus.md` and
    `references/stories-done.md` (every story already made, and what counts as too similar), plus the `brief.json` and
    `script.md` of any `~/surplus-videos/*` not on that list yet (videos still in progress). Then find 10 ideas that fit
@@ -109,8 +111,8 @@ that the voice isn't found, ask the user to add "Mark - Natural Conversations" t
 **From here to the finished MP4: no questions.** Once the idea is picked, work through steps 4–10 and only come
 back with the rendered video. Say in one line what you're starting at each step.
 
-## 4. The script → `P/script.md`
-Write it from the picked idea, following `references/script.md` (the format of the owner's eight model videos; its
+## 4. The story, then the ending → `P/script.md`
+1. **The story.** Write it from the picked idea to its callback, with no Surplus in it, following `references/script.md` (the format of the owner's eight model videos; its
 model script shows the rhythm): the beat map for its kind, the hook (He, She or They, one strange act with one object
 in the past tense, then a pressure beat in the same breath; ten written, the best kept), told like you're telling your
 best friend (present tense, the viewer voiced with "Wait, …? Well, …", a comedy aside about every ten seconds, two to
@@ -120,12 +122,15 @@ eight, "but" and "so" beats, a time ladder in threes, a loop open at all times, 
 the "You see," reveal 60–75 % in, the story ending on a callback to the hook's object), show don't tell (a *We see*
 and a *Camera* line under every line, a *Scene* line for each new place, every concept pictured whole), no pauses, the specs' word count (aim for 150–170 words, about 50–57 s), written to flow
 ("Writing for the ear": commas and bridges between beats, full stops only for the hook, a few punch sentences, the
-callback and the CTA), a new place every ~20 words, and the payoff (the bridge carrying the story's trick into today,
-the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every real fact, number and
-health claim checked (web search) and listed under Sources, the story's source under Story source, a changed or
-made-up story never called true, and Surplus only in the payoff; Surplus claims only from `references/surplus.md`. Run the
-checklist at the end of script.md, then add the numbered script to the ideas doc under a heading **Script**, so the
-user can read it while you build. No question: go on.
+callback), and a new place every ~20 words. Leave room for the ending: the story is 85–95 % of the words. Every real
+fact, number and health claim checked (web search) and listed under Sources, the story's source under Story source,
+and a changed or made-up story never called true.
+2. **The ending.** Only now, with the whole story written, find the bridge (no story line changes to make one): write two or three and test them against the bridge test in script.md
+   ("Surplus, last"). If one passes, it's the payoff; if none does, the plug. Then the CTA, in the last 5–15 %, with
+   nothing after it (after a plug, "Comment BULK and I'll send you the app": set `"cta": "keyword"`, `"keyword":
+   "BULK"` in brief.json unless the user picked their own keyword), Surplus claims only from `references/surplus.md`. Write `"ending": "bridge"` or `"plug"` into
+   `P/brief.json`. Run the checklist at the end of script.md, put the whole script in the doc under a heading
+   **Script**, and go on with no question.
 A script the user pasted: lay their words out in the same file format (only line breaks, `[S#]`, *We see*, *Scene*
 and *Camera* lines added, never a word changed; any pause marks in it are dropped). If a claim in it is wrong or unsupported, quote the
 line, say what's off with the source, and wait for their corrected line (the one question allowed before the
@@ -217,7 +222,8 @@ The one review and its fixes are the check: the video renders straight away, wit
 ## 10. Hand it over
 Send the MP4 (SendUserFile) and `open` it, and open `http://localhost:8765/preview.html` in the browser pane for notes
 (if the pane is hidden, ask them to press Cmd+Shift+B). Tell them, briefly:
-- what it is (the story, kind, length) and the script (the numbered lines);
+- what it is (the story, kind, length), whether it ends on a bridge or the plug (and, for the plug, why no bridge
+  passed), and the script (the numbered lines);
 - what the reviewer caught and you fixed, and anything still open; the specs: all met, or which one isn't and why;
 - for a script the user pasted: any script-side spec it misses (step 4), one line each;
 - how to give notes, if they want changes: **"Play the preview and tell me what to change with the time from the

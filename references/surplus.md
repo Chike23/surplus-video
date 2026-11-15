@@ -1,6 +1,6 @@
 # Surplus: what every video is selling
 
-Every script points at Surplus. Claim only what is written here. When the owner tells you something new about the
+Every video ends on Surplus, after the story. Claim only what is written here. When the owner tells you something new about the
 app (a feature, a price, a link), add it here so later videos can use it.
 
 ## The app
@@ -18,12 +18,14 @@ app (a feature, a price, a link), add it here so later videos can use it.
 <!-- Add real features here as the owner confirms them (e.g. meal ideas, progress charts, reminders, barcode scanner). -->
 
 ## How Surplus appears in a video (owner's rule)
-Never on a phone, a screen or as the app: no phone, no app icon, no app screens or anything that looks like them. The
-plug is told through the story's character at the end: the narration says what Surplus does for them, and the
-character acts out the change (eats the extra meal, the scale finally moves, a proud pose). Only the name and the CTA
-may be lettered in the style (the easel card, a marquee).
+Never on a phone, a screen or as the app: no phone, no app icon, no app screens or anything that looks like them. It
+comes last, after the whole story: as a bridge through the story's character, who acts out the change (eats the
+extra meal, the scale finally moves, a proud pose), or as a plain plug in a new scene when no bridge is good enough
+(`references/script.md`, "Surplus, last"). The plug says only what Surplus is for, never how it works, along the
+lines of "If you want to gain weight or bulk, Surplus is a bulking app that helps you do it." Only the name and the CTA may be lettered in the
+style (the easel card, a marquee).
 
-## Calls to action (the user picks one per video)
+## Calls to action (the user picks one per video; a plug ending always uses 3, "Comment BULK and I'll send you the app")
 1. **Link in bio:** spoken "Download Surplus, link in bio." On screen: "Surplus · link in bio".
 2. **App Store search:** spoken "Search Surplus on the App Store." On screen: "Search **Surplus** on the App Store".
 3. **Comment keyword:** spoken "Comment KEYWORD and I'll send you Surplus." On screen: "Comment **KEYWORD**". The post

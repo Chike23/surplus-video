@@ -5,7 +5,13 @@ the user picked. It meets the script-side specs in `references/specs.md`, and ev
 the user pastes instead is used word for word: only lay it out (the file format below) and check it.
 
 The job: a stranger mid-scroll stops in the first second, can't leave before the end, and walks away with something
-they'll repeat to a friend. Surplus is the last 10–15 % and has to feel earned, not stapled on.
+they'll repeat to a friend. The story is the video.
+
+## Story first, Surplus last (owner's rule, 2026-11-15)
+Work forwards, never backwards from the app. Pick the idea and write the whole story from hook to callback (step 4)
+for one thing only: how captivating it is. Never ask "how do we get to Surplus?" while choosing or writing it.
+Only once the whole story is written do you look for a bridge to Surplus. A bridge never changes a story beat. If no bridge
+is good enough, the video ends on a plain plug instead ("Surplus, last", below).
 
 **The format comes from eight model videos** the owner picked (millions of views each), measured word by word on
 2026-11-14: the hook, the way it's told, the engine and the beat map below. Use their *patterns*; never copy their
@@ -14,28 +20,31 @@ lines or their stories.
 ## The two kinds (the user picks one first)
 **Twist: a story with a twist.** A gripping story from any era, with a physical cause and effect you can show on a
 stage, and a last beat that flips what we thought was going on. It can be true, a true story made better, or made up
-(next section). It is a story first: it would be worth watching with no app at the end. Its want and its turn are
-about eating, food, appetite, strength or the body, so the bridge to gaining weight is one short line.
+(next section). It is a story first: it would be worth watching with no app at the end. Most are about eating, food,
+appetite, strength, growing or the body. A few can be any great story with some thread to eating or gaining.
 
 **Relatable: an informative story the viewer lives.** A moment the viewer has had ("you order the big meal and tap out
 at half"), the surprising fact or mechanism behind it (always real), and one character living it until the turn
 (usually made up). The viewer
-recognises themselves in the first three seconds and leaves knowing something they didn't. Surplus is how the
-character fixes it. The models' informative videos pull the viewer in with "you" ("you know that feeling when…",
+recognises themselves in the first three seconds and leaves knowing something they didn't. It's still a story first;
+Surplus comes after, as the bridge or the plug. The models' informative videos pull the viewer in with "you" ("you know that feeling when…",
 "your stomach…"), so Relatable uses "you" in the body; the hook still starts with the character.
 
 Both kinds turn on **one surprising story, fact or experience.** Never a tip list, never a generic "how to gain weight"
 explainer, never a story that's only there to get to the app.
 
-## Where the story comes from: true, reworked or made up
-Stories don't have to be true. Pick whatever makes the best video:
-- **True:** it happened as told. Check its key facts with a web search. Real historical people are fine (never living
-  people), but called by what they are ("the king", "the scientist"), not by name.
-- **Inspired by a true story:** take a real event or fact and make it better: a sharper, better-planted twist, higher
-  stakes, a new everyman character or setting, and the want bent towards eating, appetite, strength or gaining so it
-  fits Surplus. Swap the real people for invented characters, so nothing made up is pinned on a real person.
-- **Fiction:** made up from scratch: a fable, a what-if, a character in an invented town or kingdom. Anything goes,
-  as long as the cause and effect feel real and can be shown on stage.
+## Where the story comes from: made up or reworked first
+Stories don't have to be true, and made-up or reworked ones usually beat true ones, because we can sharpen them. Pick
+whatever makes the most captivating video:
+- **Fiction:** made up from scratch: a fable, a what-if, a character in an invented town or kingdom. Told straight, as
+  if it happened, or as "legend has it". Anything goes, as long as the cause and effect feel real and can be shown on
+  stage.
+- **Inspired by a true story or a real topic:** take a real event, topic or fact and put our twist on it: a sharper,
+  better-planted twist, higher stakes, a new everyman character or setting, bent wherever it makes the story more
+  captivating. Swap the real people for invented characters, so nothing made up is pinned on a real person.
+- **True:** it happened as told, and only when the true story beats a made-up one. Check its key facts with a web
+  search. Real historical people are fine (never living people), but called by what they are ("the king", "the
+  scientist"), not by name.
 
 What stays true in every kind: the food, body and weight facts the story teaches (the stomach adapts, a handful of
 nuts is about 160 calories), because viewers act on them, so they're checked and sourced; and what Surplus does
@@ -45,6 +54,8 @@ stayed the thinnest man aboard") is fine: that's storytelling, not a claim. A le
 says", never as fact.
 
 ## What makes an idea right for this format
+- **Captivating on its own.** Would a stranger stop, stay to the end and retell it? That's what decides an idea.
+  Whether or how it reaches Surplus plays no part in picking it.
 - One surprising story with a physical cause and effect you can show: something happens to an object or a body, on
   stage, that the viewer can see.
 - **A main character who does something that looks wrong** (pointless, crazy or backwards) for a reason we only learn
@@ -61,8 +72,8 @@ says", never as fact.
   disasters, weird laws, lucky accidents.
 - **Relatable:** mix the 10 across everyday moments: school or work lunch, family dinner, eating out, the gym, sport,
   mornings, a date, holidays, travel, being sick, a growth spurt.
-- **Mix the sources and label each:** Twist ideas roughly a third true, a third inspired by a true story, a third
-  fiction, unless the user asks for one kind; Relatable ideas usually have a made-up character living a real fact.
+- **Mix the sources and label each:** Twist ideas mostly fiction or a real topic with our twist, and at most 2 of the
+  10 true, unless the user asks for one kind; Relatable ideas usually have a made-up character living a real fact.
   A true idea's story is checked with a web search before it's offered; every idea's food or body fact is checked.
 - **Rules:** stories, characters and shots are always original. Never recreate another creator's video shot for shot;
   if the user brings one, offer an original take on the same idea. No real, named living people as characters, and
@@ -70,13 +81,13 @@ says", never as fact.
 - Not too similar to a done story (`references/stories-done.md`), and not too similar to another of the 10.
 
 ## The 10 ideas (step 1)
-Numbered, ranked by how hard the hook stops a scroll. Each one:
+Numbered, ranked by how hard the story grips (the hook, the stakes, the twist). No bridge yet: that comes after the
+whole story is written. Each one:
 ```
 3. **<Title>** · <era or everyday moment> · Twist | Relatable · True | Inspired | Fiction · Underdog | Backfire
    Hook: "<the first line, word for word>"
    Story: <the character, what they want, what goes wrong, how it gets worse (2 lines)>
    Twist / turn: <the flip in the last story beat, and the "You see," fact that explains it>
-   Bridge: <how it turns to gaining weight and Surplus, one line>
    Based on: <True: as it happened | Inspired: the real story in one line, then what you changed | Fiction: made up>
    Sources: <links for the real facts: the story's if it's true, and the food or body fact it teaches>
 ```
@@ -164,8 +175,8 @@ Name the real thing and the real result, in the plainest words. No metaphors, eu
 - **The twist flips the meaning** of what came before, not just a fun fact tacked on. Test: does the hook read
   differently after the twist?
 - **End on a callback.** The story's last line brings back the hook's object or crowd, turned around ("And the guys
-  who laughed? They all eat from five bowls now."). The models stop right there; we go straight into the Surplus
-  bridge.
+  who laughed? They all eat from five bowls now."). The models stop right there, and so does the story; then come
+  the bridge or the plug.
 - **Feeling we can see:** hope, embarrassment, triumph, shown by the puppet (pose swaps, a glance, a slump), never
   named by the narrator.
 - **Cut the slack.** A line nobody would miss goes.
@@ -195,7 +206,7 @@ The picture tells the story. The narration says only what the picture can't.
   never name the place or announce what's next or when: the set says where we are, and the picture shows time passing.
 
 ## The beat map (about 55 s, about 160 words)
-The models' story fills the whole video; ours fills the first ~85 % and the bridge to Surplus takes the rest.
+The models' story fills the whole video; ours fills the first 85–95 %, and the bridge or the plug takes the rest.
 
 **Twist**
 | Beat | Words (of ~160) | When | Job |
@@ -206,7 +217,7 @@ The models' story fills the whole video; ours fills the first ~85 % and the brid
 | The turn | ~10–15 | 35–40 s | What happens that nobody expected, on a voiced line or "Wait, what?". |
 | The reveal | ~20–30 | 40–47 s (60–75 % in) | "You see," and the why: the one real fact, in plain words, with its number. |
 | The callback | ~8–12 | to ~85 % | The hook's object or crowd, turned around. The story ends here. |
-| Payoff | ~20–25 | last 10–15 % | The bridge: the same puppet in a costume swap carries the story's trick into today, one thing Surplus does for them, the result we see, the CTA. |
+| Bridge or plug | ~10–25 | last 5–15 % | Written after the whole story. A bridge: the same puppet in a costume swap carries the story's trick into today, one thing Surplus does for them, the result we see, the CTA. Or a plug: a cut to a new scene, one plain line, the CTA. |
 
 **Relatable**
 | Beat | Words (of ~160) | When | Job |
@@ -217,7 +228,7 @@ The models' story fills the whole video; ours fills the first ~85 % and the brid
 | The turn | ~10–15 | 35–40 s | The counter-intuitive thing they try, or what happens that shouldn't. "Wait, what?" |
 | The reveal | ~20–30 | 40–47 s (60–75 % in) | "You see," and the real cause in plain words, with one number. |
 | The callback | ~8–12 | to ~85 % | The habit from the hook, turned around. |
-| Payoff | ~20–25 | last 10–15 % | Surplus is how the character does the fix (features from surplus.md); they act out the change; the CTA ends it. |
+| Bridge or plug | ~10–25 | last 5–15 % | Written after the whole story. A bridge: Surplus is how the character does the fix (features from surplus.md), and they act out the change. Or a plug: a cut to a new scene and one plain line. The CTA ends it. |
 
 ## The numbers (references/specs.md)
 - Mark on v4 runs at about 3 words a second at his own pace, pauses included, so **45–60 s is about 130–195 words**.
@@ -227,30 +238,39 @@ The models' story fills the whole video; ours fills the first ~85 % and the brid
 - **"You see,"** starts the line right after the hook (the who and the stakes, never the why), or brings the reveal
   60–75 % in (the why). The models use one or both.
 - **A new place every ~20 words** (6–7 s): each beat moves somewhere new on the stage.
-- **The payoff lands in the last 10–15 %** (from about word 85 % on) and the script ends on it. It is the character's
-  result with Surplus, and its last line is the CTA. No outro, no sign-off after it.
+- **The payoff (the bridge or the plug) lands in the last 5–15 %** (from about word 85–95 % on) and the script ends
+  on it. Its last line is the CTA. No outro, no sign-off after it.
 
-## Surplus, through the character
-Never write a line that needs the app on screen ("tap here", "look at this screen", "open the app and..."): the picture
-never shows a phone or the app. The narration says what Surplus does **for the character**, and the picture shows the
-character doing it: eating the extra meal, stepping on the scale and finally weighing more, a proud pose. For
-example: "So he stops guessing, and Surplus counts every bite and sets him five hundred calories over, and two months
-later he's gained three kilos. Search Surplus on the App Store." Features only from `references/surplus.md`, and any
-rate of gain inside its guard rails (0.25–0.5 kg a week).
+## Surplus, last: a bridge or a plug
+Written only after the whole story is written (step 4), and it never changes a story beat. Either way, never write a line
+that needs the app on screen ("tap here", "look at this screen", "open the app and..."): the picture never shows a
+phone or the app. Features only from `references/surplus.md`, and any rate of gain inside its guard rails (0.25–0.5
+kg a week).
 
-**The bridge comes after the callback, and it's seamless:** the story's trick or object walks into today. The same
-puppet in a quick costume swap (or a modern twin with the same problem) is still doing the story's thing, and Surplus
-is the one tool that helps them do it ("Today he's still on five bowls, and Surplus keeps him…"). No "and that's why
-you need…", no change of tone: same teller, same breath.
+**The bridge, when the story hands you one.** After the callback the story's trick or object walks into today: the
+same puppet in a quick costume swap (or a modern twin with the same problem) is still doing the story's thing, and
+Surplus is the one tool that helps them do it. The narration says what Surplus does **for the character**, and the
+picture shows them doing it: eating the extra meal, stepping on the scale and finally weighing more, a proud pose.
+"Today he's still on five bowls, and Surplus keeps him five hundred calories over, and he's three kilos up. Search
+Surplus on the App Store." Same teller, same breath, no "and that's why you need…". About 15–25 words. The character
+is the hero and Surplus is the tool they pick up: "he finally ate enough", not "Surplus changed his life".
 
-**Fit the app, don't sell it.** Choose and shape the story so its problem is the one Surplus solves (not eating
-enough, a stomach that fills too fast, guessing instead of counting, gaining too slowly or too fast), so the plug grows
-out of the story. But the story is the point, so it never feels like an ad:
-- Surplus isn't named, hinted at or set up before the payoff. With the payoff cut, it's still a story worth sharing.
-- The payoff is the last 10–15 % (about 20 words before the CTA): one thing Surplus does, the one the story's problem
-  needs, and the result we see. No feature list, no hype words, no price, no "download now".
-- The character is the hero and Surplus is the tool they pick up. The win is theirs: "he finally ate enough", not
-  "Surplus changed his life".
+**The bridge test.** Use a bridge only if all three are true: it grows out of the story's own trick, object or
+problem in one breath, with no new set-up and no stretch ("speaking of eating…"); it makes sense to someone who
+struggles to gain weight; and it's at least as good an ending as the plug. Write two or three bridges and test them.
+If none passes, use the plug: a weak bridge is worse than an honest plug.
+
+**The plug, when no bridge passes** (owner's rule, 2026-11-15). The story ends on its callback, then a straight cut to
+a new scene of its own, and one plain line in the same voice, then the CTA. Keep it that simple: say what Surplus is
+for, never how it works (no tracking, counting, targets or when to eat). A plug always ends on the comment CTA,
+whatever CTA was picked for a bridge: "Comment BULK and I'll send you the app" (the user's own keyword if they picked
+the keyword CTA). About 20–25 words in all, along the lines of "If you want to gain weight or bulk, Surplus is a
+bulking app that helps you do it. Comment BULK and I'll send you the app." The new scene shows it, never a phone
+or the app: a skinny cut-out filling out his shirt, or a scale's needle swinging up, with Surplus and the CTA lettered
+large on the marquee.
+
+**Never an ad, either way.** Surplus isn't named, hinted at or set up before the payoff, and with the payoff cut it's
+still a story worth sharing. One thing Surplus does, no feature list, no hype words, no price, no "download now".
 
 ## Writing for the ear
 - One idea per clause, everyday words. The main character as he, she or they, everyone else by what they are, the
@@ -345,11 +365,13 @@ True | Inspired by <the real story, one line>; changed: <what> | Fiction
   few punch sentences at the turns, the callback and the CTA; questions and exclamations only in the voiced lines and
   the viewer's "Wait"); "You see," right after the hook or 60–75 % in; a new place every ~20 words; 3–4 story parts;
   no `[pause]` marks.
-- The payoff starts after about 85 % of the words, ends the script, and its last line is the picked CTA.
-- Surplus told through the character, the bridge carrying the story's trick into today; no line that needs a phone or
-  the app on screen; claims only from surplus.md; any rate of gain inside its guard rails.
-- **Not an ad:** Surplus isn't named before the payoff; the payoff is one feature and the character's result; the
-  story still works with the payoff cut, and the payoff grows out of the story's problem.
+- **Story first:** the whole story was written before the ending, and no beat was changed to reach Surplus.
+- The payoff starts after 85–95 % of the words, ends the script, and its last line is the CTA (the picked one after a bridge; "Comment BULK
+  and I'll send you the app" after a plug).
+- A bridge that passes the bridge test, or the plug; no line that needs a phone or the app on screen; claims only
+  from surplus.md; any rate of gain inside its guard rails.
+- **Not an ad:** Surplus isn't named before the payoff; the payoff is one thing Surplus does; the story still works
+  with the payoff cut.
 - Every real fact, number and health claim has a source (web search) and stays inside the health guard rails in
   surplus.md. A changed or made-up story is never called true and pins nothing on a real person or date; a legend is
   told as a story or as "legend says".

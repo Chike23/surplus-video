@@ -99,10 +99,15 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   passing) or made while out of frame, as the plan's prop table says.
 
 ## The Surplus ending
-The plug is part of the story, told through the character. **Never show a phone, a screen, the app, an app icon or
-anything that looks like the app** (calorie rings, dashboards, progress bars, a "+500 kcal" readout). While the
-narration says what Surplus does for them, the character acts it out: eats the extra meal, the scale's needle finally
-swings up and settles, a proud pose swap with a bounce. The word **Surplus** and the CTA line ("link in bio", "Search
+`P/brief.json` says which ending the script has. **Never show a phone, a screen, the app, an app icon or anything
+that looks like the app** (calorie rings, dashboards, progress bars, a "+500 kcal" readout).
+- **A bridge:** while the narration says what Surplus does for them, the character acts it out: eats the extra meal,
+  the scale's needle finally swings up and settles, a proud pose swap with a bounce.
+- **A plug:** the story ends on its callback, then a straight cut to a new scene of its own (a new place, opening
+  wide): a skinny cut-out filling out his shirt, or a scale's needle swinging up, as script.md says, with the marquee
+  lit with Surplus and the CTA before the word "Surplus".
+
+The word **Surplus** and the CTA line ("link in bio", "Search
 Surplus on the App Store", "Comment BULK") may be lettered in the style, on the easel card or a marquee: large, inside
 the safe area, part of the payoff the video ends on. No App Store badge or other logos.
 
