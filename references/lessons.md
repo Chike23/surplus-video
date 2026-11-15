@@ -48,6 +48,25 @@ when it's the same rule; don't add duplicates.
 - A prop handed from a hand to a target moves over the last 2–3 drawings of the reach, and the reach arrives on the
   word. Never move the prop on the word and reach afterwards. (bakers-thirteenth-loaf: the sealed weight)
 
+- An action window that starts before its word (a set-down, a lean-back, a spring) must never start before its
+  shot's cut: clamp it to the shot start and read poses from inside the shot, or the first frames show the previous
+  shot's pose. (calf-on-his-shoulders: the calf flew in from nowhere at a cut)
+- The shutter is centred on the frame time: clamp its sub-samples at every straight cut **and** at every instant swap
+  (body, head, expression, prop visibility), or that frame shows both at 50 %. (calf-on-his-shoulders: ghost doubles)
+- One move between two far-apart subjects (4+ frame heights) smears: give it 0.6 s or more, or cut. Rerun the whip
+  check after every reframing. (calf-on-his-shoulders: the pan to the wrestlers)
+- Lying, flattened or slumping characters: frame where the head ends up, lift the head so the face reads, and slump in
+  place inside the framing instead of sliding out of it. (calf-on-his-shoulders: slam, flatten and defeat faces lost)
+- A comparison beat ("grows", "swells", "slower") is checked by measuring two frames: the visible shape changes by
+  30 % or more, and both things compared are whole in one frame. Scaling a part hidden behind its card shows nothing.
+  (calf-on-his-shoulders: the chalk biceps)
+- A CTA or reveal flown in during a fast camera flight streaks and lands after its word: hang and light it off-frame
+  first and land the flight 3+ drawings before the key word. (calf-on-his-shoulders: the marquee)
+- Two light cut-outs on neighbouring slots merge into one shape: space them along x or keep one clearly in front; two
+  heads in a two-shot sit side by side, never one behind the other. (calf-on-his-shoulders)
+- A dark-toned set (amber wash on wood, a big floor in an extreme wide) can read as a dip to black at its cut:
+  lighten the set's paint rather than the lamp level, which also brightens every closer shot. (calf-on-his-shoulders)
+
 ## Story, script and voice (owner's notes)
 - Tell it like you're telling your best friend, not like a narrator describing an event: present tense, the teller's
   own reactions ("wait, what?"), and two to four characters' lines voiced at the turns. The hook starts with
@@ -86,6 +105,11 @@ when it's the same rule; don't add duplicates.
 - Small marks (sweat drops, sparks) over a surface of similar value read as wrong shapes: give them contrast and a
   clear silhouette. (stomach-stretch: sweat drop read as a white triangle)
 
+- On a mirrored card (face −1), any rotation written for the right-facing card turns the other way: multiply tilts,
+  nods and swings by face and check the result on a frame. (calf-on-his-shoulders: his lifted head turned into the ground)
+- Eyes first: lead the head tilt and expression by 3 drawings before the body's lean-back on every big action.
+  (calf-on-his-shoulders)
+
 ## Words on screen
 - Plan where every label goes **per shot** before building: never over the subject or a prop in use, never in
   Instagram's covered areas. (stomach-stretch: a label covered the plate)
@@ -99,6 +123,10 @@ when it's the same rule; don't add duplicates.
 - Dials and gauges: a needle must never cover the key number at its rest or final position. Put labels outside the
   needle's sweep. (stomach-stretch: needle hid "+0.5")
 
+- Size each scene card for its opening framing: cap height ≥ 45 px at 1080 wide in a wide or extreme wide. A long
+  name shrinks to fit its card, so keep names short. Every cut, even within one place, gets its own wash shade.
+  (calf-on-his-shoulders: THE TRAINER'S BOARD unreadable, two gym shots with one wash)
+
 ## Code
 - `K.seg(q, a, b)` with a == b divides by zero (NaN): never build a zero-width window. (stomach-stretch)
 - A mesh squashed to near-zero height on a coplanar surface shows only its ink outline (a black blob): give it a
@@ -107,6 +135,11 @@ when it's the same rule; don't add duplicates.
   runs the score on a stub ("sound score runs"); a FAIL there means silence or a crash on Play. (how-fast-to-gain)
 - Anything the kit renders several times per frame must be stateless in `update(t)`; rebuild per-frame geometry from
   t, never accumulate.
+
+- `CUE.at/find(phrase, from)`: an integer `from` is a word index, a decimal one is a time. Always pass decimals
+  (`36.9`, never `37`), or a cue lands seconds away and the camera runs backwards. (calf-on-his-shoulders)
+- Joining lines can push code behind a trailing `//` comment and silently disable it: before QA, grep for
+  statements after a `//` on the same line. (calf-on-his-shoulders: four lines disabled)
 
 ## Tools on this machine
 - Whisper stretches the last words of a line into the pause after it (0.3–0.75 s late). voice.mjs ends each line at

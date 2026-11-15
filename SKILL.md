@@ -1,6 +1,6 @@
 ---
 name: surplus-video
-description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, builds the animation to fixed specs with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
+description: Makes a finished vertical (9:16) 3D animated video promoting the Surplus weight-gain app, always in the Spotlight Stage style (a toy theatre lit by stage lamps). First asks the kind of story (a story with a twist that can be true, reworked from a true one or made up, or a relatable story with a surprising real fact), then offers 10 story ideas of that kind to pick from, then writes a show-don't-tell script told like you're telling your best friend, with voiced character lines, plain words, a he/she/they main character and a hook that starts with He, She or They (or uses one the user pastes); scene changes are straight cuts; Surplus is told through the character, never shown as a phone or app. Voices it with ElevenLabs (always the narrator Mark - Natural Conversations on the Eleven v4 model) at his natural 3 words a second (the voice is never sped up, slowed, cut or re-timed, and there are no pauses), times every word with Whisper, plans each scene's contents, camera focus and prop states, takes props from a reusable prop library (each new one judged by a Sonnet agent), has a Sonnet agent check every framing in a layout pass before animating, builds the animation to fixed specs (the camera moves only for a reason; full and waist-up shots are home base) with no word captions, has one fresh reviewer agent check it once, fixes what it finds, mixes the audio with mix.py (music bed at -19 dB to the voice, as in the model videos), and renders the MP4 straight away with no approval step, then hands it over; changes only when the user asks. Lessons from every review are kept. Use for "/surplus-video", "make a Surplus video/reel", "make a Surplus video about ...", "new animation for Surplus".
 ---
 
 # /surplus-video
@@ -12,7 +12,8 @@ changes, and each round is rendered again. You do everything else, the script in
 **Names:** SKILL = this skill's folder (its base directory). P = the project folder, `~/surplus-videos/<yyyy-mm-dd>-<slug>`.
 **Read first:** `references/specs.md` (the owner's specs: every video meets them), `references/surplus.md` (what we
 sell, the CTAs, health guard rails), `references/script.md` (how the stories work) and `references/lessons.md` (every time).
-Read the others at their step: `references/stories-done.md`, `references/build.md`, `agents/reviewer.md`.
+Read the others at their step: `references/stories-done.md`, `references/build.md`, `agents/prop-judge.md`,
+`agents/layout-check.md`, `agents/reviewer.md`.
 
 ## Rules, always
 - **Original.** Stories, characters and shots are always original. Never recreate another creator's video shot for
@@ -36,7 +37,8 @@ Read the others at their step: `references/stories-done.md`, `references/build.m
   reference. A script you write meets the script-side specs too; only a script the user pasted can miss them, and
   then you tell them.
 - **One review, by a fresh agent**, never you grading your own work. It runs once per video, then the video comes back
-  to the user ready. More changes happen only when the user asks for them.
+  to the user ready. More changes happen only when the user asks for them. (The quick Sonnet checks of props and
+  framings in step 7 come before it and don't replace it.)
 - **You write the script**, from the idea the user picked (step 1). Never script an idea they haven't picked. If the
   user pastes their own script instead, use it word for word.
 - **Surplus is never shown.** No phone, no screen, no app, no app icon, nothing that looks like the app (calorie rings,
@@ -113,7 +115,7 @@ four short voiced lines, mostly the doubters), said as it is (plain results and 
 or they, everyone else by role, no names), the story engine (an underdog or backfire arc, want and stakes by second
 eight, "but" and "so" beats, a time ladder in threes, a loop open at all times, a planted detail, the why held back for
 the "You see," reveal 60–75 % in, the story ending on a callback to the hook's object), show don't tell (a *We see*
-line under every line), no pauses, the specs' word count (aim for 150–170 words, about 50–57 s), written to flow
+and a *Camera* line under every line, a *Scene* line for each new place, every concept pictured whole), no pauses, the specs' word count (aim for 150–170 words, about 50–57 s), written to flow
 ("Writing for the ear": commas and bridges between beats, full stops only for the hook, a few punch sentences, the
 callback and the CTA), a new place every ~20 words, and the payoff (the bridge carrying the story's trick into today,
 the character's result with Surplus, then the CTA) in the last 10–15 %, nothing after it. Every real fact, number and
@@ -121,8 +123,8 @@ health claim checked (web search) and listed under Sources, the story's source u
 made-up story never called true, and Surplus only in the payoff; Surplus claims only from `references/surplus.md`. Run the
 checklist at the end of script.md, then add the numbered script to the ideas doc under a heading **Script**, so the
 user can read it while you build. No question: go on.
-A script the user pasted: lay their words out in the same file format (only line breaks, `[S#]` and *We see* lines
-added, never a word changed; any pause marks in it are dropped). If a claim in it is wrong or unsupported, quote the
+A script the user pasted: lay their words out in the same file format (only line breaks, `[S#]`, *We see*, *Scene*
+and *Camera* lines added, never a word changed; any pause marks in it are dropped). If a claim in it is wrong or unsupported, quote the
 line, say what's off with the source, and wait for their corrected line (the one question allowed before the
 video). Script-side specs it misses: list them in one line each at step 10; never change their words to meet them.
 
@@ -142,23 +144,45 @@ video). Script-side specs it misses: list them in one line each at step 10; neve
   new Whisper model.
 
 ## 6. Plan → `P/plan.md`
-Plan to `references/specs.md`. For each scene: its time range (from timing.json), the **places** (areas of the stage,
-about 7–9 for the video), and for each line **what we see** (from the script's *We see* lines: the picture tells it,
-the narration never describes it). Then every **shot** (time, the phrase, the place, how it changes: a straight cut, or
-a camera flight of 0.25–0.5 s) and every **move** inside it (time, pan or zoom, the size it lands on), so the counts
-and shares in specs.md come out right (add them up in the plan: shots, average shot length, place visits, framing
-changes, the first 4 s, share of each size). Then each big character action and reaction (time, the word, the pose
+Plan to `references/specs.md`, from the script's *We see*, *Scene* and *Camera* lines. For each scene: its time range
+(from timing.json), the **places** (areas of the stage, about 7–9 for the video), and **what's in it** (set pieces,
+characters, props). Then every **shot** (time, the phrase, the place, how it changes: a straight cut, or a camera
+flight of 0.25–0.5 s) and every **move** inside it (time, pan or zoom, the size it lands on, and its why: follow,
+reveal or react), and for every framing a **camera description**: what it sees (everything in frame that matters) and
+its **focus** (the one thing it aims at and keeps whole). Add up the counts and shares from specs.md in the plan
+(shots, average shot length, place visits, framing changes, the first 4 s, share of each size) so they come out right.
+- **Props table:** every prop, where it comes from (a library prop in `SKILL/props`, an altered version or a new one),
+  and its **state** through each scene: what it starts as, every change (the cue word and the visible move that makes
+  it: "empty bowl → full on 'eats', ladled in") and what it ends as, or "unchanged". A state changes on screen with a
+  move, or out of frame, never by a pop.
+- **Concept pictures:** for every line that teaches a fact, a cause or a number, the demonstration on stage (the
+  things, their start and end state, the framing that shows them whole) and what a viewer with the sound off takes from
+  it (script.md, "Concepts are shown whole").
+
+Then each big character action and reaction (time, the word, the pose
 swap; it lands 0–3 frames before its word), every label or piece of lettering and where on screen it sits (outside
 Instagram's covered areas, reading the right way round), the key sounds, and the music bed (which pad or pulse under
 which part, changing chord with the story's turns). Then go through `references/lessons.md` and note how this plan
 avoids each lesson that applies.
 
-## 7. Build → `P/src/style.js`
-Read `references/build.md`, the style's `card.md`, its whole `reference.js`, and its `notes.md`. Build the scene code as
-the reference does, with every time from `CUE`, the `shots`, `moves` and `payoff` the specs ask for, the music bed and
-effects in `sound(k)`, no captions, and the Surplus ending. Where the reference and specs.md disagree (camera, lamps,
-pace), specs.md wins. `node SKILL/tools/build.mjs P` must pass. Then open the preview in the browser pane and scrub
-through the cues and shots yourself; fix what you see.
+## 7. Props, layout, then the build → `P/src/style.js`
+Read `references/build.md`, the style's `card.md`, its whole `reference.js`, and its `notes.md`.
+1. **Props.** For each prop in the plan's props table, reuse a library prop (look at `SKILL/props/*.jpg`) or write an
+   altered version or a new one to `SKILL/props/<name>.js` (build.md, "Props"), drawn to look like the real thing in
+   this style. Render the new and altered ones: `node SKILL/tools/props.mjs <name> ...` → `SKILL/props/<name>.jpg`
+   (one frame per state). Spawn **one prop judge**: Agent tool, `general-purpose`, model `sonnet`, description "Judge
+   props", prompt = the whole of `SKILL/agents/prop-judge.md` with `{SKILL}` and the names filled in. Fix every FIX,
+   render those again and look yourself (no second judge). Then copy every prop the video uses to `P/props/`.
+2. **Layout pass.** Build the sets, the props in their states, the characters on their tracks (rest poses are fine)
+   and the camera from `shots` and `moves`, every time from `CUE`. `node SKILL/tools/build.mjs P` must pass, then
+   `node SKILL/tools/qa.mjs P --layout` → `P/qa/layout-*.jpg` (a frame in the middle of every framing). Spawn **one
+   layout checker**: Agent tool, `general-purpose`, model `sonnet`, description "Check framings", prompt = the whole of
+   `SKILL/agents/layout-check.md` with `{P}` and `{SKILL}` filled in. Fix every framing it fails (aim, size, a prop's
+   place or state, a concept that doesn't read), and look at the fixed ones yourself (`qa.mjs P --times`).
+3. **Animate.** Build the rest as the reference does: the actions and reactions, the `payoff`, the music bed and
+   effects in `sound(k)`, no captions, and the Surplus ending. Where the reference and specs.md disagree (camera,
+   lamps, pace), specs.md wins. `node SKILL/tools/build.mjs P` must pass. Then open the preview in the browser pane
+   and scrub through the cues and shots yourself; fix what you see.
 
 **Preview server:** in the session's working folder, `.claude/launch.json` gets (or updates) a configuration
 `{ "name": "surplus-preview", "runtimeExecutable": "python3", "runtimeArgs": ["<SKILL>/tools/serve.py", "<P>", "8765"], "port": 8765 }`.

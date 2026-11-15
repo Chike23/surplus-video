@@ -58,20 +58,26 @@ These come from the owner. They are rules, not suggestions. Every video meets al
   or flies across the screen to do it (owner's rule: crossing flats and cards are too much). The only other way is a
   camera flight to the next area of the stage (0.25–0.5 s). Never a dip to black. *QA + look*
 
-**How often the camera pans or zooms meaningfully**
-- The framing changes about every 1.4 seconds (1.1–1.8 on average): about 33 times in 45 seconds, about 44 in 60. *QA*
-- Each change is a fast, eased pan or zoom to the new framing, then a very slow drift the same way until the next
-  move. *QA + look*
-- About 3 in 4 framing changes happen during a camera move, not at a scene change (65–85 %). *QA*
-- The camera is still at most about 8% of the time; a short stop is fine. *QA*
-- About 1 in 5 frames has a fast move (12–30 %), and nothing is a smeared whip. *QA + look*
+**When the camera moves** (owner's change, 2026-11-15: it zoomed too much. It was a framing change every 1.4 s and
+never still.)
+- After the first 4 seconds, the camera pans or zooms only for a reason, declared as the move's `why`: `follow` (keep
+  a travelling character or prop in its framing), `reveal` (bring something new into frame) or `react` (land a
+  reaction or the object a line is about on its word). Never a move just to keep the picture busy. *QA (declared) + look*
+- After the first 4 seconds, the framing changes about every 3 seconds on average, cuts included (2.5–3.5). *QA*
+- Each move is a short eased pan or zoom (about 0.4–0.8 s). Between moves the framing holds still or drifts very
+  slowly the way the last move went (at most about 2 % of the frame a second), and a drift never carries the subject
+  out of its framing. *look*
+- Fast moves on at most about 1 in 8 frames (≤ 12 %), and nothing is a smeared whip. *QA + look*
 
 **Shot sizes (share of screen time)** *QA* (from the declared sizes) *+ look* (that each framing really is that size)
-- Extreme wide plus wide shots fill at least 25% (36% in Rick's), and every new place opens wide.
-- Full shots are home base at about 27% (20–35 %).
-- Medium shots are passed through quickly (under half a second each) and never fill more than 20%.
-- Close shots on faces are only for the big reactions (about 13%, 8–18 %); close-ups of objects take about 10% (5–15 %).
-- Extreme wide shots are held longest (about 1.7 seconds, 1.3–2.2), with the camera travelling through the place.
+(owner's change, 2026-11-15: not too close, not too far)
+- Full and medium shots are home base: together 45–70 %. A medium shot can be held.
+- Extreme wide plus wide shots fill 15–35 %, and every new place opens wide.
+- Face close-ups only for the 3–4 biggest reactions: at most 5 of them and at most 12 % in all.
+- Close-ups of objects (inserts) take about 10 % (5–15 %), on the props and concepts the story turns on.
+- **Framed well** *look*: every framing aims at its planned focus. The subject is whole for its size: no face, no
+  hand doing the action and no prop the line is about is cut by the frame edge. There is room above the head and in
+  front of the face, and none of it sits in Instagram's covered areas. Nothing is lost small in a lot of empty set.
 
 Sizes, for this style: **xwide** the whole theatre or more than the set (proscenium, wings or flies in frame; actors
 under 1/6 of the height). **wide** the whole set of this place (actors about 1/4–1/3 of the height). **full** an actor
@@ -92,9 +98,9 @@ shoulders, about half the frame. **insert** a close-up of an object.
 
 ## 3. Spotlight Stage: changes to the prompt (in `styles/spotlight-stage/card.md` and `prompt.md`)
 - 1080×1920 vertical, 45–60 seconds (was 1920x1080, 7-12 seconds).
-- The camera follows the pan-or-zoom-then-drift rule. It leaves the stalls seat: it pushes onto the actors, pulls
-  back to the whole stage, and pans across into the wings. (Replaces "one slow continuous move from a seat in the
-  stalls".) *QA + look*
+- The camera follows "When the camera moves" (section 1). It leaves the stalls seat: it pushes onto the actors, pulls
+  back to the whole stage, and pans across into the wings, each time for a reason. (Replaces "one slow continuous
+  move from a seat in the stalls".) *QA + look*
 - Keep the camera within about 25° of straight-on, so the flat cut-outs never turn edge-on (≤ 25°; over 30° is a
   blocker). *QA*
 - Scene changes are straight cuts, not in-view changes: no flats sliding, cards pulled or drops wiping across the
@@ -150,8 +156,8 @@ shots: [ // every scene change; the first at t 0. place: a name per area; size: 
   { t: CUE.at('every day'), place: 'wings-left', size: 'xwide', how: 'cut' },               // straight cut, new wash, same frame
   { t: CUE.at('you see'), place: 'flies', size: 'wide', how: 'fly', dur: 0.45 },             // camera flies there, no cut
 ],
-moves: [ // every pan or zoom inside a shot: when it starts, and the size it lands on
-  { t: CUE.at('eat'), size: 'full' }, { t: CUE.at('all'), size: 'close' }, ...
+moves: [ // every pan or zoom inside a shot: when it starts, the size it lands on, and why (after 4 s: follow|reveal|react)
+  { t: CUE.at('eat'), size: 'full', why: 'hook' }, { t: CUE.at('laughed'), size: 'close', why: 'react' }, ...
 ],
 payoff: CUE.at('<first word of the payoff>'),
 ```

@@ -282,6 +282,7 @@
       //   { draw(ctx) }                      free painting
       // cutout() paints the list on a canvas and extrudes the same outlines into one thick card, so the silhouette
       // you see is real geometry: it throws real shadows on the layer behind and stops the beams.
+      // @paint-start (tools/props.mjs renders library props with this block: keep it self-contained)
       const INK = '#2a1c12', CARD = '#e6d9bb';
       const ell = (cx, cy, rx, ry = rx, n = 26, a0 = 0, a1 = TAU) => Array.from({ length: n }, (_, i) => { const a = a0 + (a1 - a0) * i / (a1 - a0 > TAU - 1e-6 ? n : n - 1); return [cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]; });
       const rect = (x0, y0, x1, y1) => [[x0, y0], [x1, y0], [x1, y1], [x0, y1]];
@@ -330,6 +331,7 @@
         mesh.userData.box = { x0, y0, x1, y1 };
         return mesh;
       }
+      // @paint-end
       // Two ways a cut-out gets onto the stage.
       // hung(): flown from above on thin rods (pass the points on the card where the rods are fixed).
       const rodGeo = new THREE.CylinderGeometry(0.011, 0.011, 10, 6).translate(0, 5, 0), wireGeo = new THREE.CylinderGeometry(0.005, 0.005, 10, 5).translate(0, 5, 0);

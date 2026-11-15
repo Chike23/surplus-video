@@ -22,7 +22,7 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   const DPS = 30;
   const T = { hook: CUE.at('eat all day'), seeIt: CUE.at('you see'), ... };
   const shots = [ { t: 0, place: 'kitchen', size: 'wide' }, { t: T.hungry, place: 'pantry', size: 'wide', how: 'cut' }, { t: T.seeIt, place: 'flies', size: 'wide', how: 'fly', dur: 0.45 }, ... ];
-  const moves = [ { t: CUE.at('all'), size: 'full' }, ... ];        // every pan or zoom inside a shot
+  const moves = [ { t: CUE.at('all'), size: 'full', why: 'hook' }, ... ];   // every pan or zoom inside a shot, with its why
   const DURATION = CUE.snap(TIMING.duration + 1.0, DPS);            // hold 0.8–2 s on the payoff, no outro
   registerStyle({ id, name, duration: DURATION, shots, moves, payoff: T.payoff, fonts: [...], render: {...},
     build(S) { ...; return { update(t) {...}, overlay(ctx, t, W, H) { /* labels */ } }; },
@@ -51,13 +51,15 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   changes colour, all on one frame; nothing slides, wipes or flies across the screen to do it) or `how: 'fly'` (the
   camera flies to the next area of the stage, 0.25–0.5 s; about 1 in 5 place changes). Never a dip to black. A new
   place opens wide (`xwide` or `wide`). Where the reference slides flats or pulls cards for a scene change, cut instead.
-- **Moves**: the framing changes about every 1.4 s. Each move is a fast eased pan or zoom (about 0.3–0.5 s) to the new
-  framing, then a very slow drift the same way until the next move. The camera is never still more than ~8 % of the
-  time, and no move smears (QA flags image speed over 4 frame-heights a second).
+- **Moves, only with a reason**: after the hook, a pan or zoom only to `follow` a travelling subject, `reveal`
+  something or land a `react` on its word, with the `why` declared. The framing changes about every 3 s, cuts
+  included. A move is a short eased pan or zoom (about 0.4–0.8 s), then the framing holds still or drifts very slowly
+  the same way, and no move smears (QA flags image speed over 4 frame-heights a second).
 - **The hook (0–4 s)**: 4–5 framing changes, at most 2 of them scene changes, the rest camera moves.
-- **Sizes**: wide + extreme wide ≥ 25 % of the time, full ~27 % (home base), medium only in passing (< 0.5 s each,
-  ≤ 20 % in all), face close-ups ~13 % for the big reactions, object inserts ~10 %, extreme wides held longest
-  (~1.7 s) with the camera travelling.
+- **Sizes**: full + medium are home base (45–70 %), wide + extreme wide 15–35 %, at most 5 face close-ups for the
+  biggest reactions (≤ 12 %), object inserts ~10 %.
+- **Aim at the focus**: each framing aims at its plan's focus where that thing is at that moment, read from the same
+  function that places it (lessons.md has the cases), and keeps it whole with room around it (specs.md, "Framed well").
 - **Angle**: the stage faces +z (the house), as in the reference. Keep the camera within 25° of looking straight along
   −z, so the cut-outs never turn edge-on. Push in, pull out and pan across instead of swinging round.
 - First frame: a character already moving, fully lit, the hook's action under way. Last 0.8–2 s: hold on the payoff
@@ -74,6 +76,22 @@ does something else (its slow stalls camera, its 16:9 frame, its dark grade), th
   beat with a small bounce, and a reaction holds at least 0.5 s on a readable face.
 - Holds: a 1–2° sway on the rod, never a frozen puppet. Impacts: 3 frames frozen, then a recoil, a sound on that frame.
 - Props act: flown in on rods, needles swing, overshoot and settle. No lip-sync.
+
+## Props (the library in SKILL/props)
+- One prop per file, `SKILL/props/<name>.js`: a first line `// @prop {"what": "a white dinner plate", "states": [{}, {"food": 1}]}`
+  (what the real thing is, and every state to show the judge), then one function `<camelName>Art(s = {})` that
+  returns the art list for state `s`. Use only the painting helpers between `@paint-start` and `@paint-end` in the
+  style's reference.js (`ell`, `rect`, `round`, `strip`, `limb`, `hull`, `place`, `label`, `INK`, `CARD`, `TAU`) and
+  the prop's own colours. Drawn at stage size (units; the hero is about 1.75 tall), feet at y 0, facing +x.
+  Called with no state, it returns the whole prop as first seen; a part that moves on its own (a needle, a lid) is a
+  second function in the same file.
+- `SKILL/props/<name>.jpg` is its judged look (from `tools/props.mjs`). Look at the pictures to pick a prop.
+- A library file that a video has used is never changed. A fix to one or an altered version (cracked, bigger,
+  another colour) is a new file, `<name>-<what changed>.js`.
+- A video copies the props it uses to `P/props/` and pulls each into `build(S)`, after the painting helpers, with a
+  `/*@prop <name>*/` line. build.mjs pastes the file in.
+- A state change is a swap between cut-outs of two states, hidden by a visible move (a spoon dip, a lid, a hand
+  passing) or made while out of frame, as the plan's prop table says.
 
 ## The Surplus ending
 The plug is part of the story, told through the character. **Never show a phone, a screen, the app, an app icon or

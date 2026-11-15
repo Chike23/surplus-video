@@ -2,3 +2,4 @@ tools/node_modules/
 .backup/
 .checked
 .DS_Store
+props/.sheet/

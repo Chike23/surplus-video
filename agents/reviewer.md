@@ -33,8 +33,10 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
 1. **Clipping and solids**: objects passing through each other, the floor, flats, labels or the camera's near plane;
    things floating that should rest; shadows detached or missing; z-fighting or flicker.
 2. **Continuity**: things popping in or vanishing without a motivated move; props changing size, place, colour or count
-   between shots; a character's state (size, pose, position) jumping; light or grade jumping between frames.
-3. **Framing**: the subject cut by the frame edge; objects or arcs leaving frame mid-action, especially during camera
+   between shots; a prop not in the state plan.md's props table gives, or changing state by a pop instead of a
+   visible move; a character's state (size, pose, position) jumping; light or grade jumping between frames.
+3. **Framing**: not aimed at the plan's focus; too close or too far for its size (specs.md, "Framed well"); the
+   subject cut by the frame edge; objects or arcs leaving frame mid-action, especially during camera
    moves; a set's edge or a black gap showing in a pan or pull-out; anything important in Instagram's covered areas
    (top 11.5 %, bottom 24 %, right 13 %); a first frame that isn't a lit, moving character; an end that doesn't hold.
 4. **Words on screen**: **any word-by-word caption of the narration is a blocker** (owner's rule: no captions).
@@ -46,7 +48,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
    timing.json's word start); sound events vs picture (the style's `sound(k)` times vs `update` times).
 6. **Story**: does each part show what the narration says? **Show, don't tell:** does the picture act out each line's
    *We see* in script.md, or does it just sit there while the narration explains (a blocker when a beat has no
-   picture)? Is the hook's surprising action pictured in the very first frames? No real, named living person as a
+   picture)? Does each concept picture in plan.md read with the sound off, nothing left to imagine? Is the hook's
+   surprising action pictured in the very first frames? No real, named living person as a
    character, no brand mascot or logo anywhere (blockers). Does it end on the payoff, with the CTA the brief asks for, readable, inside the safe area, and nothing after it?
    **Surplus is never shown:** any phone, screen, app icon or app-like picture (calorie ring, dashboard, progress bar)
    anywhere in the video is a blocker. The plug must come through the character acting out the change.
@@ -59,7 +62,8 @@ say, for each one, whether it is met.** A spec is met only when a number or the 
    - shot sizes: spot-check 10 framings across the video against the size definitions in specs.md;
    - every scene change a straight cut (nothing sliding, wiping or crossing the screen to change it; a blocker if it
      does) or a 0.25–0.5 s camera flight, the wash colour changing on it, never a dip to black;
-   - after each fast move a very slow drift the same way, not a dead stop or a swing back;
+   - every move after 4 s does what its `why` says (follows, reveals or lands a reaction), and between moves the
+     framing holds or drifts slowly the same way, never swinging back;
    - sets wider than every framing (no edges), every visible area lit (no black gaps), deep indigo instead of black,
      beams and pools of light kept, follow spots on the actors through every fast move;
    - every movement item in §5 (travel in every shot, hop every 8–10 frames, hinged limbs, lean back 4–8 frames →

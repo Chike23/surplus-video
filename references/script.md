@@ -179,6 +179,14 @@ The picture tells the story. The narration says only what the picture can't.
   number, the twist in words.
 - **Every line has a picture.** In script.md each line gets a *We see* line under it. If a line has no picture,
   rewrite it until it has one, or cut it.
+- **Concepts are shown whole, never left to the imagination.** A line that teaches a fact, a cause or a number gets a
+  picture that demonstrates it with things on stage: a number becomes a count of objects, a comparison puts both
+  things whole in one frame and visibly different, a process happens step by step, and a body change is seen happening.
+  Test: with the sound off, would a viewer understand it? If no picture can do that, rewrite the line.
+- **Plan the shot with the line.** Under the *We see* line, a *Camera* line gives the size, what the frame takes in
+  and the one thing it's focused on. The first line in each new place also gets a *Scene* line: what's in the place
+  (set pieces, characters, props and the state each prop starts in). A line whose shot won't work is fixed now, before
+  the voice is paid for.
 - **The picture lands first:** the reaction or reveal happens 0–3 frames before its word, so the eye leads and the
   ear confirms.
 - Verbs and objects over adjectives: "He ate the whole loaf" beats "He ate a lot".
@@ -300,8 +308,12 @@ Kind: Twist | Relatable   Arc: Underdog | Backfire   CTA: link-in-bio | app-stor
 1. [S1] He split his dinner into five tiny bowls, and the whole barracks laughed.
    - We see: a beanpole cut-out soldier at a long mess table as five tiny bowls fly in on rods around him, and the
      row of soldiers rocks with laughter.
+   - Scene: the mess hall: a long table, benches, the soldier, five tiny bowls (empty, then landing full), a row of
+     soldiers on the far bench.
+   - Camera: full; takes in him, the five bowls and the nearest laughing soldiers; focus the bowls landing round him.
 2. You see, ...
    - We see: ...
+   - Camera: ...
 ...
 ## Story source
 True | Inspired by <the real story, one line>; changed: <what> | Fiction
@@ -309,8 +321,8 @@ True | Inspired by <the real story, one line>; changed: <what> | Fiction
 - <every real fact or number above (food, body, weight, and the story itself if it's true), with where it comes from>
 ```
 - One numbered line = one sentence or phrase. `[S1]`–`[S4]` at the start of a line opens that story part (3–4 parts).
-  Lines without a tag stay in the current part. The indented *We see* lines are not spoken (voice.mjs reads only the
-  numbered lines).
+  Lines without a tag stay in the current part. The indented *We see*, *Scene* and *Camera* lines are not spoken
+  (voice.mjs reads only the numbered lines).
 
 ## Check before voicing
 - **The hook:** starts with He, She or They; one strange act with one object, in the past tense, in 12 words or
@@ -325,7 +337,8 @@ True | Inspired by <the real story, one line>; changed: <what> | Fiction
   "so"; one time ladder in threes; a loop open at all times; a detail planted and paid off; the why held back until
   the "You see," reveal 60–75 % in; one central object in the hook and in the callback; the story's last line is the
   callback.
-- **Show, don't tell:** every line has a *We see*; no named feelings; no line describing what's on screen.
+- **Show, don't tell:** every line has a *We see* and a *Camera*, and every new place has a *Scene*; every concept is
+  pictured so the sound-off test passes; no named feelings; no line describing what's on screen.
 - 130–195 words (150–170 aimed); written to flow (commas and bridges between beats; full stops only for the hook, a
   few punch sentences at the turns, the callback and the CTA; questions and exclamations only in the voiced lines and
   the viewer's "Wait"); "You see," right after the hook or 60–75 % in; a new place every ~20 words; 3–4 story parts;
@@ -338,5 +351,5 @@ True | Inspired by <the real story, one line>; changed: <what> | Fiction
 - Every real fact, number and health claim has a source (web search) and stays inside the health guard rails in
   surplus.md. A changed or made-up story is never called true and pins nothing on a real person or date; a legend is
   told as a story or as "legend says".
-- For a script the user pasted: their words exactly (only line breaks, `[S#]` and *We see* lines added); a claim that
+- For a script the user pasted: their words exactly (only line breaks, `[S#]`, *We see*, *Scene* and *Camera* lines added); a claim that
   fails goes back to them; script-side specs it misses are listed at step 10. Never fix their words yourself.

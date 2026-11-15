@@ -3,6 +3,7 @@
 // usage: node qa.mjs <P>                          checks + sheets every 0.5 s  -> P/qa/sheet-01.jpg ... + P/qa/checks.md
 //        node qa.mjs <P> --times 12.4,12.6 [--full] close look at chosen times (--full = 1080x1920) -> P/qa/t-12.40.jpg
 //        node qa.mjs <P> --burst 12.4,20.1        12 frames in a row (30 fps) from each time, one strip each -> P/qa/burst-12.40.jpg
+//        node qa.mjs <P> --layout                 one frame in the middle of every framing (shots + moves) -> P/qa/layout-01.jpg ...
 //        options: --every 0.5  --samples 4  --cols 6 --rows 2
 import fs from 'node:fs'; import path from 'node:path'; import { execFileSync } from 'node:child_process';
 import { openPreview, grab, save } from './chrome.mjs';
@@ -35,6 +36,15 @@ if (burst) { // 12 frames in a row: anticipation, overshoot, eyes-first, impact 
     console.log(f);
   }
   await browser.close(); process.exit(0);
+}
+if (process.argv.includes('--layout')) { // the layout check: one frame per framing, time stamped, for agents/layout-check.md
+  const ts = [...(info.shots || []), ...(info.moves || [])].map((e) => e.t).sort((a, b) => a - b), per = cols * rows;
+  for (const f of fs.readdirSync(Q)) if (/^(l-\d+|layout-\d+)\.jpg$/.test(f)) fs.rmSync(path.join(Q, f));
+  for (let k = 0; k < ts.length; k++) save(await grab(page, (ts[k] + (ts[k + 1] ?? info.D)) / 2, { samples, w: 360, quality: 0.85 }), path.join(Q, `l-${String(k).padStart(4, '0')}.jpg`));
+  await browser.close();
+  for (let s = 0; s < Math.ceil(ts.length / per); s++) { const f = path.join(Q, `layout-${String(s + 1).padStart(2, '0')}.jpg`); tile(path.join(Q, 'l-%04d.jpg'), s * per, f); console.log(f); }
+  for (const f of fs.readdirSync(Q)) if (/^l-\d+\.jpg$/.test(f)) fs.rmSync(path.join(Q, f));
+  process.exit(0);
 }
 
 // ---- checks: each line OK / WARN / FAIL. FAIL = a spec (or a hard rule) missed; WARN = script-side or for a closer look.
@@ -97,8 +107,9 @@ if (!movesOk) out.push('FAIL style needs `moves: [{ t, size }]`: every pan or zo
 else if (shotsOk) {
   F = [...shots.map((s) => ({ ...s, kind: 'shot' })), ...moves.map((m) => ({ ...m, kind: 'move' }))].sort((a, b) => a.t - b.t);
   const ch = F.filter((e) => e.t > 0.05), hook = ch.filter((e) => e.t < 4);
-  ok(ch.length && within(D / ch.length, 1.1, 1.8), `${ch.length} framing changes, one every ${f2(D / Math.max(1, ch.length))} s (spec 1.4, 1.1-1.8: about ${Math.round(D / 1.4)} for this length)`);
-  ok(ch.length && within(moves.length / ch.length, 0.65, 0.85), `${moves.length} of ${ch.length} framing changes are camera moves, not scene changes (spec 3 in 4, 65-85 %)`);
+  const rest = ch.filter((e) => e.t >= 4), noWhy = moves.filter((m) => m.t >= 4 && !['follow', 'reveal', 'react'].includes(m.why));
+  ok(rest.length && within((D - 4) / rest.length, 2.5, 3.5), `after the first 4 s, ${rest.length} framing changes, one every ${f2((D - 4) / Math.max(1, rest.length))} s (spec about 3, 2.5-3.5, cuts included: about ${Math.round((D - 4) / 3)} for this length)`);
+  ok(!noWhy.length, `every move after 4 s has a why: follow, reveal or react${noWhy.length ? ': not at ' + at(noWhy.map((m) => m.t)) : ''}`);
   ok(within(hook.length, 4, 5), `${hook.length} framing changes in the first 4 s (spec 4-5)${hook.length ? ': ' + at(hook.map((e) => e.t)) : ''}`);
   ok(hook.filter((e) => e.kind === 'shot').length <= 2, `${hook.filter((e) => e.kind === 'shot').length} scene changes in the first 4 s (spec at most 1-2)`);
   if (T) { // a framing change should land on a word start or between words, not mid-word
@@ -107,15 +118,11 @@ else if (shotsOk) {
   }
   head('Shot sizes (share of screen time, from the declared sizes)');
   const seg = F.map((e, i) => ({ size: e.size, t: e.t, d: (F[i + 1]?.t ?? D) - e.t })), share = (s) => seg.filter((x) => x.size === s).reduce((a, x) => a + x.d, 0) / D;
-  const hold = (s) => { const x = seg.filter((y) => y.size === s); return x.length ? x.reduce((a, y) => a + y.d, 0) / x.length : 0; };
-  ok(share('xwide') + share('wide') >= 0.25, `extreme wide + wide ${pc(share('xwide') + share('wide'))} (spec at least 25 %)`);
-  ok(within(share('full'), 0.2, 0.35), `full ${pc(share('full'))} (spec about 27 %, 20-35 %)`);
-  const longMed = seg.filter((x) => x.size === 'medium' && x.d >= 0.5);
-  ok(share('medium') <= 0.2 && !longMed.length, `medium ${pc(share('medium'))}, each under 0.5 s (spec: passed through, never over 20 %)${longMed.length ? ': held at ' + at(longMed.map((x) => x.t)) : ''}`);
-  ok(within(share('close'), 0.08, 0.18), `face close-ups ${pc(share('close'))} (spec about 13 %, 8-18 %, big reactions only)`);
+  ok(within(share('full') + share('medium'), 0.45, 0.7), `full + medium ${pc(share('full') + share('medium'))} (spec home base, 45-70 %)`);
+  ok(within(share('xwide') + share('wide'), 0.15, 0.35), `extreme wide + wide ${pc(share('xwide') + share('wide'))} (spec 15-35 %)`);
+  const closes = seg.filter((x) => x.size === 'close');
+  ok(closes.length <= 5 && share('close') <= 0.12, `${closes.length} face close-ups, ${pc(share('close'))} (spec the 3-4 biggest reactions: at most 5, at most 12 %)${closes.length ? ': ' + at(closes.map((x) => x.t)) : ''}`);
   ok(within(share('insert'), 0.05, 0.15), `object close-ups ${pc(share('insert'))} (spec about 10 %, 5-15 %)`);
-  const xh = hold('xwide'), most = Math.max(...SIZES.filter((s) => s !== 'xwide').map(hold));
-  ok(within(xh, 1.3, 2.2) && xh >= most, `extreme wides held ${f2(xh)} s on average, longest of any size (spec about 1.7 s, 1.3-2.2; next longest ${f2(most)} s)`);
 }
 
 // ---- the camera itself, every frame, no rendering: how fast the picture moves (frame heights a second) and its angle
@@ -135,9 +142,8 @@ else {
     return { speed, angle };
   }, D);
   const sp = cam.speed, N = sp.length, tAt = (i) => (i + 1) / 30;
-  const still = sp.filter((s) => s < 0.01).length / N, fast = sp.filter((s) => s >= 0.5).length / N;
-  ok(still <= 0.08, `camera still ${pc(still)} of the time (spec at most about 8 %)`);
-  ok(within(fast, 0.12, 0.3), `fast moves on ${pc(fast)} of frames (spec about 1 in 5, 12-30 %)`);
+  const fast = sp.filter((s) => s >= 0.5).length / N;
+  ok(fast <= 0.12, `fast moves on ${pc(fast)} of frames (spec at most about 1 in 8, 12 %)`);
   const inChange = (t) => shots.some((s) => t >= s.t - 0.04 && t <= s.t + (s.how === 'cut' ? 0 : s.dur || 0.5) + 0.04); // a cut's jump is one frame
   const smear = sp.map((s, i) => [s, tAt(i)]).filter(([s, t]) => s > 4 && !inChange(t)).map(([, t]) => t);
   ok(!smear.length, `no smeared whip: the picture never moves over 4 frame heights a second${smear.length ? ': at ' + at(smear) + ' (look closer)' : ''}`);

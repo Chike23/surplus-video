@@ -19,6 +19,17 @@ another.
 ## The list
 Newest first. Entry: date · title · folder · style and kind (twist or relatable; older ones say mode A or B) · source (true, inspired or fiction; older ones are true), then the four things above and the payoff.
 
+### 2026-11-14 · The calf on his shoulders
+`~/surplus-videos/2026-11-14-calf-on-his-shoulders` · Spotlight Stage · twist · inspired (the legend of Milo of
+Croton; the unnamed wrestler, his losing streak, the trainer and his eating with the calf are made up; the bull told
+as "legend says")
+- **Core fact:** lifting tells muscle to grow but food builds it: in an energy deficit muscle protein synthesis runs
+  about a fifth (~19 %) slower (Pasiakos 2010).
+- **Hook:** "He carried a newborn calf up a hill every day, and the wrestlers laughed."
+- **Lesson:** training alone doesn't build size; eat in step with your training (more than you burn) to grow.
+- **Character:** an ancient Greek beanpole wrestler who trains with a growing calf, can't keep up with it, and copies
+  its eating; today he eats like the calf while Surplus counts every bite.
+
 ### 2026-11-14 · The baker's thirteenth loaf
 `~/surplus-videos/2026-11-14-bakers-thirteenth-loaf` · Spotlight Stage · twist · inspired (medieval London bread
 laws; Will and his near-misses are made up; the baker's dozen told as "the story goes")

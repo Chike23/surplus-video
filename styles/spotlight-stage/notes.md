@@ -31,5 +31,16 @@
 - **Motion blur:** at 8 samples a fast move breaks into separate copies with `shutter` 0.4; 0.3 keeps them closer.
   Look at a mid-move check frame (a push or a flight) before sending. (bakers-thirteenth-loaf)
 - **The camera to specs:** drive it from the style's `shots` and `moves` lists: each entry is a framing (position and
-  aim); ease to it in 0.3–0.5 s, then drift 2–4 % of the frame per second the same way until the next entry. Keep the
+  aim); ease to it in 0.4–0.8 s, then hold or drift at most 2 % of the frame per second the same way until the next
+  entry. Keep the
   aim's yaw and pitch within 25° of straight down −z.
+- **Mirrored cards:** every figure flips with `fig.scale.x = face`, so a child rotation (head tilt, nod) turns the other
+  way on a left-facing card; helper maths that mirrors x (heroPt, calfPt) agrees with the mesh. Write tilts as
+  "toward the face" and check one frame per facing. (calf-on-his-shoulders)
+- **Dark sets:** a wood or amber set in an extreme wide reads as a dip at its cut (QA's dip check is 60 % of the median
+  brightness). Lighten the drop's paint first; lamp level barely moves it and over-brightens the closer shots.
+  (calf-on-his-shoulders: the barn)
+- **Cards:** the card is 1.3 × 0.56 at scale 1. In an extreme wide (h 11.5) its letters fall under 45 px: scale it per
+  scene (1.4–1.6 for xwide openers) and keep names to about 10 letters. The card hangs at Z.card, behind the slate
+  and most flats: place it clear of them. (calf-on-his-shoulders)
+

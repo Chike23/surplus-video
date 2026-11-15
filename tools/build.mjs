@@ -6,7 +6,13 @@ import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const P = resolve(process.argv[2] || '.');
-const style = readFileSync(resolve(P, 'src/style.js'), 'utf8');
+// a /*@prop name*/ line pastes in P/props/name.js, a prop from the library (references/build.md, "Props")
+const withProps = (code) => code.replace(/\/\*@prop ([\w-]+)\*\//g, (_, n) => {
+  const f = resolve(P, 'props', n + '.js');
+  if (!existsSync(f)) throw new Error(`no prop "${n}": copy SKILL/props/${n}.js to P/props/`);
+  return readFileSync(f, 'utf8');
+});
+const style = withProps(readFileSync(resolve(P, 'src/style.js'), 'utf8'));
 const banned = style.replace(/\/\/.*$/gm, '').match(/Math\.random|new Date|Date\.now|setTimeout|setInterval|performance\.now/g);
 if (banned) throw new Error(`src/style.js uses ${[...new Set(banned)].join(', ')}: use K.rng(seed) and the time t instead`);
 
@@ -23,7 +29,7 @@ const html = readFileSync(resolve(P, 'kit/player.src.html'), 'utf8')
     const f = resolve(P, p.trim()), age = (x) => (existsSync(resolve(P, x)) ? statSync(resolve(P, x)).mtimeMs : 0);
     if (opt && !existsSync(f)) return '';
     if (opt && age(p.trim()) < Math.max(age('src/style.js'), age('vo.js'))) { console.log(`${p.trim()} is older than style.js or vo.js: left out (run render.mjs P --audio)`); return ''; }
-    const code = readFileSync(f, 'utf8');
+    const code = withProps(readFileSync(f, 'utf8'));
     if (/<\/script/i.test(code)) throw new Error(`${p} contains </script and would break the page`);
     return code;
   });
